@@ -4,11 +4,11 @@ import MenuNavegacion from "../components/menuNavegacion.component";
 
 export default function TerminosyCondicionesPage() {
     return <div className="row">
-        <MenuNavegacion></MenuNavegacion>
-        <h2>Términos y Condiciones</h2>
+        <MenuNavegacion/>
+        <h2 className="mt-4">Términos y Condiciones</h2>
         <div className="col-md-8 mt-4">
             <ul>
-                <li>Información del sitio</li>
+                <li><h5>Información del sitio</h5></li>
                 <p>
                     Sitio de cambio de criptomonedas en la región peruana
                     que busca agilizar la labor de los cambistas para establecer
@@ -16,13 +16,13 @@ export default function TerminosyCondicionesPage() {
                     proyecto universitario y no está avalada como tal por un banco
                     o entidad financiera.
                 </p>
-                <li>Usuarios</li>
+                <li><h5>Usuarios</h5></li>
                 <p>
                     La página se compromete en la protección de los datos personales
                     y la no divulgación de algún dato sensible que pueda afectar directa
                     o indirectamente a alguno de nuestros usuarios
                 </p>
-                <li>Regulaciones</li>
+                <li><h5>Regulaciones</h5></li>
                 <p>
                     De acuerdo a las siguientes leyes: ...
                 </p>

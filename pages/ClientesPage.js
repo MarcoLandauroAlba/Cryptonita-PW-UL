@@ -13,11 +13,11 @@ const ClientesPage = () => {
     ]
 
     return <div>
-        <MenuNavegacion></MenuNavegacion>
-        <OpcionesUsuariosAdmin></OpcionesUsuariosAdmin>
+        <MenuNavegacion/>
+        <OpcionesUsuariosAdmin/>
         <ListaUsuarios lista={ListadodeUsuarios}></ListaUsuarios>
-        <ValidadoCambioUsuario></ValidadoCambioUsuario>
-        <Footer></Footer>
+        <ValidadoCambioUsuario/>
+        <Footer/>
     </div>
 
 }

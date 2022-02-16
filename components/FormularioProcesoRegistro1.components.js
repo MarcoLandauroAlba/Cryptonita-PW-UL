@@ -1,9 +1,9 @@
-export default function FormularioProcesoRegistro2() {
-    return <div><h3>Paso 2 de 2</h3>
+export default function FormularioProcesoRegistro1() {
+    return <div><h3>Paso 1 de 2</h3>
         <form className="mt-4">
             <div className="row">
                 <div className="col">
-                    <label>Correo:</label>
+                    <label>Nombres:</label>
                 </div>
                 <div className="col">
                     <input type="text"></input>
@@ -11,7 +11,7 @@ export default function FormularioProcesoRegistro2() {
             </div>
             <div className="row mt-2">
                 <div className="col">
-                    <label>Contraseña:</label>
+                    <label>Apellidos:</label>
                 </div>
                 <div className="col">
                     <input type="text"></input>
@@ -19,15 +19,7 @@ export default function FormularioProcesoRegistro2() {
             </div>
             <div className="row mt-2">
                 <div className="col">
-                    <label>Repetir Contraseña:</label>
-                </div>
-                <div className="col">
-                    <input type="text"></input>
-                </div>
-            </div>
-            <div className="row mt-2">
-                <div className="col">
-                    <label>Número de teléfono:</label>
+                    <label>DNI:</label>
                 </div>
                 <div className="col">
                     <input type="text"></input>
@@ -36,7 +28,7 @@ export default function FormularioProcesoRegistro2() {
             <div className="row mt-4">
                 <div className="col">
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button className="btn btn-primary" type="button">Finalizar</button>
+                        <button className="btn btn-primary" type="button">Siguiente</button>
                     </div>
                 </div>
                 <div className="col">

@@ -1,5 +1,6 @@
 import Footer from "../components/footer.component"
-import FormularioProcesoRegistro2 from "../components/FormularioProcesoRegistro2.component"
+import FormularioProcesoRegistro1 from "../components/FormularioProcesoRegistro1.components"
+
 import MenuNavegacion from "../components/menuNavegacion.component"
 
 const ProcesoRegistro2Page = () => {
@@ -9,7 +10,7 @@ const ProcesoRegistro2Page = () => {
         <div className="col-md-6 mt-4">
             <div className="card">
                 <div className="card-body">
-                    <FormularioProcesoRegistro2/>
+                    <FormularioProcesoRegistro1/>
                 </div>
             </div>
         </div>

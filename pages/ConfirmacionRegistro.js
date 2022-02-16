@@ -4,9 +4,9 @@ import ConfirmacionRegistro from "../components/ConfirmacionRegistro.component"
 
 const ConfirmacionRegistroPage = () => {
     return <div>
-        <MenuNavegacion></MenuNavegacion>
-        <ConfirmacionRegistro></ConfirmacionRegistro>
-        <Footer></Footer>
+        <MenuNavegacion/>
+        <ConfirmacionRegistro/>
+        <Footer/>
     </div>
 }
 

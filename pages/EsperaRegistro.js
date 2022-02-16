@@ -4,9 +4,9 @@ import CuerpoEsperaRegistro from "../components/CuerpoEsperaRegistro.component"
 
 const EsperaRegistroPage = () => {
     return <div>
-        <MenuNavegacion></MenuNavegacion>
-        <CuerpoEsperaRegistro></CuerpoEsperaRegistro>
-        <Footer></Footer>
+        <MenuNavegacion/>
+        <CuerpoEsperaRegistro/>
+        <Footer/>
     </div>
 }
 
