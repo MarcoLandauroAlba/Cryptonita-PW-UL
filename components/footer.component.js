@@ -2,22 +2,18 @@ const Footer = () => {
     return <footer className="card mt-4">
     <div className="card-body">
         <div className="row">
-            <div className="col-sm-6">
-                <ul>
-                    <li> <a href="">Nosotros</a></li>
-                    <li> <a href="">Terminos y condicioes</a></li>
-                </ul>
+            <div className="col-md">
+                <div className="text-center"><a href="" className="btn-link">Nosotros</a></div>
+                <div className="text-center"><a href="/TerminosYCondiciones" className="btn-link">Terminos y condiciones</a></div>
             </div>
-            <div className="col-sm-6">
-                <ul>
-                    <li>Grupo ...</li>
-                    <li>ULIMA-2020</li>
-                </ul>
+            <div className="col-md">
+                    <div className="text-center">Grupo ...</div>
+                    <div className="text-center">ULIMA-2022</div>
             </div>
-            
+
         </div>
     </div>
- </footer>
+</footer>
 
 }
 
