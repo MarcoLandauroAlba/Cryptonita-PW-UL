@@ -1,0 +1,40 @@
+import { Image } from "react-bootstrap";
+import Footer from "../components/footer.component";
+import MenuNavegacion from "../components/menuNavegacion.component";
+
+export default function TerminosyCondicionesPage() {
+    return <div className="row">
+        <MenuNavegacion></MenuNavegacion>
+        <h2>Términos y Condiciones</h2>
+        <div className="col-md-8 mt-4">
+            <ul>
+                <li>Información del sitio</li>
+                <p>
+                    Sitio de cambio de criptomonedas en la región peruana
+                    que busca agilizar la labor de los cambistas para establecer
+                    el cambio de manera online. Página que es realizada para un
+                    proyecto universitario y no está avalada como tal por un banco
+                    o entidad financiera.
+                </p>
+                <li>Usuarios</li>
+                <p>
+                    La página se compromete en la protección de los datos personales
+                    y la no divulgación de algún dato sensible que pueda afectar directa
+                    o indirectamente a alguno de nuestros usuarios
+                </p>
+                <li>Regulaciones</li>
+                <p>
+                    De acuerdo a las siguientes leyes: ...
+                </p>
+            </ul>
+        </div>
+        <div className="col-md-4 mt-4">
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="button">Regresar</button>
+            </div>
+            <Image src="https://www.esan.edu.pe/images/blog/2018/01/30/1500x844-terminos-condiciones.jpg" thumbnail={true}
+                className="mt-4"></Image>
+        </div>
+        <Footer></Footer>
+    </div>
+}
