@@ -30,8 +30,8 @@ export default function TerminosyCondicionesPage() {
         </div>
         <div className="col-md-4 mt-4">
             <div class="d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-primary" onClick={()=>{
-                    location.href="/"
+                <button class="btn btn-primary" onClick={() => {
+                    location.href = "/"
                 }} type="button">Regresar</button>
             </div>
             <Image src="https://www.esan.edu.pe/images/blog/2018/01/30/1500x844-terminos-condiciones.jpg" thumbnail={true}

@@ -11,7 +11,7 @@ const ProcesoRegistro2Page = () => {
                 <div className="card-body">
                     <FormularioProcesoRegistro2></FormularioProcesoRegistro2>
                 </div>
-            </div>            
+            </div>
         </div>
         <div className="col-md-3"></div>
         <Footer></Footer>

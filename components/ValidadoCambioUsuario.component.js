@@ -1,4 +1,4 @@
-export default function ValidadoCambioUsuario(){
+export default function ValidadoCambioUsuario() {
     return <div className="row">
         <div className="col-md-8"></div>
         <div className="col-md-4">
