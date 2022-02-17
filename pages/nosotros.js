@@ -7,12 +7,7 @@ function nosotros() {
             <MenuNavegacion/>
             <Nosotros/>
             <Footer/>
-<<<<<<< HEAD
-            </div>
-    )
-=======
     </div>
->>>>>>> refs/remotes/origin/main
 }
 
 export default nosotros
