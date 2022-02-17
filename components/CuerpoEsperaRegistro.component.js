@@ -16,7 +16,6 @@ const CuerpoEsperaRegistro = () => {
             <div className="col-md-3"></div>
         </div>
     </div>
-
 }
 
 export default CuerpoEsperaRegistro
