@@ -3,7 +3,7 @@ import FormularioProcesoRegistro1 from "../components/FormularioProcesoRegistro1
 
 import MenuNavegacion from "../components/menuNavegacion.component"
 
-const ProcesoRegistro2Page = () => {
+const ProcesoRegistro1Page = () => {
     return <div className="row">
         <MenuNavegacion/>
         <div className="col-md-3"></div>
@@ -18,4 +18,4 @@ const ProcesoRegistro2Page = () => {
         <Footer/>
     </div>
 }
-export default ProcesoRegistro2Page
+export default ProcesoRegistro1Page

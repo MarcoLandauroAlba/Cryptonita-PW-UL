@@ -10,15 +10,17 @@ function compraVenta() {
         <div className="col-md-4 mt-4">
             <div className="card text-center"> <br/>
                 <div> 
-                    <a href="#" class="btn btn-primary btn-small col-md-3">Compra</a>
-                    <a href="#" class="btn btn-primary btn-small col-md-3">Venta</a>
+                    <a href="/compraVenta" class="btn btn-primary btn-small col-md-3">Compra</a>
+                    <a href="/compraVenta" class="btn btn-primary btn-small col-md-3">Venta</a>
                     <a href="/historialTrans" class="btn btn-primary btn-small col-md-4">Ver historial</a>
                 </div>
                 
-                <h5 className="card-tittle">Compra</h5> <br/>
-                <div className="card">1BTC</div><br/>
-                <h5 className="card-tittle">Venta</h5><br/>
-                <div className="card">s/167,433 </div> <br/>
+                <h3 className="mb-4">Exchange</h3>
+
+                <h5 className="card-tittle">BTC</h5> <br/>
+                <div className="card"><input type="text" className="form-control"defaultValue={ "1BTC" }></input></div><br/>
+                <h5 className="card-tittle">PEN</h5><br/>
+                <div className="card"><input type="text" className="form-control" defaultValue={ "S/.167,433" }></input></div><br/>
                 <button className="btn btn-primary"> Confirmar transaccion</button> <br/>
             </div>
         </div>
