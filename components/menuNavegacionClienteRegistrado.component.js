@@ -15,7 +15,9 @@ const MenuNavegacionusuarioregistrado = () => {
                             <a className="nav-link" href="/procesoRegistro1">Historial de Operaciones</a>
                         </li>
                         <li>
-                            <button type="button" className="btn btn-danger">Cerrar Sesión</button>
+                            <button type="button" className="btn btn-danger" onClick={()=>{
+                                location.href="/"
+                            }}>Cerrar Sesión</button>
                         </li>
                     </ul>
                 </div>
