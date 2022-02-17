@@ -36,12 +36,16 @@ export default function FormularioProcesoRegistro2() {
             <div className="row mt-4">
                 <div className="col">
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button className="btn btn-primary" type="button">Finalizar</button>
+                        <button className="btn btn-primary" type="button" onClick={()=>{
+                            location.href="/"
+                        }}>Finalizar</button>
                     </div>
                 </div>
                 <div className="col">
                     <div className="d-grid gap-2 d-md-block">
-                        <button className="btn btn-primary lg" type="button">Regresar</button>
+                        <button className="btn btn-primary lg" type="button" onClick={()=>{
+                            location.href="/procesoRegistro1"
+                        }}>Regresar</button>
                     </div>
                 </div>
             </div>

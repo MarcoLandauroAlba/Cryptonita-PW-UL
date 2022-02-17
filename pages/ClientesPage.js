@@ -1,8 +1,8 @@
 import Footer from "../components/footer.component"
-import MenuNavegacion from "../components/menuNavegacion.component"
 import OpcionesUsuariosAdmin from "../components/OpcionesUsuariosAdmin.component"
 import ListaUsuarios from "../components/ListaUsuarios.component"
 import ValidadoCambioUsuario from "../components/ValidadoCambioUsuario.component"
+import MenuNavegacionadminregistrado from "../components/menuNavegacionAdminRegistrado.component"
 
 const ClientesPage = () => {
 
@@ -13,7 +13,7 @@ const ClientesPage = () => {
     ]
 
     return <div>
-        <MenuNavegacion/>
+        <MenuNavegacionadminregistrado></MenuNavegacionadminregistrado>
         <OpcionesUsuariosAdmin/>
         <ListaUsuarios lista={ListadodeUsuarios}></ListaUsuarios>
         <ValidadoCambioUsuario/>
