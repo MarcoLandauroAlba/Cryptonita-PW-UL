@@ -15,7 +15,7 @@ const MenuNavegacionadminregistrado = () => {
                             <a className="nav-link" href="/procesoRegistro1">Tipo de Cambio</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Operaciones</a>
+                            <a className="nav-link" href="/OperacionesAdmin">Operaciones</a>
                         </li>
                         <li>
                             <button type="button" className="btn btn-danger" onClick={()=>{
