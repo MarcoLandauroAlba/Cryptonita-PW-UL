@@ -9,10 +9,10 @@ const MenuNavegacionusuarioregistrado = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Compra/Venta</a>
+                            <a className="nav-link active" aria-current="page" href="/compraVenta">Compra/Venta</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Historial de Operaciones</a>
+                            <a className="nav-link" href="/historialTrans">Historial de Operaciones</a>
                         </li>
                         <li>
                             <button type="button" className="btn btn-danger" onClick={()=>{
