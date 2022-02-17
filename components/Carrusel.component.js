@@ -3,7 +3,6 @@ const Carrusel = () => {
         <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    {/* PROPUESTAS */}
                     <div className="card bg-dark text-white mt-4 ">
                         <img 
                             className='img-fluid' 
@@ -17,14 +16,13 @@ const Carrusel = () => {
                                     <p className="card-text m-4 h5" size='5'>Últimamente se ha presentado una gran tendencia alcista en el valor del bitcoin, luego de la gran caída de un precio de 60.000 euros a
                                         aproximadamente 30.000 euros la unidad de bitcoin. Se recomienda a los usuarios tomar esta tendencia alcista con precaución debido a la volatilidad
                                         de la moneda.</p>
-                                    <p className='m-4 h5'><b>Cordialmente - La organización -</b></p>
+                                    <p className='m-4 h5'><b>Atentamente - La organización -</b></p>
                                 </font>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="carousel-item">
-                    {/* PROPUESTAS */}
                     <div className="card bg-dark text-white mt-4">
                         <img 
                             className='img-fluid' 
