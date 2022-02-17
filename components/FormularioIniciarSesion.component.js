@@ -10,7 +10,7 @@ export default function FormularioIniciarSesion() {
                         <input type="text" className="form-control mt-2"></input>
                         <label className="mt-2">Contraseña:</label>
                         <input type="text" className="form-control mt-2"></input>
-                        <button type="button" className="btn btn-primary mt-4">Ingresar</button>
+                        <a href="/compraVenta"><button type="button" className="btn btn-primary mt-4">Ingresar</button></a>
                     </form>
                 </div>
             </div>

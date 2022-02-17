@@ -4,8 +4,8 @@ import FormularioIniciarSesion from "../components/FormularioIniciarSesion.compo
 
 export default function IniciarSesionPage(){
     return <div>
-        <MenuNavegacion></MenuNavegacion>
-        <FormularioIniciarSesion></FormularioIniciarSesion>
-        <Footer></Footer>
+        <MenuNavegacion/>
+        <FormularioIniciarSesion/>
+        <Footer/>
     </div>
 }
