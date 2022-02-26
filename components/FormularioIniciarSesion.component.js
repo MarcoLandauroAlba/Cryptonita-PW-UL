@@ -1,20 +1,64 @@
-export default function FormularioIniciarSesion() {
-    return <div className="row mt-4">
-        <div className="col-md-4"></div>
-        <div className="col-md-4">
-            <div className="card">
-                <div className="card-body">
-                    <h3>Login</h3>
-                    <form>
-                        <label className="mt-2">Correo:</label>
-                        <input type="text" className="form-control mt-2"></input>
-                        <label className="mt-2">Contraseña:</label>
-                        <input type="text" className="form-control mt-2"></input>
-                        <a href="/compraVenta"><button type="button" className="btn btn-primary mt-4">Ingresar</button></a>
-                    </form>
+import { useState } from 'react'
+/*
+props Utilizados:
+- validarUsuario       : Realiza el cruze de informacion con la base de datos para determinar si los datos son correctos
+- contrasenaIncorrecta : Devuelve true si la contrasena no coincide con el correo enviado
+- correoInexistente    : Devuelve true si el correo no coincide con ninguno en la base de datos
+*/
+export default function FormularioIniciarSesion(props) {
+
+    const [correo, setCorreo] = useState('')
+    const [contrasena, setContrasena] = useState('')
+    const setCorreoOnChange = (event) => {
+        setCorreo(event.target.value)
+    }
+    const setContrasenaOnChange = (event) => {
+        setContrasena(event.target.value)
+    }
+
+    return (
+        <div className="row mt-4">
+            <div className="col-md-3"></div>
+            <div className="col-md-6">
+                <div className="card">
+                    <div className="card-body">
+                        <h3>Login</h3>
+                        <form>
+                            {
+                                (() => {
+                                    if (props.correoInexistente == true) {
+                                        return (
+                                            <div className="h4 my-2 text-danger">El correo ingresado no ha sido registrado</div>
+                                        )
+                                    }
+                                })()
+                            }
+                            <label htmlFor='correo' className="mt-2">Correo:</label>
+                            <input type="text" className="form-control mt-2" id="correo" defaultValue={correo} onChange={setCorreoOnChange} />
+                            {
+                                (() => {
+                                    if (props.contrasenaIncorrecta == true) {
+                                        return (
+                                            <div className="h4 my-2 text-danger">La contrasena ingresada no coincide</div>
+                                        )
+                                    }
+                                })()
+                            }
+                            <label htmlFor='contrasena' className="mt-2">Contraseña:</label>
+                            <input type="text" className="form-control mt-2" id="contrasena" defaultValue={contrasena} onChange={setContrasenaOnChange} />
+                            <div className="text-center">
+                                <button
+                                    className="btn btn-primary mt-4"
+                                    type="button"
+                                    onClick={() => { props.validarUsuario(correo, contrasena) }}>
+                                    Ingresar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div className="col-md-4"></div>
-    </div>
+            <div className="col-md-3"></div>
+        </div>)
+
 }
