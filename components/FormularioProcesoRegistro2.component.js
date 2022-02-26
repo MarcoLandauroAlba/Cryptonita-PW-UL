@@ -130,7 +130,7 @@ export default function FormularioProcesoRegistro2(props) {
                                                     <button
                                                         className="btn btn-primary lg"
                                                         type="button"
-                                                        onClick={() => { props.guardar() }}>
+                                                        onClick={() => { props.guardar(correo,contra,numero) }}>
                                                         Finalizar
                                                     </button>
                                                 </div>
