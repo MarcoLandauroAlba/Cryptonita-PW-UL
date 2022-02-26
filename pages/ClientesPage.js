@@ -2,7 +2,6 @@ import Footer from "../components/footer.component"
 import OpcionesUsuariosAdmin from "../components/OpcionesUsuariosAdmin.component"
 import ListaUsuarios from "../components/ListaUsuarios.component"
 import ValidadoCambioUsuario from "../components/ValidadoCambioUsuario.component"
-import MenuNavegacionadminregistrado from "../components/menuNavegacionAdminRegistrado.component"
 
 const ClientesPage = () => {
 

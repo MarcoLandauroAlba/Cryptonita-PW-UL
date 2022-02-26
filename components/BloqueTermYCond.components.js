@@ -1,5 +1,5 @@
 import { Image } from "react-bootstrap";
-const BloqueTermYCond = () => {
+const BloqueTermYCond = (props) => {
     return (
         <div className="row">
             <h2 className="mt-4">Términos y Condiciones</h2>
@@ -27,12 +27,19 @@ const BloqueTermYCond = () => {
             </div>
             <div className="col-md-4 mt-4">
                 <div className="d-grid gap-2 col-6 mx-auto">
-                    <button className="btn btn-primary" onClick={() => {
-                        location.href = "/"
-                    }} type="button">Regresar</button>
+                    <button 
+                        className="btn btn-primary" 
+                        onClick={() => {props.volver()}} 
+                        type="button">
+                        Regresar
+                    </button>
                 </div>
-                <Image src="https://www.esan.edu.pe/images/blog/2018/01/30/1500x844-terminos-condiciones.jpg" thumbnail={true}
-                    className="mt-4"></Image>
+                <Image 
+                    src="https://www.esan.edu.pe/images/blog/2018/01/30/1500x844-terminos-condiciones.jpg" 
+                    thumbnail={true}
+                    className="mt-4"
+                    alt="..."
+                />
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-const CompraVenta = () => {
+const CompCompraVenta = () => {
     return (
         <div className="row">
             <div className='col-md-8 mt-4'>
@@ -20,4 +20,4 @@ const CompraVenta = () => {
             </div>
         </div>)
 }
-export default CompraVenta
+export default CompCompraVenta

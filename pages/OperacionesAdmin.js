@@ -11,9 +11,9 @@ const OperacionesAdminPage = () => {
     ]
 
     return <div>
-        <MenuNavegacionadminregistrado></MenuNavegacionadminregistrado>
+        <MenuNavegacionadminregistrado />
         <ListaOperaciones lista={ListadodeOperaciones}/>
-        <ValidadoCambioOperaciones/>
+        <ValidadoCambioOperaciones />
         <Footer/>
     </div>
 }
