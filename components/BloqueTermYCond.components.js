@@ -1,4 +1,8 @@
 import { Image } from "react-bootstrap";
+/*
+props Utilizados:
+- volver: Sirve para regresar a la page anterior mas proxima (funciona como un stack)
+*/
 const BloqueTermYCond = (props) => {
     return (
         <div className="row">

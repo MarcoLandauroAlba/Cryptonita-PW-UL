@@ -1,6 +1,11 @@
 import { Image } from "react-bootstrap"
-
-
+/*
+props Utilizados:
+- tipoDeCliente     : Puede tener 4 valores (1:admin,2:usuarioConf,3:UsuarioNoConf,4:invitado)
+- redireccionamiento: Recibe un argumento (direccion) y te redirige al destino
+- salir             : Sirve para salir del tipo de usuario 1, 2 y 3 hacia el 4
+- ubicacion         : Envia la ubicacion actual para activar el boton de la pagina visitada
+*/
 const MenuNavegacion = (props) => {
 
     if (props.tipoDeCliente == 1) {        //ADMINISTRADOR
@@ -42,7 +47,7 @@ const MenuNavegacion = (props) => {
                                 }
                             </li>
                             <li className="nav-item">
-                                {/*FALTA ACTUALIZAR ESTE BOTON CON LA DIRECCION CORRESPONDIENTE  */}
+                                {/*TODO: FALTA ACTUALIZAR ESTE BOTON CON LA DIRECCION CORRESPONDIENTE  */}
                                 {
                                     (
                                         () => {

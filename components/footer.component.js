@@ -1,5 +1,8 @@
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
-
+/*
+props Utilizados:
+- redireccionamiento: Recibe un argumento (direccion) y te redirige al destino
+*/
 const renderTooltip1 = (props) => (
     <Tooltip id="button-tooltip" {...props}>
         El mejor grupo del salon :)
