@@ -3,6 +3,7 @@ import OpcionesUsuariosAdmin from "../components/OpcionesUsuariosAdmin.component
 import ListaUsuarios from "../components/ListaUsuarios.component"
 import ValidadoCambioUsuario from "../components/ValidadoCambioUsuario.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
+import ModalClientes from "../components/modalClientes.component"
 import { useEffect, useState } from 'react'
 
 const ClientesPage = () => {
@@ -137,6 +138,17 @@ const ClientesPage = () => {
 
     // SE HAN AGREGADO LINEAS DE CODIGO EN EL USEEFFECT
 
+    const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
+
+
+    const ocultar = () => {
+        setSeDebeMostrarModal(false)
+    }
+
+    const editarClienteHandler = () => {
+        setSeDebeMostrarModal(true)
+    }
+
     return <div>
         <MenuNavegacion
             tipoDeCliente={tipoDeCliente}
@@ -151,6 +163,7 @@ const ClientesPage = () => {
         <ListaUsuarios 
             tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
             lista={listaUsuarios} 
+            onEditar={ editarClienteHandler }
         />
         <ValidadoCambioUsuario 
             tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
@@ -158,6 +171,7 @@ const ClientesPage = () => {
         <Footer 
             redireccionamiento={RedirigirAOtraPagina}
         />
+        <ModalClientes onOcultar={ ocultar } onMostrar={ seDebeMostrarModal }></ModalClientes>
     </div>
 
 }
