@@ -9,21 +9,21 @@ export default function TerminosyCondicionesPage() {
     // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
-    const [cliente, setCliente] = useState({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] })
+    const [cliente, setCliente] = useState(123)
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
 
     useEffect(() => {
         // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
         if (localStorage.getItem('cliente') == null) {
-            localStorage.setItem('cliente', JSON.stringify({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] }))
+            localStorage.setItem('cliente', cliente)
         }
         // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
         if (localStorage.getItem('tipoCliente') == null) {
-            localStorage.setItem('tipoCliente', 4)
+            localStorage.setItem('tipoCliente', tipoDeCliente)
         }
         //se actualizan los valores de las variables de estado con lo guardado en el localStorage
-        setCliente(JSON.parse(localStorage.getItem('cliente')))
+        setCliente(parseInt(localStorage.getItem('cliente')))
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
     }, [])
 
@@ -31,7 +31,7 @@ export default function TerminosyCondicionesPage() {
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
     const RedirigirAOtraPagina = (direccion) => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', JSON.stringify(cliente))
+        localStorage.setItem('cliente', cliente)
         localStorage.setItem('tipoCliente', tipoDeCliente)
         location.href = direccion
     }
@@ -39,7 +39,7 @@ export default function TerminosyCondicionesPage() {
     // Props: salir                 => Elimina los datos del usuario actual
     const TerminarSesionActiva = () => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', JSON.stringify({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] }))
+        localStorage.setItem('cliente', 123)
         localStorage.setItem('tipoCliente', 4)
         location.href = '/'
     }
