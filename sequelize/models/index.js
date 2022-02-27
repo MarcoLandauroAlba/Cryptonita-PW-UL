@@ -15,7 +15,7 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-fs
+/*fs
   .readdirSync(__dirname)
   .filter(file => {
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
@@ -24,6 +24,15 @@ fs
     const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
+  */
+
+const model = require("../models/operacion")
+const modelCliente = require("../models/cliente")
+const modelAdministrador = require("../models/administrador")
+
+db[model(sequelize, Sequelize.DataTypes).name] = model(sequelize, Sequelize.DataTypes);
+db[modelCliente(sequelize, Sequelize.DataTypes).name] = modelCliente(sequelize, Sequelize.DataTypes);
+db[modelAdministrador(sequelize, Sequelize.DataTypes).name] = modelAdministrador(sequelize, Sequelize.DataTypes);
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
