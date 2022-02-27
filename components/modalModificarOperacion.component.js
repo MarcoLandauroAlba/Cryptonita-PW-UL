@@ -12,7 +12,7 @@ export default function ModalModificarOperacion(props) {
     useEffect(()=>{
         setEstadoOperacion(props.operacion.estado)
         console.log('ahora->',props.operacion.estado)
-    },[props.mostrar])
+    },[props.mostrar,props.operacion.estado])
     
     const guardarOnClick = () => {
         props.guardar(props.operacion.id,estadoOperacion)

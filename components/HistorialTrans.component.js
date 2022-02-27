@@ -2,9 +2,9 @@ const HistorialTrans = () =>{
     return(<div >
         <div className="card text-center"> <br/>
             <div> 
-                <a href="/compraVenta" class="btn btn-primary btn-small col-md-3">Compra</a>
-                <a href="/compraVenta" class="btn btn-primary btn-small col-md-3">Venta</a>
-                <a href="#" class="btn btn-primary disabled btn-small col-md-4">Ver historial</a>
+                <button onClick={()=>{console.log('redirigir aqui')}} className="btn btn-primary btn-small col-md-3">Compra</button>
+                <button onClick={()=>{console.log('redirigir aqui')}}  className="btn btn-primary btn-small col-md-3">Venta</button>
+                <button onClick={()=>{console.log('redirigir aqui')}}  className="btn btn-primary disabled btn-small col-md-4">Ver historial</button>
             </div>
             <table>
                 <tr>

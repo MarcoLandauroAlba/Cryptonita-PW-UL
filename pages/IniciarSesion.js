@@ -25,7 +25,7 @@ export default function IniciarSesionPage() {
         //se actualizan los valores de las variables de estado con lo guardado en el localStorage
         setCliente(parseInt(localStorage.getItem('cliente')))
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
-    }, [])
+    }, [cliente,tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
     // FUNCION CAMBIADA EXCLUSIVAMENTE PARA ESTA PANTALLA

@@ -17,6 +17,7 @@ const ClientesPage = () => {
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
 
     useEffect(() => {
+        console.log('RECARGO')
         // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
         if (localStorage.getItem('cliente') == null) {
             localStorage.setItem('cliente', cliente)
@@ -35,7 +36,7 @@ const ClientesPage = () => {
             { numero: 2, id: "toppiOrg", nombre: "Mathias Almeida", dni: 17498635, correo: "mathi.almeida@gmail.com", numerotelf: 987563374, estado: "validado" },
             { numero: 3, id: "reseAlm", nombre: "Jack Newton", dni: 15698236, correo: "jack.newton@gmail.com", numerotelf: 978632145, estado: "pendiente de validación" }
         ])
-    }, [])
+    }, [cliente,tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
     const RedirigirAOtraPagina = (direccion) => {
@@ -171,7 +172,10 @@ const ClientesPage = () => {
         <Footer 
             redireccionamiento={RedirigirAOtraPagina}
         />
-        <ModalClientes onOcultar={ ocultar } onMostrar={ seDebeMostrarModal }></ModalClientes>
+        <ModalClientes 
+            onOcultar={ ocultar } 
+            onMostrar={ seDebeMostrarModal }
+        />
     </div>
 
 }

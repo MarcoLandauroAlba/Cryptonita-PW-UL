@@ -1,14 +1,16 @@
+import { Image } from "react-bootstrap"
 const Carrusel = () => {
     return (<div><h1 className='mt-4 text-center'>BITCOIN AL DÍA</h1>
         <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-inner">
                 <div className="carousel-item active">
                     <div className="card bg-dark text-white mt-4 ">
-                        <img 
-                            className='img-fluid' 
-                            src='https://estaticos-cdn.elperiodico.com/clip/5d0a3ba8-43db-4b2f-abc9-882d8344e5d5_alta-libre-aspect-ratio_default_0.jpg' 
-                            alt='...'>
-                        </img>
+                        <Image
+                            alt="..."
+                            className="banner"
+                            src="https://estaticos-cdn.elperiodico.com/clip/5d0a3ba8-43db-4b2f-abc9-882d8344e5d5_alta-libre-aspect-ratio_default_0.jpg"
+                            thumbnail={true}
+                        />
                         <div>
                             <div className='m-4' align="justify">
                                 <font face='Britannic Bold'>
@@ -24,11 +26,12 @@ const Carrusel = () => {
                 </div>
                 <div className="carousel-item">
                     <div className="card bg-dark text-white mt-4">
-                        <img 
-                            className='img-fluid' 
-                            src='https://estudiotarazona.com/wp-content/uploads/2020/11/81cd82ce-2d69-417f-9c7a-324660761590-1000x500.jpg' 
-                            alt='...'>
-                        </img>
+                        <Image
+                            alt="..."
+                            className="banner"
+                            src="https://estudiotarazona.com/wp-content/uploads/2020/11/81cd82ce-2d69-417f-9c7a-324660761590-1000x500.jpg"
+                            thumbnail={true}
+                        />
                         <div>
                             <div className='m-5' align="justify">
                                 <font face='Britannic Bold'>

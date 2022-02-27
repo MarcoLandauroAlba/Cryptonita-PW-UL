@@ -29,7 +29,7 @@ const OperacionesAdminPage = () => {
 
         // CODIGO EXTRA !!! SETEO DE DATOS PARA LA LISTA DE OPERACIONES
         buscarListaDeOperacionesEnBD()
-    }, [])
+    }, [cliente,tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
     // FUNCION CAMBIADA EXCLUSIVAMENTE PARA ESTA PANTALLA
