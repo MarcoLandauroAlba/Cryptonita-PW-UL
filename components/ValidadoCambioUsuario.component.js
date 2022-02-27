@@ -4,12 +4,11 @@ props Utilizados:
 */
 export default function ValidadoCambioUsuario(props) {
     if (props.tipoDeCliente == 1) {
-        return <div className="row">
-            <div className="col-md-8"></div>
+        return <div className="row justify-content-center">
             <div className="col-md-4">
                 <div className="card">
                     <div className="card-body">
-                        <p className="peru">Se han validado los cambios</p>
+                        <p className="text-center">Se han validado los cambios</p>
                     </div>
                 </div>
             </div>

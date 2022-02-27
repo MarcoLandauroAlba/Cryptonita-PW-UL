@@ -3,6 +3,7 @@ import OpcionesUsuariosAdmin from "../components/OpcionesUsuariosAdmin.component
 import ListaUsuarios from "../components/ListaUsuarios.component"
 import ValidadoCambioUsuario from "../components/ValidadoCambioUsuario.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
+import ModalClientes from "../components/modalClientes.component"
 import { useEffect, useState } from 'react'
 
 const ClientesPage = () => {
@@ -11,21 +12,21 @@ const ClientesPage = () => {
     // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
-    const [cliente, setCliente] = useState({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] })
+    const [cliente, setCliente] = useState(123)
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
 
     useEffect(() => {
         // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
         if (localStorage.getItem('cliente') == null) {
-            localStorage.setItem('cliente', JSON.stringify({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] }))
+            localStorage.setItem('cliente', cliente)
         }
         // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
         if (localStorage.getItem('tipoCliente') == null) {
-            localStorage.setItem('tipoCliente', 4)
+            localStorage.setItem('tipoCliente', tipoDeCliente)
         }
         //se actualizan los valores de las variables de estado con lo guardado en el localStorage
-        setCliente(JSON.parse(localStorage.getItem('cliente')))
+        setCliente(parseInt(localStorage.getItem('cliente')))
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
 
         // Actualizan las listas de usuarios existentes
@@ -39,7 +40,7 @@ const ClientesPage = () => {
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
     const RedirigirAOtraPagina = (direccion) => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', JSON.stringify(cliente))
+        localStorage.setItem('cliente', cliente)
         localStorage.setItem('tipoCliente', tipoDeCliente)
         location.href = direccion
     }
@@ -47,7 +48,7 @@ const ClientesPage = () => {
     // Props: salir                 => Elimina los datos del usuario actual
     const TerminarSesionActiva = () => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', JSON.stringify({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] }))
+        localStorage.setItem('cliente', 123)
         localStorage.setItem('tipoCliente', 4)
         location.href = '/'
     }
@@ -137,6 +138,17 @@ const ClientesPage = () => {
 
     // SE HAN AGREGADO LINEAS DE CODIGO EN EL USEEFFECT
 
+    const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
+
+
+    const ocultar = () => {
+        setSeDebeMostrarModal(false)
+    }
+
+    const editarClienteHandler = () => {
+        setSeDebeMostrarModal(true)
+    }
+
     return <div>
         <MenuNavegacion
             tipoDeCliente={tipoDeCliente}
@@ -151,6 +163,7 @@ const ClientesPage = () => {
         <ListaUsuarios 
             tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
             lista={listaUsuarios} 
+            onEditar={ editarClienteHandler }
         />
         <ValidadoCambioUsuario 
             tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
@@ -158,6 +171,7 @@ const ClientesPage = () => {
         <Footer 
             redireccionamiento={RedirigirAOtraPagina}
         />
+        <ModalClientes onOcultar={ ocultar } onMostrar={ seDebeMostrarModal }></ModalClientes>
     </div>
 
 }

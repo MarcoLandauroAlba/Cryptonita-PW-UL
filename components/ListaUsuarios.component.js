@@ -5,6 +5,7 @@ props Utilizados:
 */
 export default function ListaUsuarios(props) {
 
+
     if (props.tipoDeCliente == 1) {
         return <div>
             <h3>Listado de Usuarios</h3>
@@ -33,7 +34,9 @@ export default function ListaUsuarios(props) {
                                     <td>{usuario.correo}</td>
                                     <td>{usuario.numerotelf}</td>
                                     <td>{usuario.estado}</td>
-                                    <td><button type="button" className="btn btn-link">Modificar</button>
+                                    <td><button type="button" className="btn btn-link" onClick={ ()=>{
+                                        props.onEditar()
+                                    } }>Modificar</button>
                                         <button type="button" className="btn btn-link">Eliminar</button></td>
                                 </tr>
                             })
