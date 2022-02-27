@@ -9,28 +9,29 @@ export default function IniciarSesionPage() {
     // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
-    const [cliente, setCliente] = useState({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] })
+    const [cliente, setCliente] = useState(123)
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
 
     useEffect(() => {
         // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
         if (localStorage.getItem('cliente') == null) {
-            localStorage.setItem('cliente', JSON.stringify({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] }))
+            localStorage.setItem('cliente', cliente)
         }
         // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
         if (localStorage.getItem('tipoCliente') == null) {
-            localStorage.setItem('tipoCliente', 4)
+            localStorage.setItem('tipoCliente', tipoDeCliente)
         }
         //se actualizan los valores de las variables de estado con lo guardado en el localStorage
-        setCliente(JSON.parse(localStorage.getItem('cliente')))
+        setCliente(parseInt(localStorage.getItem('cliente')))
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
     }, [])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
+    // FUNCION CAMBIADA EXCLUSIVAMENTE PARA ESTA PANTALLA
     const RedirigirAOtraPagina = (direccion) => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', JSON.stringify(cliente))
+        localStorage.setItem('cliente', cliente)
         localStorage.setItem('tipoCliente', tipoDeCliente)
         location.href = direccion
     }
@@ -38,7 +39,7 @@ export default function IniciarSesionPage() {
     // Props: salir                 => Elimina los datos del usuario actual
     const TerminarSesionActiva = () => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', JSON.stringify({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] }))
+        localStorage.setItem('cliente', 123)
         localStorage.setItem('tipoCliente', 4)
         location.href = '/'
     }
@@ -106,7 +107,8 @@ export default function IniciarSesionPage() {
     const [contrasenaIncorrecta,setContrasenaIncorrecta] = useState(false)
     const [correoInexistente,setCorreoInexistente] = useState(false)
 
-    const ValidarUsuario = (correo,contrasena) => {
+
+    const validarUsuario = (correo,contrasena) => {
         // TODO: REALIZAR LO SIGUIENTE CUANDO LA BASE DE DATOS ESTE LISTA
         // SE HACE UNA PRIMERA LLAMADA A BASE DE DATOS PREGUNTANDO POR EL CORREO,
 
@@ -125,20 +127,32 @@ export default function IniciarSesionPage() {
                     //SI EL CLIENTE ES USUARIO NO CONFIRMADO
                         // setTipoDeCliente(3)
                     
+                    // EN ESTA VARIABLE ID, SE GUARDARA EL VALOR DEL ID DEL CLIENTE INGRESADO
+                    // SE TIENE QUE HACER UNA PETICION A BASE DE DATOS PARA QUE DEVUELVA EL VALOR
+                    const id = 12345678
+                    // EN ESTA VARIABLE TIPO, SE GUARDARA EL VALOR DEL TIPO DE CLIENTE BUSCADO
+                    // SI ES ADMIN SERA 1, CLIENTE CONFIRMADO 2 Y CLIENTE POR CONFIRMAR 3
+                    const tipo = 1
 
-                    // SE ACTUALIZAN LOS DATOS DEL USUARIO ACTUAL, PARA PODER UTILIZARLAS LUEGO EN LAS PANTALLAS NECESARIAS
-                    const arregloUsuarioActual = { datos: ['id-persona-ingresada', 'id-cliente-ingresada', 'nombre-ingresado', 'apellido-ingresado'] }
-                    setCliente(arregloUsuarioActual)
 
                     // SE ENVIA AL USUARIO A LA PAGINA PRINCIPAL
-                    RedirigirAOtraPagina('/')
+                    
+                    RedirigirAPaginaPrincipalConLogeoRealizado(id,tipo)
 
 
 
             //SI CONTRASENA NO COINCIDE, SE CAMBIA EL ESTADO DE CONTRASENAINCORRECTA
-            setContrasenaIncorrecta(true)
+            // setContrasenaIncorrecta(true)
+
         //SI EL CORREO NO EXISTEN, SE CAMBIA EL ESTADO DE CORREOINEXISTENTE
-        setCorreoInexistente(true)
+        // setCorreoInexistente(true)
+    }
+    
+    const RedirigirAPaginaPrincipalConLogeoRealizado = (VALORcliente,VALORtipoDeCliente) => {
+        GuardarPaginaAnterior()
+        localStorage.setItem('cliente', VALORcliente)
+        localStorage.setItem('tipoCliente', VALORtipoDeCliente)
+        location.href = '/'
     }
 
 
@@ -151,7 +165,7 @@ export default function IniciarSesionPage() {
             ubicacion={'IniciarSesion'}
         />
         <FormularioIniciarSesion 
-            validarUsuario={ValidarUsuario}
+            validarUsuario={validarUsuario}
             contrasenaIncorrecta={contrasenaIncorrecta}
             correoInexistente={correoInexistente}
         />

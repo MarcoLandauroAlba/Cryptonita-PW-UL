@@ -40,7 +40,7 @@ const Footer = (props) => {
                     <div className="col-md">
                         <div className="text-center mb-1">
                             <OverlayTrigger
-                                placement="right"
+                                placement="top"
                                 delay={{ show: 250, hide: 400 }}
                                 overlay={renderTooltip1}
                             >
@@ -49,7 +49,7 @@ const Footer = (props) => {
                             </div>
                         <div className="text-center mt-1">
                         <OverlayTrigger
-                                placement="right"
+                                placement="top"
                                 delay={{ show: 250, hide: 400 }}
                                 overlay={renderTooltip2}
                             >

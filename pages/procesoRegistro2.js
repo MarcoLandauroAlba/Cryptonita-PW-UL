@@ -9,21 +9,21 @@ const ProcesoRegistro2Page = () => {
     // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
-    const [cliente, setCliente] = useState({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] })
+    const [cliente, setCliente] = useState(123)
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
 
     useEffect(() => {
         // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
         if (localStorage.getItem('cliente') == null) {
-            localStorage.setItem('cliente', JSON.stringify({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] }))
+            localStorage.setItem('cliente', cliente)
         }
         // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
         if (localStorage.getItem('tipoCliente') == null) {
-            localStorage.setItem('tipoCliente', 4)
+            localStorage.setItem('tipoCliente', tipoDeCliente)
         }
         //se actualizan los valores de las variables de estado con lo guardado en el localStorage
-        setCliente(JSON.parse(localStorage.getItem('cliente')))
+        setCliente(parseInt(localStorage.getItem('cliente')))
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
 
         // IMPORTANT: ESTA LINEA DE CODIGO ES AGREGADA PARA DETEMRINAR SI EL PROCESO DE REGISTRO 1 FUE REALIZADO CON EXITO
@@ -33,7 +33,7 @@ const ProcesoRegistro2Page = () => {
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
     const RedirigirAOtraPagina = (direccion) => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', JSON.stringify(cliente))
+        localStorage.setItem('cliente', 123)
         localStorage.setItem('tipoCliente', tipoDeCliente)
         location.href = direccion
     }
@@ -41,7 +41,7 @@ const ProcesoRegistro2Page = () => {
     // Props: salir                 => Elimina los datos del usuario actual
     const TerminarSesionActiva = () => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', JSON.stringify({ datos: ['id-persona', 'id-cliente', 'nombre', 'apellido'] }))
+        localStorage.setItem('cliente', 123)
         localStorage.setItem('tipoCliente', 4)
         location.href = '/'
     }
@@ -115,7 +115,7 @@ const ProcesoRegistro2Page = () => {
         console.log(correo)
         console.log(contrasena)
         console.log(telefono)
-        RedirigirAOtraPagina("/")
+        
         // TODO: FALTA CREAR LA LOGICA DE SI ES UNA PERSONA CON EL MISMO CORREO (NO SE PUEDE DUPLICAR)
         //setDisponible(false)
 
@@ -126,6 +126,17 @@ const ProcesoRegistro2Page = () => {
 
         //TODO: SE REALIZA LA ELIMINACION DEL DNI EN EL LOCALSTORAGE
         localStorage.removeItem('DniGuardable')
+
+        //TODO: LOGICA QUE PIDE EN BACKEND CREAR AL NUEVO CLIENTE
+
+        //TODO: PEDIR DE BACKEND EL VALOR DEL ID DEL CLIENTE Y ALMACENAR ABAJO
+        // EN ESTA VARIABLE ID, SE GUARDARA EL VALOR DEL ID DEL CLIENTE REGISTRADO
+        const id = 666
+        // EN ESTA VARIABLE TIPO, SE GUARDARA EL VALOR DEL TIPO DE CLIENTE BUSCADO
+        // CLIENTE POR CONFIRMAR 3 (NO HABRA MAS OPCIONES)
+        const tipo = 3
+
+        RedirigirAPaginaPrincipalDeEsperaConLoggeo(id,tipo)
 
     }
 
@@ -139,8 +150,11 @@ const ProcesoRegistro2Page = () => {
         }
     }
 
-    const EstablecerDatosCorrectos = (correo) => {
-        localStorage.setItem('CorreoGuardable',correo)
+    const RedirigirAPaginaPrincipalDeEsperaConLoggeo = (VALORcliente,VALORtipoDeCliente) => {
+        GuardarPaginaAnterior()
+        localStorage.setItem('cliente', VALORcliente)
+        localStorage.setItem('tipoCliente', VALORtipoDeCliente)
+        location.href = '/EsperaRegistro'
     }
 
     return (
