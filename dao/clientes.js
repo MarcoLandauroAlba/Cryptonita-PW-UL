@@ -26,7 +26,8 @@ const obtenerClientes = async () => {
 }
 
 const editarOperacion = async (cliente) => {
-    await db.Cliente.modify({
+    await db.Cliente.update({
+        estado: cliente.estado},{
         where : {
             id : cliente.id
         },

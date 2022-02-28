@@ -29,11 +29,11 @@ const obtenerOperacion = async (id) => {
 }
 
 const editarOperacion = async (operacion) => {
-    await db.Operacion.modify({
+    await db.Operacion.update({
+        estado: operacion.estado},{
         where : {
             id : operacion.id
-        },  
-        estado: operacion.estado
+        } 
     })
 }
 
