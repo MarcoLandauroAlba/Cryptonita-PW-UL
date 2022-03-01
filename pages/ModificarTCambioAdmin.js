@@ -1,9 +1,10 @@
-import Footer from "../components/footer.component"
-import HistorialTrans from "../components/HistorialTrans.component"
-import MenuNavegacion from "../components/menuNavegacion.component"
-import { useEffect, useState } from 'react' 
-const historialTrans =() => {
-    // INICIO: EL CODIGO ESCRITO DESDE AQUI HASTA LA SIGUIENTE SEÑAL, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
+import Footer from "../components/footer.component";
+import MenuNavegacion from "../components/menuNavegacion.component";
+import ModTCambio from "../components/ModTCambio.component";
+import { useEffect, useState } from 'react'
+
+const ModificarTCambioAdmin = () => {
+     // INICIO: EL CODIGO ESCRITO DESDE AQUI HASTA LA SIGUIENTE SEÑAL, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
     // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
@@ -98,13 +99,22 @@ const historialTrans =() => {
     // FIN: EL CODIGO ESCRITO HASTA AQUI, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
 
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
-    return ( <div className="">
-        <MenuNavegacion/> <br/>
-        <HistorialTrans
-        redireccionamiento={RedirigirAOtraPagina}/>
-        <Footer/>
+
+    return <div>
+        <MenuNavegacion
+            tipoDeCliente={tipoDeCliente}
+            redireccionamiento={RedirigirAOtraPagina}
+            salir={TerminarSesionActiva}
+            ubicacion={'OperacionesAdmin'}
+        />
+        <ModTCambio
+            tipoDeCliente={tipoDeCliente}
+        />
+
+        <Footer 
+            redireccionamiento={RedirigirAOtraPagina}
+        />
     </div>
-    )
 }
 
-export default historialTrans
+export default ModificarTCambioAdmin
