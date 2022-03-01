@@ -140,7 +140,9 @@ const ClientesPage = () => {
                         nombre: usuario.nombre, 
                         apellido: usuario.apellido, 
                         dni: usuario.dni, 
-                        correo: usuario.correo
+                        correo: usuario.correo,
+                        telefono : usuario.telefono,
+                        estado : usuario.estado
                     })
                 }
             }
@@ -154,7 +156,9 @@ const ClientesPage = () => {
                         nombre: usuario.nombre, 
                         apellido: usuario.apellido, 
                         dni: usuario.dni, 
-                        correo: usuario.correo
+                        correo: usuario.correo,
+                        telefono : usuario.telefono,
+                        estado : usuario.estado
                     })
                 }
             }
@@ -168,7 +172,9 @@ const ClientesPage = () => {
                         nombre: usuario.nombre, 
                         apellido: usuario.apellido, 
                         dni: usuario.dni, 
-                        correo: usuario.correo
+                        correo: usuario.correo,
+                        telefono : usuario.telefono,
+                        estado : usuario.estado
                     })
                 }
             }
@@ -182,7 +188,9 @@ const ClientesPage = () => {
                         nombre: usuario.nombre, 
                         apellido: usuario.apellido, 
                         dni: usuario.dni, 
-                        correo: usuario.correo
+                        correo: usuario.correo,
+                        telefono : usuario.telefono,
+                        estado : usuario.estado
                     })
                 }
             }
