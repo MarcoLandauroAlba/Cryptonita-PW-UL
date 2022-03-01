@@ -2,6 +2,7 @@ import Footer from "../components/footer.component"
 import FormularioProcesoRegistro2 from "../components/FormularioProcesoRegistro2.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useState, useEffect } from "react"
+import { obtenerClienteDatosIniciales } from "../dao/cliente_local"
 
 
 const ProcesoRegistro2Page = () => {
@@ -29,7 +30,7 @@ const ProcesoRegistro2Page = () => {
 
         // IMPORTANT: ESTA LINEA DE CODIGO ES AGREGADA PARA DETEMRINAR SI EL PROCESO DE REGISTRO 1 FUE REALIZADO CON EXITO
         confirmarSiPasoAnteriorRealizado()
-    }, [cliente,tipoDeCliente])
+    }, [cliente, tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
     const RedirigirAOtraPagina = (direccion) => {
@@ -105,83 +106,137 @@ const ProcesoRegistro2Page = () => {
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
 
 
-    const obtenerClientesHTTP = async () => {
-        let response = await fetch("/api/usuarios")
-        const data = await response.json()
-        return data
-    }
+
 
 
     //Si el CORREO se repite, se cambia a estado falso
     const [disponible, setDisponible] = useState(true)
 
-    const GuardarClienteOnHandler = async (correo, contrasena, telefono) => {
-        // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
-        const clienteintancia = JSON.parse(localStorage.getItem("fpr1"))
-        const nombre = clienteintancia.nombre
-        const apellido = clienteintancia.apellido
-        const dni = parseInt(clienteintancia.dni)
-        //TODO:SE MANDA A ESPERA HASTA QUE UN ADMINISTRADOR PERMITA EL LOGEO DEL CLIENTE
-        const estado = false
+    // SE UTILIZAN PARA DETERMINAR SI HAN SIDO RELLENADOS LOS CAMPOS SOLICITADOS
+    const [faltaCorreo, setFaltaCorreo] = useState(false)
+    const [faltaContraOri, setFaltaContraOri] = useState(false)
+    const [faltaContraRep, setFaltaContraRep] = useState(false)
+    const [faltaTelefono, setFaltaTelefono] = useState(false)
 
-        const cliente = {
-            nombre : nombre,
-            apellido : apellido,
-            dni : dni,
-            correo : correo,
-            telefono : telefono,
-            contraseña : contrasena,
-            estado : estado
+    // VALIDA SI EL CORREO INGRESADO CUMPLE CON EL FORMATO REQUERIDO PARA EXISTIR
+    const validarEmail = (correo) => {
+        if ((/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i).test(correo)) {
+            return true
+        } else {
+            return false
         }
+    }
 
-        const resp = await fetch("/api/usuarios",{
-            method : "POST",
-            body : JSON.stringify(cliente)   
-        })
-        const data = await resp.json()
-
-        if(data.msg == ""){
-            const dataClientes = await obtenerClientesHTTP()
-            const lista = dataClientes.clientes
-            localStorage.setItem("clienteNuevo", JSON.stringify(lista))
+    // VALIDA SI EL CORREO EXISTE EN BASE DE DATOS O NO
+    const existeCorreoEnBaseDeDatos = async (correo) => {
+        const response = await fetch(`/api/clientes/${correo}`)
+        const data = await response.json()
+        console.log('data',data)
+        if(data.cliente==null){
+            return false
+        }else{
+            true
         }
-        // TODO: FALTA CREAR LA LOGICA DE SI ES UNA PERSONA CON EL MISMO CORREO (NO SE PUEDE DUPLICAR)
-        //setDisponible(false)
+    }
 
-        //TODO: SE REALIZA EL ALMACENAMIENTO DEL CLIENTE
+    const GuardarClienteOnHandler = async (correo, contrasenaOriginal, contrasenaRepe, telefono) => {
+        // PRIMERO CORROBORAMOS QUE TODOS LOS DATOS SOLICITADOS ESTAN COMPLETOS
+        let EfaltaCorreo = true
+        let EfaltaContraOri = true
+        let EfaltaContraRep = true
+        let EfaltaTelefono = true
+        let ENodisponible = true
+
+        console.log('validarEmail(correo)',validarEmail(correo))
+        if (!validarEmail(correo)) {
+            setFaltaCorreo(true)
+        } else {
+            setFaltaCorreo(false)
+            EfaltaCorreo = false
+        }
+        if (contrasenaOriginal == '') {
+            setFaltaContraOri(true)
+        } else {
+            setFaltaContraOri(false)
+            EfaltaContraOri = false
+        }
+        if (contrasenaRepe == '') {
+            setFaltaContraRep(true)
+        } else {
+            if (contrasenaRepe == contrasenaOriginal) {
+                setFaltaContraRep(false)
+                EfaltaContraRep = false
+            } else {
+                setFaltaContraRep(true)
+            }
+        }
+        if (telefono == undefined) {
+            setFaltaTelefono(true)
+        } else {
+            if (telefono.toString().length == 7 || telefono.toString().length == 9) {
+                setFaltaTelefono(false)
+                EfaltaTelefono = false
+            } else {
+                setFaltaTelefono(true)
+            }
+        }
+        // // REVISAMOS SI EL CORREO EXISTE EN LA BASE DE DATOS
+        if(!EfaltaCorreo){
+            setDisponible(!await existeCorreoEnBaseDeDatos(correo))
+            ENodisponible = false
+        }
         
-        //CODIGO DE ALMACENAMIENTO
-        //TODO: SE REALIZA LA ELIMINACION DEL CLIENTE EN PRIMERA INSTANCIA EN EL LOCALSTORAGE
-        localStorage.removeItem('fpr1')
-
-        //TODO: LOGICA QUE PIDE EN BACKEND CREAR AL NUEVO CLIENTE
-
-        //TODO: PEDIR DE BACKEND EL VALOR DEL ID DEL CLIENTE Y ALMACENAR ABAJO
-        // EN ESTA VARIABLE ID, SE GUARDARA EL VALOR DEL ID DEL CLIENTE REGISTRADO
-        // EN ESTA VARIABLE TIPO, SE GUARDARA EL VALOR DEL TIPO DE CLIENTE BUSCADO
-        // CLIENTE POR CONFIRMAR 3 (NO HABRA MAS OPCIONES)
-        const tipo = 3
-
-
-        
-        RedirigirAPaginaPrincipalDeEsperaConLoggeo(id,tipo)
-
+        // SI INGRESA A ESTA CONDICIONAL, SIGNIFICA QUE TODO LO INGRESADO ES VALIDO PARA CREAR UNA CUENTA
+        if(!EfaltaCorreo && !EfaltaContraOri && !EfaltaContraRep && !EfaltaTelefono && !ENodisponible ){
+            // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
+            const clienteintancia = obtenerClienteDatosIniciales()
+            const nombre = clienteintancia.nombre
+            const apellido = clienteintancia.apellido
+            const dni = parseInt(clienteintancia.dni)
+            //TODO:SE MANDA A ESPERA HASTA QUE UN ADMINISTRADOR PERMITA EL LOGEO DEL CLIENTE
+            const estado = false
+    
+            const clientePorGuardar = {
+                nombre : nombre,
+                apellido : apellido,
+                dni : dni,
+                correo : correo,
+                telefono : telefono,
+                contrasena : contrasenaOriginal,
+                estado : estado
+            }
+            console.log('cliente12+',clientePorGuardar)
+    
+            const resp = await fetch("/api/usuarios",{
+                method : "POST",
+                body : JSON.stringify(clientePorGuardar)   
+            })
+            const data = await resp.json()
+            
+            
+            //TODO: SE REALIZA LA ELIMINACION DEL CLIENTE EN PRIMERA INSTANCIA EN EL LOCALSTORAGE
+            localStorage.removeItem('fpr1')
+    
+            const tipo = 3
+    
+            // RedirigirAPaginaPrincipalDeEsperaConLoggeo(id)
+        }
     }
 
     const [procede, setProcede] = useState(true)
 
     const confirmarSiPasoAnteriorRealizado = () => {
-        if(localStorage.getItem('fpr1')!=null){
+        if (localStorage.getItem('fpr1') != null) {
             setProcede(true)
-        }else{
+        } else {
             setProcede(false)
         }
     }
 
-    const RedirigirAPaginaPrincipalDeEsperaConLoggeo = (VALORcliente,VALORtipoDeCliente) => {
+    const RedirigirAPaginaPrincipalDeEsperaConLoggeo = (VALORcliente) => {
         GuardarPaginaAnterior()
         localStorage.setItem('cliente', VALORcliente)
-        localStorage.setItem('tipoCliente', VALORtipoDeCliente)
+        localStorage.setItem('tipoCliente', 3)
         location.href = '/EsperaRegistro'
     }
 
@@ -198,6 +253,10 @@ const ProcesoRegistro2Page = () => {
                 volver={VolverAPaginaAnterior}
                 disponible={disponible}
                 procede={procede}
+                VerFaltaCorreo={faltaCorreo}
+                VerFaltaContraOri={faltaContraOri}
+                VerFaltaContraRep={faltaContraRep}
+                VerFaltaTelefono={faltaTelefono}
             />
             <Footer
                 redireccionamiento={RedirigirAOtraPagina}

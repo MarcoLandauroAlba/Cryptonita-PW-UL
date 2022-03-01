@@ -27,7 +27,7 @@ const ProcesoRegistro1Page = () => {
         //se actualizan los valores de las variables de estado con lo guardado en el localStorage
         setCliente(parseInt(localStorage.getItem('cliente')))
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
-    }, [cliente,tipoDeCliente])
+    }, [cliente, tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
     const RedirigirAOtraPagina = (direccion) => {
@@ -104,27 +104,46 @@ const ProcesoRegistro1Page = () => {
 
 
 
-    //Si el numero de DNI se repite, se cambia a estado falso
-    const [disponible,setDisponible] = useState(false)
 
-    const GuardarClienteOnHandler = (nombres, apellidos, dni) => {
-        // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
-        console.log(nombres)
-        console.log(apellidos)
-        console.log(dni)
-        RedirigirAOtraPagina("/procesoRegistro2")
-        
-        // TODO: FALTA CREAR LA LOGICA DE SI ES UNA PERSONA CON EL MISMO DNI (NO SE PUEDE DUPLICAR)
-        //setDisponible(false)
+    const [faltaNombre, setFaltaNombre] = useState(false)
+    const [faltaApellido, setFaltaApellido] = useState(false)
+    const [faltaDni, setFaltaDni] = useState(false)
 
-        //TODO: SI EL DNI ESTA DISPONIBLE PARA ALMACENAR, SE PROCEDE A LA SIGUIENTE FUNCION
-        
-        EstablecerDatosCorrectos(dni)
-    }
-
-    // SOLO SE GUARDA EL DNI (PERSONA) PARA PODER RELACIONARLO LUEGO CON EL CLIENTE (CORREO)
-    const EstablecerDatosCorrectos = (dni) => {
-        localStorage.setItem('DniGuardable',dni)
+    //  EN ESTA FUNCION SE GUARDARAN LOS DATOS EN EL LOCALSTORAGE
+    const GuardarClienteOnHandler = (nombre, apellido, dni) => {
+        // PRIMERO CORROBORAMOS SI TODOS LOS CAMPOS HAN SIDO RELLENADOS
+        let EfaltaNombre = true
+        let EfaltaApellido = true
+        let EfaltaDni = true
+        if (nombre == '') {
+            setFaltaNombre(true)
+        } else {
+            setFaltaNombre(false)
+            EfaltaNombre = false
+        }
+        if (apellido == '') {
+            setFaltaApellido(true)
+        } else {
+            setFaltaApellido(false)
+            EfaltaApellido = false
+        }
+        if (dni == undefined) {
+            setFaltaDni(true)
+        } else {
+            if (dni.toString().length == 8) {
+                setFaltaDni(false)
+                EfaltaDni = false
+            } else {
+                setFaltaDni(true)
+            }
+        }
+        // SI TODOS LOS CAMPOS HAN SIDO RELLENADOS CORRECTAMENTE...
+        if (EfaltaNombre == false && EfaltaApellido == false && EfaltaDni == false) {
+            // SE GUARDAN LOS DATOS EN EL LOCALSTORAGE
+            guardarClienteDatosIniciales(nombre, apellido, dni)
+            // SE REDIRIGE A PROCESOREGISTRO2
+            RedirigirAOtraPagina("/procesoRegistro2")
+        }
     }
 
     return (
@@ -138,8 +157,11 @@ const ProcesoRegistro1Page = () => {
             <FormularioProcesoRegistro1
                 guardar={GuardarClienteOnHandler}
                 volver={VolverAPaginaAnterior}
+                VerFaltaNombre={faltaNombre}
+                VerFaltaApellido={faltaApellido}
+                VerFaltaDni={faltaDni}
             />
-            <Footer 
+            <Footer
                 redireccionamiento={RedirigirAOtraPagina}
             />
         </div>)
