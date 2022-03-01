@@ -3,6 +3,7 @@ import FormularioProcesoRegistro2 from "../components/FormularioProcesoRegistro2
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useState, useEffect } from "react"
 
+
 const ProcesoRegistro2Page = () => {
 
     // INICIO: EL CODIGO ESCRITO DESDE AQUI HASTA LA SIGUIENTE SEÑAL, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
@@ -104,38 +105,65 @@ const ProcesoRegistro2Page = () => {
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
 
 
-
+    const obtenerClientesHTTP = async () => {
+        let response = await fetch("/api/usuarios")
+        const data = await response.json()
+        return data
+    }
 
 
     //Si el CORREO se repite, se cambia a estado falso
     const [disponible, setDisponible] = useState(true)
 
-    const GuardarClienteOnHandler = (correo, contrasena, telefono) => {
+    const GuardarClienteOnHandler = async (correo, contrasena, telefono) => {
         // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
-        console.log(correo)
-        console.log(contrasena)
-        console.log(telefono)
-        
+        const clienteintancia = JSON.parse(localStorage.getItem("fpr1"))
+        const nombre = clienteintancia.nombre
+        const apellido = clienteintancia.apellido
+        const dni = parseInt(clienteintancia.dni)
+        //TODO:SE MANDA A ESPERA HASTA QUE UN ADMINISTRADOR PERMITA EL LOGEO DEL CLIENTE
+        const estado = false
+
+        const cliente = {
+            nombre : nombre,
+            apellido : apellido,
+            dni : dni,
+            correo : correo,
+            telefono : telefono,
+            contraseña : contrasena,
+            estado : estado
+        }
+
+        const resp = await fetch("/api/usuarios",{
+            method : "POST",
+            body : JSON.stringify(cliente)   
+        })
+        const data = await resp.json()
+
+        if(data.msg == ""){
+            const dataClientes = await obtenerClientesHTTP()
+            const lista = dataClientes.clientes
+            localStorage.setItem("clienteNuevo", JSON.stringify(lista))
+        }
         // TODO: FALTA CREAR LA LOGICA DE SI ES UNA PERSONA CON EL MISMO CORREO (NO SE PUEDE DUPLICAR)
         //setDisponible(false)
 
         //TODO: SE REALIZA EL ALMACENAMIENTO DEL CLIENTE
         
         //CODIGO DE ALMACENAMIENTO
-        const dni = localStorage.getItem('DniGuardable')
-
-        //TODO: SE REALIZA LA ELIMINACION DEL DNI EN EL LOCALSTORAGE
-        localStorage.removeItem('DniGuardable')
+        //TODO: SE REALIZA LA ELIMINACION DEL CLIENTE EN PRIMERA INSTANCIA EN EL LOCALSTORAGE
+        localStorage.removeItem('fpr1')
 
         //TODO: LOGICA QUE PIDE EN BACKEND CREAR AL NUEVO CLIENTE
 
         //TODO: PEDIR DE BACKEND EL VALOR DEL ID DEL CLIENTE Y ALMACENAR ABAJO
         // EN ESTA VARIABLE ID, SE GUARDARA EL VALOR DEL ID DEL CLIENTE REGISTRADO
-        const id = 666
         // EN ESTA VARIABLE TIPO, SE GUARDARA EL VALOR DEL TIPO DE CLIENTE BUSCADO
         // CLIENTE POR CONFIRMAR 3 (NO HABRA MAS OPCIONES)
         const tipo = 3
 
+
+        
         RedirigirAPaginaPrincipalDeEsperaConLoggeo(id,tipo)
 
     }
@@ -143,7 +171,7 @@ const ProcesoRegistro2Page = () => {
     const [procede, setProcede] = useState(true)
 
     const confirmarSiPasoAnteriorRealizado = () => {
-        if(localStorage.getItem('DniGuardable')!=null){
+        if(localStorage.getItem('fpr1')!=null){
             setProcede(true)
         }else{
             setProcede(false)

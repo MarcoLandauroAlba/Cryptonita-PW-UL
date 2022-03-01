@@ -31,11 +31,6 @@ const ClientesPage = () => {
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
 
         // Actualizan las listas de usuarios existentes
-        setListaUsuarios([
-            { numero: 1, id: "arnodorian020", nombre: "Jose Borgoña", dni: 10698536, correo: "jose.borgona@gmail.com", numerotelf: 954785636, estado: "pendiente de validación" },
-            { numero: 2, id: "toppiOrg", nombre: "Mathias Almeida", dni: 17498635, correo: "mathi.almeida@gmail.com", numerotelf: 987563374, estado: "validado" },
-            { numero: 3, id: "reseAlm", nombre: "Jack Newton", dni: 15698236, correo: "jack.newton@gmail.com", numerotelf: 978632145, estado: "pendiente de validación" }
-        ])
     }, [cliente,tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
@@ -116,18 +111,93 @@ const ClientesPage = () => {
 
 
     const [listaUsuarios,setListaUsuarios] = useState([])
+    const[usuario, setUsuario] = useState(null)
 
-    const buscarUsuarios = (datos,boton) => {
+    const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
+
+    const obtenerClientesHTTP = async () => {
+        let response = await fetch("/api/usuarios")
+        const data = await response.json()
+        return data
+    }
+
+    useEffect(async ()=> {
+        const dataClientes = await obtenerClientesHTTP()
+        setListaUsuarios(dataClientes.clientes)
+    },[])
+
+    const buscarUsuarios = async (datos,boton) => {
         //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
-        console.log('datos => ',datos)
-        console.log('boton => ',boton)
+        let nuevaLista = []
+        if(boton == 'DNI'){
+            for(let usuario of listaUsuarios){
+                console.log(listaUsuarios)
+                console.log(usuario.dni)
+                console.log(datos)
+                if(usuario.dni == datos){
+                    nuevaLista.push({
+                        id: usuario.id, 
+                        nombre: usuario.nombre, 
+                        apellido: usuario.apellido, 
+                        dni: usuario.dni, 
+                        correo: usuario.correo,
+                        telefono : usuario.telefono,
+                        estado : usuario.estado
+                    })
+                }
+            }
+            setListaUsuarios(nuevaLista)
+        }
+        else if(boton == 'NOMBRE'){
+            for(let usuario of listaUsuarios){
+                if(usuario.nombre == datos){
+                    nuevaLista.push({
+                        id: usuario.id, 
+                        nombre: usuario.nombre, 
+                        apellido: usuario.apellido, 
+                        dni: usuario.dni, 
+                        correo: usuario.correo,
+                        telefono : usuario.telefono,
+                        estado : usuario.estado
+                    })
+                }
+            }
+            setListaUsuarios(nuevaLista)
+        }
+        else if(boton == 'APELLIDO'){
+            for(let usuario of listaUsuarios){
+                if(usuario.apellido == datos){
+                    nuevaLista.push({
+                        id: usuario.id, 
+                        nombre: usuario.nombre, 
+                        apellido: usuario.apellido, 
+                        dni: usuario.dni, 
+                        correo: usuario.correo,
+                        telefono : usuario.telefono,
+                        estado : usuario.estado
+                    })
+                }
+            }
+            setListaUsuarios(nuevaLista)
+        }
+        else if(boton == 'CORREO'){
+            for(let usuario of listaUsuarios){
+                if(usuario.correo == datos){
+                    nuevaLista.push({
+                        id: usuario.id, 
+                        nombre: usuario.nombre, 
+                        apellido: usuario.apellido, 
+                        dni: usuario.dni, 
+                        correo: usuario.correo,
+                        telefono : usuario.telefono,
+                        estado : usuario.estado
+                    })
+                }
+            }
+            setListaUsuarios(nuevaLista)
+        }
         // TODO: FALTA BASE DE DATOS PARA IMPLEMENTAR FUNCIONALIDAD A LOS BOTONES
 
-        setListaUsuarios([
-            { numero: 4, id: "arnodorian020", nombre: "Jose Borgoña", dni: 10698536, correo: "jose.borgona@gmail.com", numerotelf: 954785636, estado: "pendiente de validación" },
-            { numero: 5, id: "toppiOrg", nombre: "Mathias Almeida", dni: 17498635, correo: "mathi.almeida@gmail.com", numerotelf: 987563374, estado: "validado" },
-            { numero: 6, id: "reseAlm", nombre: "Jack Newton", dni: 15698236, correo: "jack.newton@gmail.com", numerotelf: 978632145, estado: "pendiente de validación" }
-        ])
     }
 
     // codigo de ejemplo 
@@ -139,15 +209,46 @@ const ClientesPage = () => {
 
     // SE HAN AGREGADO LINEAS DE CODIGO EN EL USEEFFECT
 
-    const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
-
 
     const ocultar = () => {
         setSeDebeMostrarModal(false)
     }
 
-    const editarClienteHandler = () => {
+    const actualizarClienteHandler = async (id, nombre, apellido, dni, correo, telefono, estado) => {
+        const cliente = {
+            id : id,
+            nombre : nombre,
+            apellido : apellido,
+            dni : dni,
+            correo : correo,
+            telefono : telefono,
+            estado : estado
+        }
+
+        const resp = await fetch("/api/usuarios", {
+            method : "PUT",
+            body : JSON.stringify(cliente)
+        })
+        const data = await resp.json()
+
+        if(data.msg == ""){
+            setSeDebeMostrarModal(false)
+            const dataClientes = await obtenerClientesHTTP()
+            setListaUsuarios(dataClientes.clientes)
+        }
+    }
+
+    const editarClienteHandler = async (id) => {
+        const resp = await fetch(`/api/usuarios/${id}`)
+        const data = await resp.json()
+        console.log(data)
+        setUsuario(data.cliente)
         setSeDebeMostrarModal(true)
+    }
+
+    const recargarLista = async () => {
+        const dataClientes = await obtenerClientesHTTP()
+        setListaUsuarios(dataClientes.clientes)
     }
 
     return <div>
@@ -165,6 +266,7 @@ const ClientesPage = () => {
             tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
             lista={listaUsuarios} 
             onEditar={ editarClienteHandler }
+            onRecargar={ recargarLista }
         />
         <ValidadoCambioUsuario 
             tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
@@ -175,6 +277,8 @@ const ClientesPage = () => {
         <ModalClientes 
             onOcultar={ ocultar } 
             onMostrar={ seDebeMostrarModal }
+            onActualizarCliente={ actualizarClienteHandler }
+            cliente={ usuario }
         />
     </div>
 

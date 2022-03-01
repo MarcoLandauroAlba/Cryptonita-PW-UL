@@ -2,6 +2,8 @@ import Footer from "../components/footer.component"
 import FormularioProcesoRegistro1 from "../components/FormularioProcesoRegistro1.components"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
+import { guardarClienteDatosIniciales } from "../dao/cliente_local"
+
 
 const ProcesoRegistro1Page = () => {
 
@@ -136,7 +138,6 @@ const ProcesoRegistro1Page = () => {
             <FormularioProcesoRegistro1
                 guardar={GuardarClienteOnHandler}
                 volver={VolverAPaginaAnterior}
-                disponible={disponible}
             />
             <Footer 
                 redireccionamiento={RedirigirAOtraPagina}

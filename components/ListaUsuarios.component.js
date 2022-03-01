@@ -9,13 +9,14 @@ export default function ListaUsuarios(props) {
     if (props.tipoDeCliente == 1) {
         return <div>
             <h3>Listado de Usuarios</h3>
+            <button type="button" className="btn btn-success" onClick={ props.onRecargar }>Recargar Lista Original</button>
             <div className="table-responsive">
                 <table className="table mt-4">
                     <thead>
                         <tr>
-                            <th>Número</th>
                             <th>ID</th>
-                            <th>Nombre Completo</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
                             <th>DNI</th>
                             <th>Correo Electrónico</th>
                             <th>Número Teléfonico</th>
@@ -27,17 +28,17 @@ export default function ListaUsuarios(props) {
                         {
                             props.lista.map((usuario) => {
                                 return <tr key={usuario.id}>
-                                    <td>{usuario.numero}</td>
                                     <td>{usuario.id}</td>
                                     <td>{usuario.nombre}</td>
+                                    <td>{usuario.apellido}</td>
                                     <td>{usuario.dni}</td>
                                     <td>{usuario.correo}</td>
-                                    <td>{usuario.numerotelf}</td>
-                                    <td>{usuario.estado}</td>
+                                    <td>{usuario.telefono}</td>
+                                    <td>{usuario.estado}</td> 
                                     <td><button type="button" className="btn btn-link" onClick={ ()=>{
-                                        props.onEditar()
+                                        props.onEditar(usuario.id)
                                     } }>Modificar</button>
-                                        <button type="button" className="btn btn-link">Eliminar</button></td>
+                                    </td>
                                 </tr>
                             })
                         }
