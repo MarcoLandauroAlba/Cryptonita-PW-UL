@@ -53,11 +53,11 @@ const MenuNavegacion = (props) => {
                                         () => {
                                             if (props.ubicacion == 'index') {
                                                 return (
-                                                    <button className="nav-link btn active" onClick={() => { props.redireccionamiento('/') }}>Tipo de Cambio</button>
+                                                    <button className="nav-link btn active" onClick={() => { props.redireccionamiento('/ModificarTCambioAdmin') }}>Tipo de Cambio</button>
                                                 )
                                             } else {
                                                 return (
-                                                    <button className="nav-link btn" onClick={() => { props.redireccionamiento('/') }}>Tipo de Cambio</button>
+                                                    <button className="nav-link btn" onClick={() => { props.redireccionamiento('/ModificarTCambioAdmin') }}>Tipo de Cambio</button>
                                                 )
                                             }
                                         })()

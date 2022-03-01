@@ -1,10 +1,10 @@
-import Footer from "../components/footer.component"
-import MenuNavegacion from "../components/menuNavegacion.component"
-import CuerpoEsperaRegistro from "../components/CuerpoEsperaRegistro.component"
-import { useState, useEffect } from "react"
+import Footer from "../components/footer.component";
+import MenuNavegacion from "../components/menuNavegacion.component";
+import ModTCambio from "../components/ModTCambio.component";
+import { useEffect, useState } from 'react'
 
-const EsperaRegistroPage = () => {
-    // INICIO: EL CODIGO ESCRITO DESDE AQUI HASTA LA SIGUIENTE SEÑAL, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
+const ModificarTCambioAdmin = () => {
+     // INICIO: EL CODIGO ESCRITO DESDE AQUI HASTA LA SIGUIENTE SEÑAL, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
     // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
@@ -22,16 +22,14 @@ const EsperaRegistroPage = () => {
             localStorage.setItem('tipoCliente', tipoDeCliente)
         }
         //se actualizan los valores de las variables de estado con lo guardado en el localStorage
-        console.log('antes cliente',cliente)
         setCliente(parseInt(localStorage.getItem('cliente')))
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
-        console.log('despues cliente',cliente)
     }, [cliente,tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
+    // FUNCION CAMBIADA EXCLUSIVAMENTE PARA ESTA PANTALLA
     const RedirigirAOtraPagina = (direccion) => {
         GuardarPaginaAnterior()
-        console.log('cliente =>', cliente)
         localStorage.setItem('cliente', cliente)
         localStorage.setItem('tipoCliente', tipoDeCliente)
         location.href = direccion
@@ -52,7 +50,7 @@ const EsperaRegistroPage = () => {
         if (localStorage.getItem('paginasAnteriores') != null) {
             let lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
             let pagina = lista.pop()
-            if (pagina == '/EsperaRegistro') {                                                // ACTUALIZAR A LA DIRECCION ACTUAL
+            if (pagina == '/OperacionesAdmin') {                                                // ACTUALIZAR A LA DIRECCION ACTUAL
                 let pagina = lista.pop()
             }
             localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
@@ -70,12 +68,12 @@ const EsperaRegistroPage = () => {
             lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
             if (lista.length > 5) {
                 lista.shift()
-                lista.push('/EsperaRegistro')                                                 // ACTUALIZAR A LA DIRECCION ACTUAL
+                lista.push('/OperacionesAdmin')                                                 // ACTUALIZAR A LA DIRECCION ACTUAL
             } else {
-                lista.push('/EsperaRegistro')                                                 // ACTUALIZAR A LA DIRECCION ACTUAL
+                lista.push('/OperacionesAdmin')                                                 // ACTUALIZAR A LA DIRECCION ACTUAL
             }
         } else {
-            lista.push('/EsperaRegistro')                                                     // ACTUALIZAR A LA DIRECCION ACTUAL
+            lista.push('/OperacionesAdmin')                                                     // ACTUALIZAR A LA DIRECCION ACTUAL
         }
         localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
         RevisarListaAnteriores()
@@ -101,19 +99,22 @@ const EsperaRegistroPage = () => {
     // FIN: EL CODIGO ESCRITO HASTA AQUI, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
 
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
-    
+
     return <div>
         <MenuNavegacion
             tipoDeCliente={tipoDeCliente}
             redireccionamiento={RedirigirAOtraPagina}
             salir={TerminarSesionActiva}
-            ubicacion={'index'}
+            ubicacion={'OperacionesAdmin'}
         />
-        <CuerpoEsperaRegistro/>
-        <Footer
+        <ModTCambio
+            tipoDeCliente={tipoDeCliente}
+        />
+
+        <Footer 
             redireccionamiento={RedirigirAOtraPagina}
         />
     </div>
 }
 
-export default EsperaRegistroPage
+export default ModificarTCambioAdmin

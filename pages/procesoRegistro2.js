@@ -104,6 +104,7 @@ const ProcesoRegistro2Page = () => {
     // FIN: EL CODIGO ESCRITO HASTA AQUI, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
 
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
+<<<<<<< HEAD
 
 
 
@@ -117,6 +118,21 @@ const ProcesoRegistro2Page = () => {
     const [faltaContraOri, setFaltaContraOri] = useState(false)
     const [faltaContraRep, setFaltaContraRep] = useState(false)
     const [faltaTelefono, setFaltaTelefono] = useState(false)
+=======
+    
+    //Si el CORREO se repite, se cambia a estado falso
+    const [disponible, setDisponible] = useState(true)
+
+    const GuardarClienteOnHandler = async (correo, contrasena, telefono) => {
+        // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
+        const clienteintancia = JSON.parse(localStorage.getItem("fpr1"))
+        const nombre = clienteintancia.nombre
+        const apellido = clienteintancia.apellido
+        const dni = parseInt(clienteintancia.dni)
+        //TODO:SE MANDA A ESPERA HASTA QUE UN ADMINISTRADOR PERMITA EL LOGEO DEL CLIENTE
+        const estado = false
+        const id=3
+>>>>>>> origin
 
     // VALIDA SI EL CORREO INGRESADO CUMPLE CON EL FORMATO REQUERIDO PARA EXISTIR
     const validarEmail = (correo) => {
