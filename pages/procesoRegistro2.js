@@ -117,15 +117,14 @@ const ProcesoRegistro2Page = () => {
 
     const GuardarClienteOnHandler = async (correo, contrasena, telefono) => {
         // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
-        const objeto = JSON.parse(localStorage.getItem("nombreAGuardar"))
-        const nombre = objeto.nombre
-        const apellido = objeto.apellido
-        const dni = parseInt(localStorage.getItem("DniGuardable"))
+        const clienteintancia = JSON.parse(localStorage.getItem("fpr1"))
+        const nombre = clienteintancia.nombre
+        const apellido = clienteintancia.apellido
+        const dni = parseInt(clienteintancia.dni)
+        //TODO:SE MANDA A ESPERA HASTA QUE UN ADMINISTRADOR PERMITA EL LOGEO DEL CLIENTE
         const estado = false
-        const id = 3
 
         const cliente = {
-            id : id,
             nombre : nombre,
             apellido : apellido,
             dni : dni,
@@ -152,8 +151,8 @@ const ProcesoRegistro2Page = () => {
         //TODO: SE REALIZA EL ALMACENAMIENTO DEL CLIENTE
         
         //CODIGO DE ALMACENAMIENTO
-        //TODO: SE REALIZA LA ELIMINACION DEL DNI EN EL LOCALSTORAGE
-        localStorage.removeItem('DniGuardable')
+        //TODO: SE REALIZA LA ELIMINACION DEL CLIENTE EN PRIMERA INSTANCIA EN EL LOCALSTORAGE
+        localStorage.removeItem('fpr1')
 
         //TODO: LOGICA QUE PIDE EN BACKEND CREAR AL NUEVO CLIENTE
 
@@ -172,7 +171,7 @@ const ProcesoRegistro2Page = () => {
     const [procede, setProcede] = useState(true)
 
     const confirmarSiPasoAnteriorRealizado = () => {
-        if(localStorage.getItem('DniGuardable')!=null){
+        if(localStorage.getItem('fpr1')!=null){
             setProcede(true)
         }else{
             setProcede(false)
