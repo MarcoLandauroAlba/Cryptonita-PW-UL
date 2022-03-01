@@ -103,15 +103,7 @@ const ProcesoRegistro2Page = () => {
     // FIN: EL CODIGO ESCRITO HASTA AQUI, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
 
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
-
-
-    const obtenerClientesHTTP = async () => {
-        let response = await fetch("/api/usuarios")
-        const data = await response.json()
-        return data
-    }
-
-
+    
     //Si el CORREO se repite, se cambia a estado falso
     const [disponible, setDisponible] = useState(true)
 
@@ -131,7 +123,7 @@ const ProcesoRegistro2Page = () => {
             dni : dni,
             correo : correo,
             telefono : telefono,
-            contraseña : contrasena,
+            contraeña : contrasena,
             estado : estado
         }
 
@@ -141,11 +133,7 @@ const ProcesoRegistro2Page = () => {
         })
         const data = await resp.json()
 
-        if(data.msg == ""){
-            const dataClientes = await obtenerClientesHTTP()
-            const lista = dataClientes.clientes
-            localStorage.setItem("clienteNuevo", JSON.stringify(lista))
-        }
+        
         // TODO: FALTA CREAR LA LOGICA DE SI ES UNA PERSONA CON EL MISMO CORREO (NO SE PUEDE DUPLICAR)
         //setDisponible(false)
 
