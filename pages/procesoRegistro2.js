@@ -115,6 +115,7 @@ const ProcesoRegistro2Page = () => {
         const dni = parseInt(clienteintancia.dni)
         //TODO:SE MANDA A ESPERA HASTA QUE UN ADMINISTRADOR PERMITA EL LOGEO DEL CLIENTE
         const estado = false
+        const id=3
 
         const cliente = {
             nombre : nombre,
@@ -122,7 +123,7 @@ const ProcesoRegistro2Page = () => {
             dni : dni,
             correo : correo,
             telefono : telefono,
-            contraeña : contrasena,
+            contraseña : contrasena,
             estado : estado
         }
 
@@ -131,7 +132,8 @@ const ProcesoRegistro2Page = () => {
             body : JSON.stringify(cliente)   
         })
         const data = await resp.json()
-
+        
+        console.log(contrasena)
         
         // TODO: FALTA CREAR LA LOGICA DE SI ES UNA PERSONA CON EL MISMO CORREO (NO SE PUEDE DUPLICAR)
         //setDisponible(false)
