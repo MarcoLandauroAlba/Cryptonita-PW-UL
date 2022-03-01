@@ -103,7 +103,7 @@ const ProcesoRegistro1Page = () => {
 
 
     //Si el numero de DNI se repite, se cambia a estado falso
-    const [disponible,setDisponible] = useState(true)
+    const [disponible,setDisponible] = useState(false)
 
     const GuardarClienteOnHandler = (nombres, apellidos, dni) => {
         // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
@@ -111,17 +111,18 @@ const ProcesoRegistro1Page = () => {
         console.log(apellidos)
         console.log(dni)
         RedirigirAOtraPagina("/procesoRegistro2")
+        
         // TODO: FALTA CREAR LA LOGICA DE SI ES UNA PERSONA CON EL MISMO DNI (NO SE PUEDE DUPLICAR)
         //setDisponible(false)
 
         //TODO: SI EL DNI ESTA DISPONIBLE PARA ALMACENAR, SE PROCEDE A LA SIGUIENTE FUNCION
+        
         EstablecerDatosCorrectos(dni)
     }
 
     // SOLO SE GUARDA EL DNI (PERSONA) PARA PODER RELACIONARLO LUEGO CON EL CLIENTE (CORREO)
     const EstablecerDatosCorrectos = (dni) => {
         localStorage.setItem('DniGuardable',dni)
-        
     }
 
     return (

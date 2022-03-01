@@ -2,8 +2,8 @@ import { guardarCliente, obtenerCliente, obtenerClientes, editarOperacion } from
 
 const clientesIdHandler = async (req, res) => {
     if (req.method == "GET") {
-        const data = req.query
-        const cliente = await obtenerCliente(data.id)
+        // const data = req.query
+        // const cliente = await obtenerCliente(data.id)
         res.json({
             msg: "hola"
         })
