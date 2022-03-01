@@ -113,28 +113,6 @@ const ClientesPage = () => {
     const [listaUsuarios,setListaUsuarios] = useState([])
     const[usuario, setUsuario] = useState(null)
 
-    const buscarUsuarios = (datos,boton) => {
-        //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
-        console.log('datos => ',datos)
-        console.log('boton => ',boton)
-        // TODO: FALTA BASE DE DATOS PARA IMPLEMENTAR FUNCIONALIDAD A LOS BOTONES
-
-        setListaUsuarios([
-            { id: 4, nombre: "Jose Borgoña", dni: 10698536, correo: "jose.borgona@gmail.com", numerotelf: 954785636, estado: "pendiente de validación" },
-            { id: 5, nombre: "Mathias Almeida", dni: 17498635, correo: "mathi.almeida@gmail.com", numerotelf: 987563374, estado: "validado" },
-            { id: 6, nombre: "Jack Newton", dni: 15698236, correo: "jack.newton@gmail.com", numerotelf: 978632145, estado: "pendiente de validación" }
-        ])
-    }
-
-    // codigo de ejemplo 
-    // const ListadodeUsuarios = [
-    //     { numero: 1, id: "arnodorian020", nombre: "Jose Borgoña", dni: 10698536, correo: "jose.borgona@gmail.com", numerotelf: 954785636, estado: "pendiente de validación" },
-    //     { numero: 2, id: "toppiOrg", nombre: "Mathias Almeida", dni: 17498635, correo: "mathi.almeida@gmail.com", numerotelf: 987563374, estado: "validado" },
-    //     { numero: 3, id: "reseAlm", nombre: "Jack Newton", dni: 15698236, correo: "jack.newton@gmail.com", numerotelf: 978632145, estado: "pendiente de validación" }
-    // ]
-
-    // SE HAN AGREGADO LINEAS DE CODIGO EN EL USEEFFECT
-
     const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
 
     const obtenerClientesHTTP = async () => {
@@ -147,6 +125,82 @@ const ClientesPage = () => {
         const dataClientes = await obtenerClientesHTTP()
         setListaUsuarios(dataClientes.clientes)
     },[])
+
+    const buscarUsuarios = async (datos,boton) => {
+        //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
+        let nuevaLista = []
+        if(boton == 'DNI'){
+            for(let usuario of listaUsuarios){
+                console.log(listaUsuarios)
+                console.log(usuario.dni)
+                console.log(datos)
+                if(usuario.dni == datos){
+                    nuevaLista.push({
+                        id: usuario.id, 
+                        nombre: usuario.nombre, 
+                        apellido: usuario.apellido, 
+                        dni: usuario.dni, 
+                        correo: usuario.correo
+                    })
+                }
+            }
+            setListaUsuarios(nuevaLista)
+        }
+        else if(boton == 'NOMBRE'){
+            for(let usuario of listaUsuarios){
+                if(usuario.nombre == datos){
+                    nuevaLista.push({
+                        id: usuario.id, 
+                        nombre: usuario.nombre, 
+                        apellido: usuario.apellido, 
+                        dni: usuario.dni, 
+                        correo: usuario.correo
+                    })
+                }
+            }
+            setListaUsuarios(nuevaLista)
+        }
+        else if(boton == 'APELLIDO'){
+            for(let usuario of listaUsuarios){
+                if(usuario.apellido == datos){
+                    nuevaLista.push({
+                        id: usuario.id, 
+                        nombre: usuario.nombre, 
+                        apellido: usuario.apellido, 
+                        dni: usuario.dni, 
+                        correo: usuario.correo
+                    })
+                }
+            }
+            setListaUsuarios(nuevaLista)
+        }
+        else if(boton == 'CORREO'){
+            for(let usuario of listaUsuarios){
+                if(usuario.correo == datos){
+                    nuevaLista.push({
+                        id: usuario.id, 
+                        nombre: usuario.nombre, 
+                        apellido: usuario.apellido, 
+                        dni: usuario.dni, 
+                        correo: usuario.correo
+                    })
+                }
+            }
+            setListaUsuarios(nuevaLista)
+        }
+        // TODO: FALTA BASE DE DATOS PARA IMPLEMENTAR FUNCIONALIDAD A LOS BOTONES
+
+    }
+
+    // codigo de ejemplo 
+    // const ListadodeUsuarios = [
+    //     { numero: 1, id: "arnodorian020", nombre: "Jose Borgoña", dni: 10698536, correo: "jose.borgona@gmail.com", numerotelf: 954785636, estado: "pendiente de validación" },
+    //     { numero: 2, id: "toppiOrg", nombre: "Mathias Almeida", dni: 17498635, correo: "mathi.almeida@gmail.com", numerotelf: 987563374, estado: "validado" },
+    //     { numero: 3, id: "reseAlm", nombre: "Jack Newton", dni: 15698236, correo: "jack.newton@gmail.com", numerotelf: 978632145, estado: "pendiente de validación" }
+    // ]
+
+    // SE HAN AGREGADO LINEAS DE CODIGO EN EL USEEFFECT
+
 
     const ocultar = () => {
         setSeDebeMostrarModal(false)
@@ -184,6 +238,11 @@ const ClientesPage = () => {
         setSeDebeMostrarModal(true)
     }
 
+    const recargarLista = async () => {
+        const dataClientes = await obtenerClientesHTTP()
+        setListaUsuarios(dataClientes.clientes)
+    }
+
     return <div>
         <MenuNavegacion
             tipoDeCliente={tipoDeCliente}
@@ -199,6 +258,7 @@ const ClientesPage = () => {
             tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
             lista={listaUsuarios} 
             onEditar={ editarClienteHandler }
+            onRecargar={ recargarLista }
         />
         <ValidadoCambioUsuario 
             tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/

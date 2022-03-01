@@ -21,6 +21,38 @@ const obtenerCliente = async (id) => {
     })
 }
 
+const obtenerClientexDNI = async (dni) => {
+    return await db.Cliente.findOne({
+        where : {
+            dni : dni
+        }
+    })
+}
+
+const obtenerClientexNom = async (nombre) => {
+    return await db.Cliente.findOne({
+        where : {
+            nombre : nombre
+        }
+    })
+}
+
+const obtenerClientexAp = async (apellido) => {
+    return await db.Cliente.findOne({
+        where : {
+            apellido : apellido
+        }
+    })
+}
+
+const obtenerClientexCorr = async (correo) => {
+    return await db.Cliente.findOne({
+        where : {
+            correo : correo
+        }
+    })
+}
+
 const obtenerClientes = async () => {
     const admins = await db.Cliente.findAll({
         order : [
@@ -54,4 +86,4 @@ const editarOperacion = async (cliente) => {
     })
 }
 
-export {guardarCliente, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente}
+export {guardarCliente, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI}

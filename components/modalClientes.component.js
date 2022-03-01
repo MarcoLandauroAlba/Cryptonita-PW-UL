@@ -79,36 +79,46 @@ const ModalClientes = (props) => {
                     <label className="form-label">
                         Nombre
                     </label>
-                    <input className="form-control" type="text" onChange={ NombreOnChange } defaultValue={ txtNombre }>
+                    <fieldset disabled>
+                    <input id="disabledTextInput" className="form-control" type="text" onChange={ NombreOnChange } defaultValue={ txtNombre }>
                     </input>
+                    </fieldset>
                 </div>
                 <div>
                     <label className="form-label">
                         Apellido
                     </label>
-                    <input className="form-control" type="text" onChange={ ApellidoOnChange } defaultValue={ txtApellido }>
+                    <fieldset disabled>
+                    <input id="disabledTextInput" className="form-control" type="text" onChange={ ApellidoOnChange } defaultValue={ txtApellido }>
                     </input>
+                    </fieldset>
                 </div>
                 <div>
                     <label className="form-label">
                         DNI
                     </label>
-                    <input className="form-control" type="number" onChange={ DNIOnChange } defaultValue={ txtDNI }>
+                    <fieldset disabled>
+                    <input id="disabledTextInput" className="form-control" type="number" onChange={ DNIOnChange } defaultValue={ txtDNI }>
                     </input>
+                    </fieldset>
                 </div>
                 <div>
                     <label className="form-label">
                         Correo Electrónico
                     </label>
-                    <input className="form-control" type="text" onChange={ CorreoOnChange } defaultValue={ txtCorreo }>
+                    <fieldset disabled>
+                    <input id="disabledTextInput" className="form-control" type="text" onChange={ CorreoOnChange } defaultValue={ txtCorreo }>
                     </input>
+                    </fieldset>
                 </div>
                 <div>
                     <label className="form-label">
                         Número Teléfonico
                     </label>
-                    <input className="form-control" type="number" onChange={ TelefonoOnChange } defaultValue={ txtTelefono }>
+                    <fieldset disabled>
+                    <input id="disabledTextInput" className="form-control" type="number" onChange={ TelefonoOnChange } defaultValue={ txtTelefono }>
                     </input>
+                    </fieldset>
                 </div>
                 <div>
                     <label className="form-label">

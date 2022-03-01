@@ -9,6 +9,7 @@ export default function ListaUsuarios(props) {
     if (props.tipoDeCliente == 1) {
         return <div>
             <h3>Listado de Usuarios</h3>
+            <button type="button" className="btn btn-success" onClick={ props.onRecargar }>Recargar Lista Original</button>
             <div className="table-responsive">
                 <table className="table mt-4">
                     <thead>

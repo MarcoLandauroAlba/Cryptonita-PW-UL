@@ -2,8 +2,7 @@ import Footer from "../components/footer.component"
 import FormularioProcesoRegistro2 from "../components/FormularioProcesoRegistro2.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useState, useEffect } from "react"
-import setListaUsuarios from "../pages/ClientesPage"
-import ClientesPage from "../pages/ClientesPage"
+
 
 const ProcesoRegistro2Page = () => {
 
