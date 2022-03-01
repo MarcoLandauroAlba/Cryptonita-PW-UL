@@ -31,11 +31,6 @@ const ClientesPage = () => {
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
 
         // Actualizan las listas de usuarios existentes
-        setListaUsuarios([
-            { numero: 1, id: "arnodorian020", nombre: "Jose Borgoña", dni: 10698536, correo: "jose.borgona@gmail.com", numerotelf: 954785636, estado: "pendiente de validación" },
-            { numero: 2, id: "toppiOrg", nombre: "Mathias Almeida", dni: 17498635, correo: "mathi.almeida@gmail.com", numerotelf: 987563374, estado: "validado" },
-            { numero: 3, id: "reseAlm", nombre: "Jack Newton", dni: 15698236, correo: "jack.newton@gmail.com", numerotelf: 978632145, estado: "pendiente de validación" }
-        ])
     }, [cliente,tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
@@ -116,6 +111,7 @@ const ClientesPage = () => {
 
 
     const [listaUsuarios,setListaUsuarios] = useState([])
+    const[usuario, setUsuario] = useState(null)
 
     const buscarUsuarios = (datos,boton) => {
         //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
@@ -124,9 +120,9 @@ const ClientesPage = () => {
         // TODO: FALTA BASE DE DATOS PARA IMPLEMENTAR FUNCIONALIDAD A LOS BOTONES
 
         setListaUsuarios([
-            { numero: 4, id: "arnodorian020", nombre: "Jose Borgoña", dni: 10698536, correo: "jose.borgona@gmail.com", numerotelf: 954785636, estado: "pendiente de validación" },
-            { numero: 5, id: "toppiOrg", nombre: "Mathias Almeida", dni: 17498635, correo: "mathi.almeida@gmail.com", numerotelf: 987563374, estado: "validado" },
-            { numero: 6, id: "reseAlm", nombre: "Jack Newton", dni: 15698236, correo: "jack.newton@gmail.com", numerotelf: 978632145, estado: "pendiente de validación" }
+            { id: 4, nombre: "Jose Borgoña", dni: 10698536, correo: "jose.borgona@gmail.com", numerotelf: 954785636, estado: "pendiente de validación" },
+            { id: 5, nombre: "Mathias Almeida", dni: 17498635, correo: "mathi.almeida@gmail.com", numerotelf: 987563374, estado: "validado" },
+            { id: 6, nombre: "Jack Newton", dni: 15698236, correo: "jack.newton@gmail.com", numerotelf: 978632145, estado: "pendiente de validación" }
         ])
     }
 
@@ -141,12 +137,50 @@ const ClientesPage = () => {
 
     const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
 
+    const obtenerClientesHTTP = async () => {
+        let response = await fetch("/api/usuarios")
+        const data = await response.json()
+        return data
+    }
+
+    useEffect(async ()=> {
+        const dataClientes = await obtenerClientesHTTP()
+        setListaUsuarios(dataClientes.clientes)
+    },[])
 
     const ocultar = () => {
         setSeDebeMostrarModal(false)
     }
 
-    const editarClienteHandler = () => {
+    const actualizarClienteHandler = async (id, nombre, apellido, dni, correo, telefono, estado) => {
+        const cliente = {
+            id : id,
+            nombre : nombre,
+            apellido : apellido,
+            dni : dni,
+            correo : correo,
+            telefono : telefono,
+            estado : estado
+        }
+
+        const resp = await fetch("/api/usuarios", {
+            method : "PUT",
+            body : JSON.stringify(cliente)
+        })
+        const data = await resp.json()
+
+        if(data.msg == ""){
+            setSeDebeMostrarModal(false)
+            const dataClientes = await obtenerClientesHTTP()
+            setListaUsuarios(dataClientes.clientes)
+        }
+    }
+
+    const editarClienteHandler = async (id) => {
+        const resp = await fetch(`/api/usuarios/${id}`)
+        const data = await resp.json()
+        console.log(data)
+        setUsuario(data.cliente)
         setSeDebeMostrarModal(true)
     }
 
@@ -175,6 +209,8 @@ const ClientesPage = () => {
         <ModalClientes 
             onOcultar={ ocultar } 
             onMostrar={ seDebeMostrarModal }
+            onActualizarCliente={ actualizarClienteHandler }
+            cliente={ usuario }
         />
     </div>
 

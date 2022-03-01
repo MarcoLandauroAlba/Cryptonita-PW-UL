@@ -2,6 +2,8 @@ import Footer from "../components/footer.component"
 import FormularioProcesoRegistro2 from "../components/FormularioProcesoRegistro2.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useState, useEffect } from "react"
+import setListaUsuarios from "../pages/ClientesPage"
+import ClientesPage from "../pages/ClientesPage"
 
 const ProcesoRegistro2Page = () => {
 
@@ -104,26 +106,53 @@ const ProcesoRegistro2Page = () => {
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
 
 
-
+    const obtenerClientesHTTP = async () => {
+        let response = await fetch("/api/usuarios")
+        const data = await response.json()
+        return data
+    }
 
 
     //Si el CORREO se repite, se cambia a estado falso
     const [disponible, setDisponible] = useState(true)
 
-    const GuardarClienteOnHandler = (correo, contrasena, telefono) => {
+    const GuardarClienteOnHandler = async (correo, contrasena, telefono) => {
         // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
-        console.log(correo)
-        console.log(contrasena)
-        console.log(telefono)
-        
+        const objeto = JSON.parse(localStorage.getItem("nombreAGuardar"))
+        const nombre = objeto.nombre
+        const apellido = objeto.apellido
+        const dni = parseInt(localStorage.getItem("DniGuardable"))
+        const estado = false
+        const id = 3
+
+        const cliente = {
+            id : id,
+            nombre : nombre,
+            apellido : apellido,
+            dni : dni,
+            correo : correo,
+            telefono : telefono,
+            contraseña : contrasena,
+            estado : estado
+        }
+
+        const resp = await fetch("/api/usuarios",{
+            method : "POST",
+            body : JSON.stringify(cliente)   
+        })
+        const data = await resp.json()
+
+        if(data.msg == ""){
+            const dataClientes = await obtenerClientesHTTP()
+            const lista = dataClientes.clientes
+            localStorage.setItem("clienteNuevo", JSON.stringify(lista))
+        }
         // TODO: FALTA CREAR LA LOGICA DE SI ES UNA PERSONA CON EL MISMO CORREO (NO SE PUEDE DUPLICAR)
         //setDisponible(false)
 
         //TODO: SE REALIZA EL ALMACENAMIENTO DEL CLIENTE
         
         //CODIGO DE ALMACENAMIENTO
-        const dni = localStorage.getItem('DniGuardable')
-
         //TODO: SE REALIZA LA ELIMINACION DEL DNI EN EL LOCALSTORAGE
         localStorage.removeItem('DniGuardable')
 
@@ -131,11 +160,12 @@ const ProcesoRegistro2Page = () => {
 
         //TODO: PEDIR DE BACKEND EL VALOR DEL ID DEL CLIENTE Y ALMACENAR ABAJO
         // EN ESTA VARIABLE ID, SE GUARDARA EL VALOR DEL ID DEL CLIENTE REGISTRADO
-        const id = 666
         // EN ESTA VARIABLE TIPO, SE GUARDARA EL VALOR DEL TIPO DE CLIENTE BUSCADO
         // CLIENTE POR CONFIRMAR 3 (NO HABRA MAS OPCIONES)
         const tipo = 3
 
+
+        
         RedirigirAPaginaPrincipalDeEsperaConLoggeo(id,tipo)
 
     }

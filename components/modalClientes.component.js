@@ -1,19 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Button} from 'react-bootstrap';
 
 const ModalClientes = (props) => {
     
-    const [txtID, setTxtID] = useState("")
+    const[idCliente, setIdCliente] = useState(0)
     const [txtNombre, setTxtNombre] = useState("")
     const [txtDNI, setTxtDNI] = useState(0)
     const [txtCorreo, setTxtCorreo] = useState("")
     const [txtTelefono, setTxtTelefono] = useState(0)
     const [txtEstado, setTxtEstado] = useState("")
+    const [txtApellido, setTxtApellido] = useState("")
 
-    const IDOnChange = (event) => {
-        setTxtID(event.target.value)
-    }
-
+    useEffect(()=> {
+        console.log(props.cliente)
+        if(props.cliente != null){
+            setIdCliente(props.cliente.id)
+            setTxtNombre(props.cliente.nombre)
+            setTxtApellido(props.cliente.apellido)
+            setTxtDNI(props.cliente.dni)
+            setTxtTelefono(props.cliente.telefono)
+            setTxtEstado(props.cliente.estado)
+            setTxtCorreo(props.cliente.correo)
+        }
+    }, [props.cliente])
+    
     const NombreOnChange = (event) => {
         setTxtNombre(event.target.value)
     }
@@ -33,27 +43,50 @@ const ModalClientes = (props) => {
     const EstadoOnChange = (event) => {
         setTxtEstado(event.target.value)
     }
+
+    const ApellidoOnChange = (event) => {
+        setTxtApellido(event.target.value)
+    }
     
+    const butGuardarOnClick = () => {
+        props.onActualizarCliente(idCliente, txtNombre, txtApellido, txtDNI, txtCorreo, txtTelefono, txtEstado)
+        setTxtNombre("")
+        setTxtApellido("")
+        setTxtDNI(0)
+        setTxtCorreo("")
+        setTxtEstado("")
+        setTxtTelefono(0)
+    }
+
+    const butCloseFormOnClick = () => {
+        setTxtNombre("")
+        setTxtApellido("")
+        setTxtDNI(0)
+        setTxtCorreo("")
+        setTxtEstado("")
+        setTxtTelefono(0)
+        props.onOcultar()
+    }
     
-    return <Modal show={ props.onMostrar } onHide={ props.onOcultar }>
+    return <Modal show={ props.onMostrar } onHide={ butCloseFormOnClick }>
         <Modal.Header closeButton>
-            <Modal.Title>Modal title</Modal.Title>
+            <Modal.Title>Clientes</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
             <form>
                 <div>
                     <label className="form-label">
-                        ID
+                        Nombre
                     </label>
-                    <input className="form-control" type="text" onChange={ IDOnChange } defaultValue={ txtID }>
+                    <input className="form-control" type="text" onChange={ NombreOnChange } defaultValue={ txtNombre }>
                     </input>
                 </div>
                 <div>
                     <label className="form-label">
-                        Nombre Completo
+                        Apellido
                     </label>
-                    <input className="form-control" type="text" onChange={ NombreOnChange } defaultValue={ txtNombre }>
+                    <input className="form-control" type="text" onChange={ ApellidoOnChange } defaultValue={ txtApellido }>
                     </input>
                 </div>
                 <div>
@@ -89,7 +122,8 @@ const ModalClientes = (props) => {
 
         <Modal.Footer>
             <Button variant="secondary">Cerrar</Button>
-            <Button variant="primary">Guardar</Button>
+            <Button variant="primary"
+            onClick={ butGuardarOnClick }>Guardar</Button>
         </Modal.Footer>
     </Modal>
 }

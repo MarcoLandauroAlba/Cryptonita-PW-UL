@@ -116,12 +116,20 @@ const ProcesoRegistro1Page = () => {
 
         //TODO: SI EL DNI ESTA DISPONIBLE PARA ALMACENAR, SE PROCEDE A LA SIGUIENTE FUNCION
         EstablecerDatosCorrectos(dni)
+        NombresAGuardar(nombres, apellidos)
     }
 
     // SOLO SE GUARDA EL DNI (PERSONA) PARA PODER RELACIONARLO LUEGO CON EL CLIENTE (CORREO)
     const EstablecerDatosCorrectos = (dni) => {
         localStorage.setItem('DniGuardable',dni)
-        
+    }
+
+    const NombresAGuardar = (nombre, apellido) => {
+        const nombreAGuardar = {
+            nombre : nombre,
+            apellido : apellido
+        }
+        localStorage.setItem("nombreAGuardar", JSON.stringify(nombreAGuardar))
     }
 
     return (

@@ -2,7 +2,7 @@
   "development": {
     "username": "portafolio",
     "password": "portafolio",
-    "database": "portafolio_db",
+    "database": "crypto",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

@@ -18,6 +18,8 @@ const MenuNavegacion = (props) => {
                             alt="..."
                             className="logo me-2"
                             src="https://img2.freepng.es/20180324/luq/kisspng-bitcoin-paypal-cryptocurrency-ethereum-litecoin-bitcoin-5ab6e3fcaf1991.4843415715219353567172.jpg"
+                            fluid={true}
+                            width={25}
                         />
                         Cryptonita
                     </button>
