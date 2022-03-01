@@ -2,6 +2,8 @@ import Footer from "../components/footer.component"
 import FormularioProcesoRegistro1 from "../components/FormularioProcesoRegistro1.components"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
+import { guardarClienteDatosIniciales } from "../dao/cliente_local"
+
 
 const ProcesoRegistro1Page = () => {
 
@@ -102,26 +104,9 @@ const ProcesoRegistro1Page = () => {
 
 
 
-    //Si el numero de DNI se repite, se cambia a estado falso
-    const [disponible,setDisponible] = useState(true)
-
-    const GuardarClienteOnHandler = (nombres, apellidos, dni) => {
-        // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
-        console.log(nombres)
-        console.log(apellidos)
-        console.log(dni)
+    const GuardarClienteOnHandler = (nombre, apellido, dni) => {
+        guardarClienteDatosIniciales(nombre, apellido, dni)
         RedirigirAOtraPagina("/procesoRegistro2")
-        // TODO: FALTA CREAR LA LOGICA DE SI ES UNA PERSONA CON EL MISMO DNI (NO SE PUEDE DUPLICAR)
-        //setDisponible(false)
-
-        //TODO: SI EL DNI ESTA DISPONIBLE PARA ALMACENAR, SE PROCEDE A LA SIGUIENTE FUNCION
-        EstablecerDatosCorrectos(dni)
-        NombresAGuardar(nombres, apellidos)
-    }
-
-    // SOLO SE GUARDA EL DNI (PERSONA) PARA PODER RELACIONARLO LUEGO CON EL CLIENTE (CORREO)
-    const EstablecerDatosCorrectos = (dni) => {
-        localStorage.setItem('DniGuardable',dni)
     }
 
     const NombresAGuardar = (nombre, apellido) => {
@@ -143,7 +128,6 @@ const ProcesoRegistro1Page = () => {
             <FormularioProcesoRegistro1
                 guardar={GuardarClienteOnHandler}
                 volver={VolverAPaginaAnterior}
-                disponible={disponible}
             />
             <Footer 
                 redireccionamiento={RedirigirAOtraPagina}
