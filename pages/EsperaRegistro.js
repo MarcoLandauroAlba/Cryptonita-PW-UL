@@ -37,6 +37,11 @@ const EsperaRegistroPage = () => {
         location.href = direccion
     }
 
+    const ConfirmarRegistro = (direccion) => {
+        RedirigirAOtraPagina(direccion)
+        localStorage.setItem("tipoCliente",2)
+    }
+
     // Props: salir                 => Elimina los datos del usuario actual
     const TerminarSesionActiva = () => {
         GuardarPaginaAnterior()
@@ -109,7 +114,8 @@ const EsperaRegistroPage = () => {
             salir={TerminarSesionActiva}
             ubicacion={'index'}
         />
-        <CuerpoEsperaRegistro/>
+        <CuerpoEsperaRegistro
+        redireccionamiento={ ConfirmarRegistro }/>
         <Footer
             redireccionamiento={RedirigirAOtraPagina}
         />

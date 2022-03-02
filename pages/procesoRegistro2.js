@@ -184,13 +184,12 @@ const ProcesoRegistro2Page = () => {
         if (!EfaltaCorreo) {
             const preguntaExiste = await existeCorreoEnBaseDeDatos(correo)
             console.log('preguntaExiste',preguntaExiste)
-        //     setDisponible(preguntaExiste)
-        //     if(preguntaExiste){
-        //         ENodisponible = true
-        //     }
-            
-        // }else{
-        //     ENodisponible = true
+            setDisponible(!preguntaExiste)
+            if (preguntaExiste) {
+                ENodisponible = true
+            } else {
+                ENodisponible = false
+            }
         }
 
         // SI INGRESA A ESTA CONDICIONAL, SIGNIFICA QUE TODO LO INGRESADO ES VALIDO PARA CREAR UNA CUENTA
@@ -229,7 +228,7 @@ const ProcesoRegistro2Page = () => {
             const dataCliente = await responseCliente.json()
             console.log('cliente recien creado: ', dataCliente)
 
-            // RedirigirAPaginaPrincipalDeEsperaConLoggeo(dataCliente.id)
+            RedirigirAPaginaPrincipalDeEsperaConLoggeo(dataCliente.cliente.id)
         }
     }
 

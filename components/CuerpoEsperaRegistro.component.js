@@ -1,6 +1,6 @@
 import { Image } from "react-bootstrap"
 
-const CuerpoEsperaRegistro = () => {
+const CuerpoEsperaRegistro = (props) => {
     return <div>
         <div className="row">
             <div className="col-md-3"></div>
@@ -14,6 +14,15 @@ const CuerpoEsperaRegistro = () => {
                 </Image>
             </div>
             <div className="col-md-3"></div>
+        </div>
+        <div className="mt-4 row">
+        <div className="col-md-5"></div>
+            <div className="col-md-3">
+            <button type="button" className="btn btn-success btn-lg" onClick={()=>{
+                props.redireccionamiento("/ConfirmacionRegistro")
+            }}>Confirmar</button>
+            </div>
+            <div className="col-md-4"></div>
         </div>
     </div>
 }
