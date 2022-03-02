@@ -228,7 +228,7 @@ const ProcesoRegistro2Page = () => {
             const dataCliente = await responseCliente.json()
             console.log('cliente recien creado: ', dataCliente)
 
-            RedirigirAPaginaPrincipalDeEsperaConLoggeo(dataCliente.id)
+            RedirigirAPaginaPrincipalDeEsperaConLoggeo(dataCliente.cliente.id)
         }
     }
 
