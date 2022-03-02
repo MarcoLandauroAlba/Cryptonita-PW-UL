@@ -1,8 +1,15 @@
-import { guardarAdmin, obtenerAdmin, obtenerAdmins } from "../../../dao/administradores"
+import { guardarAdmin, obtenerAdmin, obtenerAdmins, obtenerAdminxCorreoYContrasena } from "../../../dao/administradores"
 
 const administradoresIdHandler = async (req, res) => {
-    if (req.method == "GET") {
-        const data = req.query
+    if (req.method == "OPTIONS") {
+        const data = JSON.parse(req.body)
+        const admin = await obtenerAdminxCorreoYContrasena(data.correo,data.contraseña)
+        res.json({
+            msg: 'OPTIONS',
+            admin: admin
+        })
+    }else if (req.method == "GET") {
+        const data = req.body
         const admin = await obtenerAdmin(data.id)
         res.json({
             msg: "",

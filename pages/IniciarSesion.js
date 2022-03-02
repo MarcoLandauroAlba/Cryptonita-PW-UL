@@ -2,6 +2,7 @@ import Footer from "../components/footer.component";
 import MenuNavegacion from "../components/menuNavegacion.component";
 import FormularioIniciarSesion from "../components/FormularioIniciarSesion.component";
 import { useEffect, useState } from 'react'
+import { guardarDatosGenerales } from "../dao/cliente_local";
 
 export default function IniciarSesionPage() {
 
@@ -9,7 +10,7 @@ export default function IniciarSesionPage() {
     // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
-    const [cliente, setCliente] = useState(123)
+    const [cliente, setCliente] = useState(-1)
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
 
@@ -39,7 +40,7 @@ export default function IniciarSesionPage() {
     // Props: salir                 => Elimina los datos del usuario actual
     const TerminarSesionActiva = () => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', 123)
+        localStorage.setItem('cliente', -1)
         localStorage.setItem('tipoCliente', 4)
         location.href = '/'
     }
@@ -104,54 +105,48 @@ export default function IniciarSesionPage() {
 
 
 
-    const [contrasenaIncorrecta,setContrasenaIncorrecta] = useState(false)
-    const [correoInexistente,setCorreoInexistente] = useState(false)
+    // VALIDA SI EL CORREO INGRESADO CUMPLE CON EL FORMATO REQUERIDO PARA EXISTIR
 
-
-    const validarUsuario = (correo,contrasena) => {
-        // TODO: REALIZAR LO SIGUIENTE CUANDO LA BASE DE DATOS ESTE LISTA
-        // SE HACE UNA PRIMERA LLAMADA A BASE DE DATOS PREGUNTANDO POR EL CORREO,
-
-        //SI EL CORREO EXISTE, SE PROCEDE A PREGUNTAR POR LA CONTRASENA
-
-            //SE HACE UNA SEGUNDA LLAMADA A BASE DE DATOS PREGUNTANDO POR EL CORREO Y LA CONTRAASENA
-
-            //SI CORREO Y CONTRASENA COINCIDEN, SE ENVIA AL USUARIO A LA SIGUIENTE PANTALLA
-            
-                //SE GUARDAN LOS DATOS MAS IMPORTANTES DEL USUARIO EN LAS VARIABLES DE ESTADO
-                
-                    //SI EL CLIENTE ES ADMIN:
-                        // setTipoDeCliente(1)
-                    //SI EL CLIENTE ES USUARIO CONFIRMADO
-                        // setTipoDeCliente(2)
-                    //SI EL CLIENTE ES USUARIO NO CONFIRMADO
-                        // setTipoDeCliente(3)
-                    
-                    // EN ESTA VARIABLE ID, SE GUARDARA EL VALOR DEL ID DEL CLIENTE INGRESADO
-                    // SE TIENE QUE HACER UNA PETICION A BASE DE DATOS PARA QUE DEVUELVA EL VALOR
-                    const id = 12345678
-                    // EN ESTA VARIABLE TIPO, SE GUARDARA EL VALOR DEL TIPO DE CLIENTE BUSCADO
-                    // SI ES ADMIN SERA 1, CLIENTE CONFIRMADO 2 Y CLIENTE POR CONFIRMAR 3
-                    const tipo = 1
-
-
-                    // SE ENVIA AL USUARIO A LA PAGINA PRINCIPAL
-                    
-                    RedirigirAPaginaPrincipalConLogeoRealizado(id,tipo)
+    // SETEAN EL VALOR A POSITIVO SI ES QUE ALGUNO ES INCORRECTO O INEXISTENTE
+    const [credencialesIncorrecta,setCredencialesIncorrecta] = useState(false)
 
 
 
-            //SI CONTRASENA NO COINCIDE, SE CAMBIA EL ESTADO DE CONTRASENAINCORRECTA
-            // setContrasenaIncorrecta(true)
+    const validarUsuario = async (correo,contrasena) => {
 
-        //SI EL CORREO NO EXISTEN, SE CAMBIA EL ESTADO DE CORREOINEXISTENTE
-        // setCorreoInexistente(true)
+        const usuarioIncompleto = {correo: correo, contraseña: contrasena}
+
+        const responseClientes = await fetch('api/clientes',{
+            method: 'OPTIONS',
+            body: JSON.stringify(usuarioIncompleto)
+        })
+        const dataCliente = await responseClientes.json()
+
+        if(dataCliente.cliente!=null){
+            if(dataCliente.cliente.estado==true){
+                RedirigirAPaginaPrincipalConLogeoRealizado(dataCliente.cliente.id,2)
+                redi
+            }else{
+                RedirigirAPaginaPrincipalConLogeoRealizado(dataCliente.cliente.id,3)
+            }
+        }else{
+            const responseAdmin = await fetch('api/administradores',{
+                method: 'OPTIONS',
+                body: JSON.stringify(usuarioIncompleto)
+            })
+            const dataAdministrador = await responseAdmin.json()
+
+            if(dataAdministrador.admin!=null){
+                RedirigirAPaginaPrincipalConLogeoRealizado(dataAdministrador.admin.id,1)
+            }else{
+                setCredencialesIncorrecta(true)
+            }
+        }
     }
     
     const RedirigirAPaginaPrincipalConLogeoRealizado = (VALORcliente,VALORtipoDeCliente) => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', VALORcliente)
-        localStorage.setItem('tipoCliente', VALORtipoDeCliente)
+        guardarDatosGenerales(VALORcliente,VALORtipoDeCliente)
         location.href = '/'
     }
 
@@ -166,8 +161,7 @@ export default function IniciarSesionPage() {
         />
         <FormularioIniciarSesion 
             validarUsuario={validarUsuario}
-            contrasenaIncorrecta={contrasenaIncorrecta}
-            correoInexistente={correoInexistente}
+            credencialesIncorrectas={credencialesIncorrecta}
         />
         <Footer 
             redireccionamiento={RedirigirAOtraPagina}
