@@ -8,6 +8,7 @@ const BloqueNosotros = (props) => {
         <div className='row'>
             <h2>Nosotros</h2>
             <div className='col-md-8 mt-4'>
+            
                 <ul>
                     <li>Mauricio Alejandro Aguirre Izaguirre <br />
                         <Image
