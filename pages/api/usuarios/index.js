@@ -41,7 +41,8 @@ const clientesHandler = async (req, res) => {
         res.json({
             msg: ""
         })   
-    }else{
+    }
+    else{
         res.status(400).json({
             msg: "Método no definido"
         })

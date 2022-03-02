@@ -22,7 +22,11 @@ const obtenerAdmin = async (id) => {
 }
 
 const obtenerAdmins = async () => {
-    const admins = await db.Administrador.findAll()
+    const admins = await db.Administrador.findAll({
+        order : [
+            ["id", "ASC"]
+        ]
+    })
     return admins
 }
 

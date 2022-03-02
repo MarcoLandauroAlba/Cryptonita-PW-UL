@@ -121,6 +121,15 @@ const ClientesPage = () => {
         return data
     }
 
+    const obtenerClienteXNom = async (nombre) => {
+        const arreglo = {
+            nombre : nombre
+        }
+        let response = await fetch("/api/usuarios/nombre")
+        const data = await response.json()
+        return data
+    }
+
     useEffect(async ()=> {
         const dataClientes = await obtenerClientesHTTP()
         setListaUsuarios(dataClientes.clientes)
@@ -130,71 +139,24 @@ const ClientesPage = () => {
         //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
         let nuevaLista = []
         if(boton == 'DNI'){
-            for(let usuario of listaUsuarios){
-                console.log(listaUsuarios)
-                console.log(usuario.dni)
-                console.log(datos)
-                if(usuario.dni == datos){
-                    nuevaLista.push({
-                        id: usuario.id, 
-                        nombre: usuario.nombre, 
-                        apellido: usuario.apellido, 
-                        dni: usuario.dni, 
-                        correo: usuario.correo,
-                        telefono : usuario.telefono,
-                        estado : usuario.estado
-                    })
-                }
-            }
-            setListaUsuarios(nuevaLista)
+            const resp = await fetch(`/api/usuarios/DNI/${datos}`)
+            const data = await resp.json()
+            setListaUsuarios(data.cliente)
         }
         else if(boton == 'NOMBRE'){
-            for(let usuario of listaUsuarios){
-                if(usuario.nombre == datos){
-                    nuevaLista.push({
-                        id: usuario.id, 
-                        nombre: usuario.nombre, 
-                        apellido: usuario.apellido, 
-                        dni: usuario.dni, 
-                        correo: usuario.correo,
-                        telefono : usuario.telefono,
-                        estado : usuario.estado
-                    })
-                }
-            }
-            setListaUsuarios(nuevaLista)
+            const resp = await fetch(`/api/usuarios/nombres/${datos}`)
+            const data = await resp.json()
+            setListaUsuarios(data.cliente)
         }
         else if(boton == 'APELLIDO'){
-            for(let usuario of listaUsuarios){
-                if(usuario.apellido == datos){
-                    nuevaLista.push({
-                        id: usuario.id, 
-                        nombre: usuario.nombre, 
-                        apellido: usuario.apellido, 
-                        dni: usuario.dni, 
-                        correo: usuario.correo,
-                        telefono : usuario.telefono,
-                        estado : usuario.estado
-                    })
-                }
-            }
-            setListaUsuarios(nuevaLista)
+            const resp = await fetch(`/api/usuarios/apellidos/${datos}`)
+            const data = await resp.json()
+            setListaUsuarios(data.cliente)
         }
         else if(boton == 'CORREO'){
-            for(let usuario of listaUsuarios){
-                if(usuario.correo == datos){
-                    nuevaLista.push({
-                        id: usuario.id, 
-                        nombre: usuario.nombre, 
-                        apellido: usuario.apellido, 
-                        dni: usuario.dni, 
-                        correo: usuario.correo,
-                        telefono : usuario.telefono,
-                        estado : usuario.estado
-                    })
-                }
-            }
-            setListaUsuarios(nuevaLista)
+            const resp = await fetch(`/api/usuarios/correos/${datos}`)
+            const data = await resp.json()
+            setListaUsuarios(data.cliente)
         }
         // TODO: FALTA BASE DE DATOS PARA IMPLEMENTAR FUNCIONALIDAD A LOS BOTONES
 

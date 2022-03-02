@@ -183,7 +183,7 @@ const ProcesoRegistro2Page = () => {
         // // REVISAMOS SI EL CORREO EXISTE EN LA BASE DE DATOS
         if (!EfaltaCorreo) {
             const preguntaExiste = await existeCorreoEnBaseDeDatos(correo)
-            console.log('preguntaExiste', preguntaExiste)
+            console.log('preguntaExiste',preguntaExiste)
             setDisponible(!preguntaExiste)
             if (preguntaExiste) {
                 ENodisponible = true

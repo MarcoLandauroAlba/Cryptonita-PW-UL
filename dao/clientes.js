@@ -1,3 +1,5 @@
+import { Sequelize } from "../sequelize/models"
+const  Op  = Sequelize.Op
 const db = require("../sequelize/models")
 
 const guardarCliente = async (estado,telefono,contraseña,correo,nombre,apellido,dni) => {
@@ -21,7 +23,7 @@ const obtenerCliente = async (id) => {
 }
 
 const obtenerClientexDNI = async (dni) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
             dni : dni
         }
@@ -29,25 +31,31 @@ const obtenerClientexDNI = async (dni) => {
 }
 
 const obtenerClientexNom = async (nombre) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
-            nombre : nombre
+            nombre : {
+                [Op.like]: '%'+nombre+'%'
+            }
         }
     })
 }
 
 const obtenerClientexAp = async (apellido) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
-            apellido : apellido
+            apellido : {
+                [Op.like]: '%'+apellido+'%'
+            }
         }
     })
 }
 
 const obtenerClientexCorr = async (correo) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
-            correo : correo
+            correo : {
+                [Op.like]: '%'+correo+'%'
+            }
         }
     })
 }
