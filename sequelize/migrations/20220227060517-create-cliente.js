@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       dni: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

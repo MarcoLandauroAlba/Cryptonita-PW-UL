@@ -28,7 +28,9 @@ const obtenerCliente = async (id) => {
 const obtenerClientexDNI = async (dni) => {
     return await db.Cliente.findAll({
         where : {
-            dni : dni
+            dni : {
+                [Op.like]: '%'+dni+'%'
+            }
         }
     })
 }
