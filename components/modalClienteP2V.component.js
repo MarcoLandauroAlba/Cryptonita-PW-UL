@@ -2,24 +2,51 @@ import { useEffect, useState } from 'react';
 import { Modal, Button} from 'react-bootstrap';
 
 const ModalClienteP2V = (props) => {
+    const[idOperacion, setOperacion] = useState(0)
+
+    useEffect(()=> {
+        if(props.idOperacion != null){
+            setOperacion(props.idOperacion.id)
+        }
+    }, [props.idOperacion]) 
     
-    const [txtCuenta, setTxtCuenta] = useState("")
+    // const IdClienteOnChange = (event) => {
+    //     setIdCliente(event.target.value)
+    // }
+
+    // const BTipoOnChange = (event) => {
+    //     setBTipo(event.target.value)
+    // }
+
+    // const ComprabtcOnChange = (event) => {
+    //     setTxtComprabtc(event.target.value)
+    // }
+
+    // const VentabtcOnChange = (event) => {
+    //     setTxtVentabtc(event.target.value)
+    // }
+
+    // const BilleteraOnChange = (event) => {
+    //     setTxtBilletera(event.target.value)
+    // }
+
+    // const CuentabancoOnChange = (event) => {
+    //     setTxtCuentabanco(event.target.value)
+    // }
     
-    const CuentaOnChange = (event) => {
-        setTxtCuenta(event.target.value)
-    }
+    // const EstadoOnChange = (event) => {
+    //     setEstado(event.target.value)
+    // }
     
     const butGuardarOnClick = () => {
-        props.almacenarCuenta(txtCuenta)
         props.onOcultar()
-        props.habilitarModal2(true)
+        props.habilitarModal3V(true)
     }
 
     const butCloseFormOnClick = () => {
-        setTxtCuenta("")
-        props.almacenarCuenta("")
         props.onOcultar()
     }
+
     
     return <Modal show={ props.onMostrar } onHide={ butCloseFormOnClick }>
         <Modal.Header closeButton>
@@ -30,10 +57,11 @@ const ModalClienteP2V = (props) => {
             <form>
                 <div>
                     <label className="form-label">
-                        Cuenta BCP:
+                        Billetera de la empresa: 65898191
                     </label>
-                    <input id="TextInput" className="form-control" type="text" onChange={ CuentaOnChange } defaultValue={ txtCuenta }>
-                    </input>
+                    <label className="form-label">
+                        Número de transacción: {idOperacion}
+                    </label>
                 </div>
             </form>
         </Modal.Body>

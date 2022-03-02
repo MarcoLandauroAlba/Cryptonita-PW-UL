@@ -26,24 +26,15 @@ export default function FormularioIniciarSesion(props) {
                         <form>
                             {
                                 (() => {
-                                    if (props.correoInexistente == true) {
+                                    if (props.credencialesIncorrectas == true) {
                                         return (
-                                            <div className="h4 my-2 text-danger">El correo ingresado no ha sido registrado</div>
+                                            <div className="h4 my-2 text-danger">Las credenciales ingresadas son invalidas</div>
                                         )
                                     }
                                 })()
                             }
                             <label htmlFor='correo' className="mt-2">Correo:</label>
                             <input type="text" className="form-control mt-2" id="correo" defaultValue={correo} onChange={setCorreoOnChange} />
-                            {
-                                (() => {
-                                    if (props.contrasenaIncorrecta == true) {
-                                        return (
-                                            <div className="h4 my-2 text-danger">La contrasena ingresada no coincide</div>
-                                        )
-                                    }
-                                })()
-                            }
                             <label htmlFor='contrasena' className="mt-2">Contraseña:</label>
                             <input type="text" className="form-control mt-2" id="contrasena" defaultValue={contrasena} onChange={setContrasenaOnChange} />
                             <div className="text-center">

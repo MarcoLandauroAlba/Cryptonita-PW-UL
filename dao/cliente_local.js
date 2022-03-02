@@ -9,5 +9,9 @@ const guardarClienteDatosIniciales = (nombre, apellido, dni) => {
 const obtenerClienteDatosIniciales = () => {
     return JSON.parse(localStorage.getItem("fpr1"))
 }
+const guardarDatosGenerales = (id,tipo) => {
+    localStorage.setItem('cliente',id)
+    localStorage.setItem('tipoCliente',tipo)
+}
 
-export { guardarClienteDatosIniciales,obtenerClienteDatosIniciales }
+export { guardarClienteDatosIniciales,obtenerClienteDatosIniciales,guardarDatosGenerales }

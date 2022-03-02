@@ -8,7 +8,7 @@ const ModificarTCambioAdmin = () => {
     // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
-    const [cliente, setCliente] = useState(123)
+    const [cliente, setCliente] = useState(-1)
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
 
@@ -38,7 +38,7 @@ const ModificarTCambioAdmin = () => {
     // Props: salir                 => Elimina los datos del usuario actual
     const TerminarSesionActiva = () => {
         GuardarPaginaAnterior()
-        localStorage.setItem('cliente', 123)
+        localStorage.setItem('cliente', -1)
         localStorage.setItem('tipoCliente', 4)
         location.href = '/'
     }
