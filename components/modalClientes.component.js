@@ -125,8 +125,11 @@ const ModalClientes = (props) => {
                     <label className="form-label">
                         Estado
                     </label>
-                    <input className="form-control" type="text" onChange={ EstadoOnChange } defaultValue={ txtEstado }>
-                    </input>
+                    <select className="form-select" defaultValue={ txtEstado }
+                    onChange={ EstadoOnChange }>
+                        <option value={ false }>{ "Por Validar" }</option>
+                        <option value={ true }>{ "Validado" }</option>
+                    </select>
                 </div>
             </form>
         </Modal.Body>

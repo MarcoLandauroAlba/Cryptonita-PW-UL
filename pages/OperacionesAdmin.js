@@ -143,7 +143,6 @@ const OperacionesAdminPage = () => {
         console.log(operacion)
         setOperacion(operacion)
         setMostrar(true)
-
     }
     const ocultar = () => {
         setMostrar(false)
