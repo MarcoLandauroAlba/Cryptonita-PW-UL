@@ -2,119 +2,162 @@ import Footer from "../components/footer.component"
 import FormularioProcesoRegistro1 from "../components/FormularioProcesoRegistro1.components"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
-import { guardarClienteDatosIniciales } from "../dao/cliente_local"
-
+import { guardarClienteDatosIniciales, guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
+import { EntregarPaginaAnterior, guardarPaginasAnteriores } from '../dao/paginas_anteriores_local'
 
 const ProcesoRegistro1Page = () => {
 
+    // ********************************************************************************************************************************************************************************************************
+    // ========================================================================================================================================================================================================
+    // ********************************************************************************************************************************************************************************************************
+    // ========================================================================================================================================================================================================
+    // ********************************************************************************************************************************************************************************************************
     // INICIO: EL CODIGO ESCRITO DESDE AQUI HASTA LA SIGUIENTE SEÑAL, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
-    // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
-    const [cliente, setCliente] = useState(123)
+    const [cliente, setCliente] = useState(-1)
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
+    // DIRECCION DE LA PAGINA ACTUAL
+    const direccionActual = '/procesoRegistro1'
+    //  SOLO SIRVE PARA EL PROPS ubicacion
+    const ubicacionActual = 'procesoRegistro1'
 
     useEffect(() => {
-        // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
-        if (localStorage.getItem('cliente') == null) {
-            localStorage.setItem('cliente', cliente)
+        const AsyncUseEffect = async () => {
+            // Si se ingresa al if es porque recien se ingresa POR PRIMERA VEZ a la pagina desde un navegador
+            if (obtenerDatoCliente() == null) {
+                guardarDatoCliente(cliente)
+                guardarDatoTipoCliente(tipoDeCliente)
+            } else {
+                setCliente(parseInt(obtenerDatoCliente()))
+                if (cliente != -1) {
+                    // SI INGRESA AQUI SIGNIFICA QUE ES UN CLIENTE CON ID REGISTRADO EN EL NAVEGADOR
+                    // BUSCAR EN BASE DE DATOS QUE TIPO DE CLIENTE ES
+                    const DatoTipoCliente = obtenerDatoTipoCliente()
+                    if (DatoTipoCliente == 1) {
+                        // BUSCAR EN ADMIN
+                        const responseAdmin = await fetch(`api/administradores/${cliente}`)
+                        const dataAdmin = await responseAdmin.json()
+                        if (dataAdmin.cliente != null) {
+                            // SI INGRESA: EL ADMINISTRADOR SI EXISTE EN BASE DE DATOS
+                            guardarDatosGenerales(cliente, 1)
+                            setTipoDeCliente(1)
+                        } else {
+                            // SI INGRESA: EL ADMINISTRADOR NO EXISTE Y SE SETEARA TODO A CLIENTE INVITADO
+                            guardarDatosGenerales(-1, 4)
+                            setCliente(-1)
+                            setTipoDeCliente(4)
+                        }
+                    } else if (DatoTipoCliente == 2 || DatoTipoCliente == 3) {
+                        // BUSCAR EN CLIENTES
+                        const responseClienteCompleta = await fetch(`api/usuarios/${cliente}`)
+                        const dataClienteCompleta = await responseClienteCompleta.json()
+                        if (dataClienteCompleta.cliente == null) {
+                            // SI INGRESA, SIGNIFICA QUE EL USUARIO NO EXISTE, POR LO CUAL LAS CREDENCIALES SON INVALIDAS
+                            guardarDatosGenerales(-1, 4)
+                            setCliente(-1)
+                            setTipoDeCliente(4)
+                        } else {
+                            // SI INGRESA, SIGNIFICA QUE EL USUARIO SI EXISTE Y AHORA DETERMINAREMOS SI ES:
+                            // USUARIO CONFIRMADO (2) O USUARIO NO CONFIRMADO (3)
+                            if (dataClienteCompleta.cliente.estado == false) {
+                                // USUARIO NO CONFIRMARDO
+                                setTipoDeCliente(3)
+                                guardarDatosGenerales(cliente,3)
+                            } else if (dataClienteCompleta.cliente.estado == true) {
+                                // USUARIO CONFIRMARDO
+                                setTipoDeCliente(2)
+                                guardarDatosGenerales(cliente,2)
+                            } else {
+                            }
+                        }
+                    } else {
+                        guardarDatosGenerales(-1, 4)
+                        setCliente(-1)
+                        setTipoDeCliente(4)
+                    }
+                    // LUEGO DE BUSCAR EN BASE DE DATOS, ALMACENAR EN EL LS EL TIPO DE DE USUARIO QUE ES
+                }
+            }
         }
-        // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
-        if (localStorage.getItem('tipoCliente') == null) {
-            localStorage.setItem('tipoCliente', tipoDeCliente)
-        }
-        //se actualizan los valores de las variables de estado con lo guardado en el localStorage
-        setCliente(parseInt(localStorage.getItem('cliente')))
-        setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
-    }, [cliente,tipoDeCliente])
+        AsyncUseEffect()
+
+    }, [cliente, tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
     const RedirigirAOtraPagina = (direccion) => {
-        GuardarPaginaAnterior()
-        localStorage.setItem('cliente', cliente)
-        localStorage.setItem('tipoCliente', tipoDeCliente)
+        guardarPaginasAnteriores(direccionActual)
+        guardarDatosGenerales(cliente, tipoDeCliente)
         location.href = direccion
     }
 
     // Props: salir                 => Elimina los datos del usuario actual
     const TerminarSesionActiva = () => {
-        GuardarPaginaAnterior()
-        localStorage.setItem('cliente', 123)
-        localStorage.setItem('tipoCliente', 4)
+        guardarPaginasAnteriores(direccionActual)
+        guardarDatosGenerales(-1, 4)
         location.href = '/'
     }
 
-    // TODO: ESTA ES LA UNICA FUNCION A ACTUALIZAR EN TODAS LAS PAGES QUE SE UTILICE
     // NORMALMENTE SERVIRA COMO UN PROPS PARA LOS BOTONES DE "REGRESAR"
     // props: volver
     const VolverAPaginaAnterior = () => {
-        if (localStorage.getItem('paginasAnteriores') != null) {
-            let lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
-            let pagina = lista.pop()
-            if (pagina == '/procesoRegistro1') {                            // ACTUALIZAR A LA DIRECCION ACTUAL
-                let pagina = lista.pop()
-            }
-            localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
-            location.href = pagina
-        } else {
-            // No pasa nada
-            console.log('No hay pagina anterior')
+        const respuesta = EntregarPaginaAnterior(direccionActual)
+        if (respuesta != null) {
+            location.href = respuesta
         }
-    }
-
-    // ESTA ES LA UNICA FUNCION A ACTUALIZAR
-    const GuardarPaginaAnterior = () => {
-        let lista = []
-        if (localStorage.getItem('paginasAnteriores') != null) {
-            lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
-            if (lista.length > 5) {
-                lista.shift()
-                lista.push('/procesoRegistro1')                             // ACTUALIZAR A LA DIRECCION ACTUAL
-            } else {
-                lista.push('/procesoRegistro1')                             // ACTUALIZAR A LA DIRECCION ACTUAL
-            }
-        } else {
-            lista.push('/procesoRegistro1')                                 // ACTUALIZAR A LA DIRECCION ACTUAL
-        }
-        localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
-        RevisarListaAnteriores()
-    }
-
-    // SI HEMOS VISITADO LA MISMA PAGINA DOS VECES (ESTAR EN PANTALLA "NOSOTROS" Y PRESIONAR OTRA VEZ "NOSOTROS")
-    // ELIMINA LOS DUPLICADOS
-    const RevisarListaAnteriores = () => {
-        let lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
-        let tamano = lista.length
-        let i = 1
-        while (i < tamano) {
-            if (lista[i - 1] == lista[i]) {
-                lista.splice(i, 1)
-                tamano--
-            } else {
-                i++
-            }
-        }
-        localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
     }
 
     // FIN: EL CODIGO ESCRITO HASTA AQUI, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
+    // ********************************************************************************************************************************************************************************************************
+    // ========================================================================================================================================================================================================
+    // ********************************************************************************************************************************************************************************************************
+    // ========================================================================================================================================================================================================
+    // ********************************************************************************************************************************************************************************************************
+    // ESPACIO PARA ESCRIBIR CODIGO EXTRA 
 
-    //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
 
 
 
+    const [faltaNombre, setFaltaNombre] = useState(false)
+    const [faltaApellido, setFaltaApellido] = useState(false)
+    const [faltaDni, setFaltaDni] = useState(false)
+
+    //  EN ESTA FUNCION SE GUARDARAN LOS DATOS EN EL LOCALSTORAGE
     const GuardarClienteOnHandler = (nombre, apellido, dni) => {
-        guardarClienteDatosIniciales(nombre, apellido, dni)
-        RedirigirAOtraPagina("/procesoRegistro2")
-    }
-
-    const NombresAGuardar = (nombre, apellido) => {
-        const nombreAGuardar = {
-            nombre : nombre,
-            apellido : apellido
+        // PRIMERO CORROBORAMOS SI TODOS LOS CAMPOS HAN SIDO RELLENADOS
+        let EfaltaNombre = true
+        let EfaltaApellido = true
+        let EfaltaDni = true
+        if (nombre == '') {
+            setFaltaNombre(true)
+        } else {
+            setFaltaNombre(false)
+            EfaltaNombre = false
         }
-        localStorage.setItem("nombreAGuardar", JSON.stringify(nombreAGuardar))
+        if (apellido == '') {
+            setFaltaApellido(true)
+        } else {
+            setFaltaApellido(false)
+            EfaltaApellido = false
+        }
+        if (dni == undefined) {
+            setFaltaDni(true)
+        } else {
+            if (dni.toString().length == 8) {
+                setFaltaDni(false)
+                EfaltaDni = false
+            } else {
+                setFaltaDni(true)
+            }
+        }
+        // SI TODOS LOS CAMPOS HAN SIDO RELLENADOS CORRECTAMENTE...
+        if (EfaltaNombre == false && EfaltaApellido == false && EfaltaDni == false) {
+            // SE GUARDAN LOS DATOS EN EL LOCALSTORAGE
+            guardarClienteDatosIniciales(nombre, apellido, dni)
+            // SE REDIRIGE A PROCESOREGISTRO2
+            RedirigirAOtraPagina("/procesoRegistro2")
+        }
     }
 
     return (
@@ -123,13 +166,16 @@ const ProcesoRegistro1Page = () => {
                 tipoDeCliente={tipoDeCliente}
                 redireccionamiento={RedirigirAOtraPagina}
                 salir={TerminarSesionActiva}
-                ubicacion={'procesoRegistro1'}
+                ubicacion={ubicacionActual}
             />
             <FormularioProcesoRegistro1
                 guardar={GuardarClienteOnHandler}
                 volver={VolverAPaginaAnterior}
+                VerFaltaNombre={faltaNombre}
+                VerFaltaApellido={faltaApellido}
+                VerFaltaDni={faltaDni}
             />
-            <Footer 
+            <Footer
                 redireccionamiento={RedirigirAOtraPagina}
             />
         </div>)

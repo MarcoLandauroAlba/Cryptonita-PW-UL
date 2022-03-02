@@ -1,24 +1,35 @@
 const db = require("../sequelize/models")
 
-const guardarOperacion = async (idcliente,fecha,tipo,comprabtc,ventabtc,montosoles,montobtc,billetera,cuentabcp) => {
+const guardarOperacion = async (idcliente,tipo,comprabtc,ventabtc,montosoles,montobtc,billetera,cuentabcp) => {
     await db.Operacion.create({
         id_cliente : idcliente,
-        fecha: fecha,
         tipo: tipo,
         comprabtc: comprabtc,
         ventabtc: ventabtc,
         monto_soles: montosoles,
         monto_btc: montobtc,
         billetera: billetera,
-        cuentabanco: cuentabcp
+        cuentabanco: cuentabcp,
+        estado:false
     })
 }
 
 const obtenerOperaciones = async () => {
-    const operaciones = await db.Operacion.findAll()
+    const operaciones = await db.Operacion.findAll({
+        order : [
+            ["id", "DESC"]
+        ]
+    })
     return operaciones
 }
 
+const obtenerOperacionxIdcliente = async (idcliente) => {
+    return await db.Operacion.findAll({
+        where : {
+            id_cliente : idcliente
+        }
+    })
+}
 
 const obtenerOperacion = async (id) => {
     return await db.Operacion.findOne({
@@ -37,4 +48,4 @@ const editarOperacion = async (operacion) => {
     })
 }
 
-export { guardarOperacion, obtenerOperaciones, obtenerOperacion, editarOperacion }
+export { guardarOperacion, obtenerOperaciones, obtenerOperacion, editarOperacion, obtenerOperacionxIdcliente }

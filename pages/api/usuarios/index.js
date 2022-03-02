@@ -31,7 +31,7 @@ const clientesHandler = async (req, res) => {
     }else if(req.method == "POST"){
         console.log("Se debería guardar en la base de datos")
         const data = JSON.parse(req.body)
-        await guardarCliente(data.estado, data.telefono, data.contraseña, data.correo,data.nombre, data.apellido, data.dni)
+        await guardarCliente(data.estado, data.telefono, data.contrasena, data.correo,data.nombre, data.apellido, data.dni)
         res.json({
             msg: ""
         })
@@ -41,7 +41,8 @@ const clientesHandler = async (req, res) => {
         res.json({
             msg: ""
         })   
-    }else{
+    }
+    else{
         res.status(400).json({
             msg: "Método no definido"
         })

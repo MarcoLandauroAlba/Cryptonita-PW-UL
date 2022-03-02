@@ -1,3 +1,5 @@
+import { Sequelize } from "../sequelize/models"
+const  Op  = Sequelize.Op
 const db = require("../sequelize/models")
 
 const guardarCliente = async (estado,telefono,contraseña,correo,nombre,apellido,dni) => {
@@ -10,19 +12,21 @@ const guardarCliente = async (estado,telefono,contraseña,correo,nombre,apellido
         apellido: apellido,
         dni: dni
     })
-    return admin
 }
 
 const obtenerCliente = async (id) => {
-    return await db.Cliente.findOne({
+    
+    const respuesta = await db.Cliente.findOne({
         where : {
             id : id
         }
     })
+    console.log('CLIENTES JS OBTENERCLIENTE+',respuesta)
+    return respuesta 
 }
 
 const obtenerClientexDNI = async (dni) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
             dni : dni
         }
@@ -30,25 +34,48 @@ const obtenerClientexDNI = async (dni) => {
 }
 
 const obtenerClientexNom = async (nombre) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
-            nombre : nombre
+            nombre : {
+                [Op.like]: '%'+nombre+'%'
+            }
         }
     })
 }
 
 const obtenerClientexAp = async (apellido) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
-            apellido : apellido
+            apellido : {
+                [Op.like]: '%'+apellido+'%'
+            }
         }
     })
 }
 
 const obtenerClientexCorr = async (correo) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
-            correo : correo
+            correo : {
+                [Op.like]: '%'+correo+'%'
+            }
+        }
+    })
+}
+// ESTE USA MARCO PARA EL REGISTRO DE CLIENTES
+const obtenerClientexCorr2 = async (correo) => {
+    return await db.Cliente.findOne({
+        where: {
+            correo: correo,
+        }
+    })
+}
+
+const obtenerClientexCorreoYContrasena = async(correo, contrasena) => {
+    return await db.Cliente.findOne({
+        where: {
+            correo: correo,
+            contraseña: contrasena
         }
     })
 }
@@ -56,7 +83,7 @@ const obtenerClientexCorr = async (correo) => {
 const obtenerClientes = async () => {
     const admins = await db.Cliente.findAll({
         order : [
-            ["id", "DESC"]
+            ["id", "ASC"]
         ]
     })
     return admins
@@ -86,4 +113,4 @@ const editarOperacion = async (cliente) => {
     })
 }
 
-export {guardarCliente, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI}
+export {guardarCliente,obtenerClientexCorr2, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI, obtenerClientexCorreoYContrasena}

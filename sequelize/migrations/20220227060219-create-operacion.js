@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fecha: {
-        type: Sequelize.TEXT
-      },
       tipo: {
         type: Sequelize.BOOLEAN
       },
@@ -33,7 +30,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       estado: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

@@ -2,156 +2,168 @@ import Footer from "../components/footer.component";
 import MenuNavegacion from "../components/menuNavegacion.component";
 import FormularioIniciarSesion from "../components/FormularioIniciarSesion.component";
 import { useEffect, useState } from 'react'
+import { guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
+import { EntregarPaginaAnterior, guardarPaginasAnteriores } from '../dao/paginas_anteriores_local'
 
 export default function IniciarSesionPage() {
 
+    // ********************************************************************************************************************************************************************************************************
+    // ========================================================================================================================================================================================================
+    // ********************************************************************************************************************************************************************************************************
+    // ========================================================================================================================================================================================================
+    // ********************************************************************************************************************************************************************************************************
     // INICIO: EL CODIGO ESCRITO DESDE AQUI HASTA LA SIGUIENTE SEÑAL, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
-    // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
-    const [cliente, setCliente] = useState(123)
+    const [cliente, setCliente] = useState(-1)
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
+    // DIRECCION DE LA PAGINA ACTUAL
+    const direccionActual = '/IniciarSesion'
+    //  SOLO SIRVE PARA EL PROPS ubicacion
+    const ubicacionActual = 'IniciarSesion'
 
     useEffect(() => {
-        // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
-        if (localStorage.getItem('cliente') == null) {
-            localStorage.setItem('cliente', cliente)
+        const AsyncUseEffect = async () => {
+            // Si se ingresa al if es porque recien se ingresa POR PRIMERA VEZ a la pagina desde un navegador
+            if (obtenerDatoCliente() == null) {
+                guardarDatoCliente(cliente)
+                guardarDatoTipoCliente(tipoDeCliente)
+            } else {
+                setCliente(parseInt(obtenerDatoCliente()))
+                if (cliente != -1) {
+                    // SI INGRESA AQUI SIGNIFICA QUE ES UN CLIENTE CON ID REGISTRADO EN EL NAVEGADOR
+                    // BUSCAR EN BASE DE DATOS QUE TIPO DE CLIENTE ES
+                    const DatoTipoCliente = obtenerDatoTipoCliente()
+                    if (DatoTipoCliente == 1) {
+                        // BUSCAR EN ADMIN
+                        const responseAdmin = await fetch(`api/administradores/${cliente}`)
+                        const dataAdmin = await responseAdmin.json()
+                        if (dataAdmin.cliente != null) {
+                            // SI INGRESA: EL ADMINISTRADOR SI EXISTE EN BASE DE DATOS
+                            guardarDatosGenerales(cliente, 1)
+                            setTipoDeCliente(1)
+                        } else {
+                            // SI INGRESA: EL ADMINISTRADOR NO EXISTE Y SE SETEARA TODO A CLIENTE INVITADO
+                            guardarDatosGenerales(-1, 4)
+                            setCliente(-1)
+                            setTipoDeCliente(4)
+                        }
+                    } else if (DatoTipoCliente == 2 || DatoTipoCliente == 3) {
+                        // BUSCAR EN CLIENTES
+                        const responseClienteCompleta = await fetch(`api/usuarios/${cliente}`)
+                        const dataClienteCompleta = await responseClienteCompleta.json()
+                        if (dataClienteCompleta.cliente == null) {
+                            // SI INGRESA, SIGNIFICA QUE EL USUARIO NO EXISTE, POR LO CUAL LAS CREDENCIALES SON INVALIDAS
+                            guardarDatosGenerales(-1, 4)
+                            setCliente(-1)
+                            setTipoDeCliente(4)
+                        } else {
+                            // SI INGRESA, SIGNIFICA QUE EL USUARIO SI EXISTE Y AHORA DETERMINAREMOS SI ES:
+                            // USUARIO CONFIRMADO (2) O USUARIO NO CONFIRMADO (3)
+                            if (dataClienteCompleta.cliente.estado == false) {
+                                // USUARIO NO CONFIRMARDO
+                                setTipoDeCliente(3)
+                                guardarDatoTipoCliente(3)
+                            } else if (dataClienteCompleta.cliente.estado == true) {
+                                // USUARIO CONFIRMARDO
+                                setTipoDeCliente(2)
+                                guardarDatoTipoCliente(2)
+                            } else {
+                            }
+                        }
+                    } else {
+                        guardarDatosGenerales(-1, 4)
+                        setCliente(-1)
+                        setTipoDeCliente(4)
+                    }
+                    // LUEGO DE BUSCAR EN BASE DE DATOS, ALMACENAR EN EL LS EL TIPO DE DE USUARIO QUE ES
+                }
+            }
         }
-        // Si se ingresa al if, normalmente es cuando recien se ingresa por primera vez a la pagina desde un navegador
-        if (localStorage.getItem('tipoCliente') == null) {
-            localStorage.setItem('tipoCliente', tipoDeCliente)
-        }
-        //se actualizan los valores de las variables de estado con lo guardado en el localStorage
-        setCliente(parseInt(localStorage.getItem('cliente')))
-        setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
-    }, [cliente,tipoDeCliente])
+        AsyncUseEffect()
+
+    }, [cliente, tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
-    // FUNCION CAMBIADA EXCLUSIVAMENTE PARA ESTA PANTALLA
     const RedirigirAOtraPagina = (direccion) => {
-        GuardarPaginaAnterior()
-        localStorage.setItem('cliente', cliente)
-        localStorage.setItem('tipoCliente', tipoDeCliente)
+        guardarPaginasAnteriores(direccionActual)
+        guardarDatosGenerales(cliente, tipoDeCliente)
         location.href = direccion
     }
 
     // Props: salir                 => Elimina los datos del usuario actual
     const TerminarSesionActiva = () => {
-        GuardarPaginaAnterior()
-        localStorage.setItem('cliente', 123)
-        localStorage.setItem('tipoCliente', 4)
+        guardarPaginasAnteriores(direccionActual)
+        guardarDatosGenerales(-1, 4)
         location.href = '/'
     }
 
-    // TODO: ESTA ES LA UNICA FUNCION A ACTUALIZAR EN TODAS LAS PAGES QUE SE UTILICE
     // NORMALMENTE SERVIRA COMO UN PROPS PARA LOS BOTONES DE "REGRESAR"
     // props: volver
     const VolverAPaginaAnterior = () => {
-        if (localStorage.getItem('paginasAnteriores') != null) {
-            let lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
-            let pagina = lista.pop()
-            if (pagina == '/IniciarSesion') {                                                // ACTUALIZAR A LA DIRECCION ACTUAL
-                let pagina = lista.pop()
-            }
-            localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
-            location.href = pagina
-        } else {
-            // No pasa nada
-            console.log('No hay pagina anterior')
+        const respuesta = EntregarPaginaAnterior(direccionActual)
+        if (respuesta != null) {
+            location.href = respuesta
         }
-    }
-
-    // ESTA ES LA UNICA FUNCION A ACTUALIZAR
-    const GuardarPaginaAnterior = () => {
-        let lista = []
-        if (localStorage.getItem('paginasAnteriores') != null) {
-            lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
-            if (lista.length > 5) {
-                lista.shift()
-                lista.push('/IniciarSesion')                                                 // ACTUALIZAR A LA DIRECCION ACTUAL
-            } else {
-                lista.push('/IniciarSesion')                                                 // ACTUALIZAR A LA DIRECCION ACTUAL
-            }
-        } else {
-            lista.push('/IniciarSesion')                                                     // ACTUALIZAR A LA DIRECCION ACTUAL
-        }
-        localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
-        RevisarListaAnteriores()
-    }
-
-    // SI HEMOS VISITADO LA MISMA PAGINA DOS VECES (ESTAR EN PANTALLA "NOSOTROS" Y PRESIONAR OTRA VEZ "NOSOTROS")
-    // ELIMINA LOS DUPLICADOS
-    const RevisarListaAnteriores = () => {
-        let lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
-        let tamano = lista.length
-        let i = 1
-        while (i < tamano) {
-            if (lista[i - 1] == lista[i]) {
-                lista.splice(i, 1)
-                tamano--
-            } else {
-                i++
-            }
-        }
-        localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
     }
 
     // FIN: EL CODIGO ESCRITO HASTA AQUI, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
-
-    //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
-
-
-
-
-    const [contrasenaIncorrecta,setContrasenaIncorrecta] = useState(false)
-    const [correoInexistente,setCorreoInexistente] = useState(false)
-
-
-    const validarUsuario = (correo,contrasena) => {
-        // TODO: REALIZAR LO SIGUIENTE CUANDO LA BASE DE DATOS ESTE LISTA
-        // SE HACE UNA PRIMERA LLAMADA A BASE DE DATOS PREGUNTANDO POR EL CORREO,
-
-        //SI EL CORREO EXISTE, SE PROCEDE A PREGUNTAR POR LA CONTRASENA
-
-            //SE HACE UNA SEGUNDA LLAMADA A BASE DE DATOS PREGUNTANDO POR EL CORREO Y LA CONTRAASENA
-
-            //SI CORREO Y CONTRASENA COINCIDEN, SE ENVIA AL USUARIO A LA SIGUIENTE PANTALLA
-            
-                //SE GUARDAN LOS DATOS MAS IMPORTANTES DEL USUARIO EN LAS VARIABLES DE ESTADO
-                
-                    //SI EL CLIENTE ES ADMIN:
-                        // setTipoDeCliente(1)
-                    //SI EL CLIENTE ES USUARIO CONFIRMADO
-                        // setTipoDeCliente(2)
-                    //SI EL CLIENTE ES USUARIO NO CONFIRMADO
-                        // setTipoDeCliente(3)
-                    
-                    // EN ESTA VARIABLE ID, SE GUARDARA EL VALOR DEL ID DEL CLIENTE INGRESADO
-                    // SE TIENE QUE HACER UNA PETICION A BASE DE DATOS PARA QUE DEVUELVA EL VALOR
-                    const id = 12345678
-                    // EN ESTA VARIABLE TIPO, SE GUARDARA EL VALOR DEL TIPO DE CLIENTE BUSCADO
-                    // SI ES ADMIN SERA 1, CLIENTE CONFIRMADO 2 Y CLIENTE POR CONFIRMAR 3
-                    const tipo = 1
-
-
-                    // SE ENVIA AL USUARIO A LA PAGINA PRINCIPAL
-                    
-                    RedirigirAPaginaPrincipalConLogeoRealizado(id,tipo)
+    // ********************************************************************************************************************************************************************************************************
+    // ========================================================================================================================================================================================================
+    // ********************************************************************************************************************************************************************************************************
+    // ========================================================================================================================================================================================================
+    // ********************************************************************************************************************************************************************************************************
+    // ESPACIO PARA ESCRIBIR CODIGO EXTRA
 
 
 
-            //SI CONTRASENA NO COINCIDE, SE CAMBIA EL ESTADO DE CONTRASENAINCORRECTA
-            // setContrasenaIncorrecta(true)
 
-        //SI EL CORREO NO EXISTEN, SE CAMBIA EL ESTADO DE CORREOINEXISTENTE
-        // setCorreoInexistente(true)
+    // VALIDA SI EL CORREO INGRESADO CUMPLE CON EL FORMATO REQUERIDO PARA EXISTIR
+
+    // SETEAN EL VALOR A POSITIVO SI ES QUE ALGUNO ES INCORRECTO O INEXISTENTE
+    const [credencialesIncorrecta,setCredencialesIncorrecta] = useState(false)
+
+
+
+    const validarUsuario = async (correo,contrasena) => {
+
+        const usuarioIncompleto = {correo: correo, contrasena: contrasena}
+        console.log('antes responseClientes')
+        const responseClientes = await fetch('api/usuarios/correoYcontra',{
+            method: 'OPTIONS',
+            body: JSON.stringify(usuarioIncompleto)
+        })
+        console.log('despues responseClientes')
+        const dataCliente = await responseClientes.json()
+        console.log('estoy aqui amigo')
+        if(dataCliente.cliente!=null){
+            console.log('validarUsuario EXISTE')
+            if(dataCliente.cliente.estado==true){
+                RedirigirAPaginaPrincipalConLogeoRealizado(dataCliente.cliente.id,2)
+                redi
+            }else{
+                RedirigirAPaginaPrincipalConLogeoRealizado(dataCliente.cliente.id,3)
+            }
+        }else{
+            console.log('validarUsuario NULO')
+            const responseAdmin = await fetch('api/administradores',{
+                method: 'OPTIONS',
+                body: JSON.stringify(usuarioIncompleto)
+            })
+            const dataAdministrador = await responseAdmin.json()
+
+            if(dataAdministrador.admin!=null){
+                RedirigirAPaginaPrincipalConLogeoRealizado(dataAdministrador.admin.id,1)
+            }else{
+                setCredencialesIncorrecta(true)
+            }
+        }
     }
     
     const RedirigirAPaginaPrincipalConLogeoRealizado = (VALORcliente,VALORtipoDeCliente) => {
-        GuardarPaginaAnterior()
-        localStorage.setItem('cliente', VALORcliente)
-        localStorage.setItem('tipoCliente', VALORtipoDeCliente)
+        guardarPaginasAnteriores(direccionActual)
+        guardarDatosGenerales(VALORcliente,VALORtipoDeCliente)
         location.href = '/'
     }
 
@@ -162,12 +174,11 @@ export default function IniciarSesionPage() {
             tipoDeCliente={tipoDeCliente}
             redireccionamiento={RedirigirAOtraPagina}
             salir={TerminarSesionActiva}
-            ubicacion={'IniciarSesion'}
+            ubicacion={ubicacionActual}
         />
         <FormularioIniciarSesion 
             validarUsuario={validarUsuario}
-            contrasenaIncorrecta={contrasenaIncorrecta}
-            correoInexistente={correoInexistente}
+            credencialesIncorrectas={credencialesIncorrecta}
         />
         <Footer 
             redireccionamiento={RedirigirAOtraPagina}

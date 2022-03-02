@@ -56,6 +56,7 @@ const ModalClientes = (props) => {
         setTxtCorreo("")
         setTxtEstado("")
         setTxtTelefono(0)
+        //props.almacenarDatos()
     }
 
     const butCloseFormOnClick = () => {

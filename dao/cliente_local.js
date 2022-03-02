@@ -6,9 +6,39 @@ const guardarClienteDatosIniciales = (nombre, apellido, dni) => {
     }
     localStorage.setItem("fpr1",JSON.stringify(cliente))
 }
+
 const obtenerClienteDatosIniciales = () => {
-    const clienteStr = localStorage.getItem("fpr1")
-    return JSON.parse(clienteStr)
+    return JSON.parse(localStorage.getItem("fpr1"))
 }
 
-export { guardarClienteDatosIniciales,obtenerClienteDatosIniciales }
+
+const guardarDatosGenerales = (id,tipo) => {
+    localStorage.setItem('cliente',id)
+    localStorage.setItem('tipoCliente',tipo)
+}
+
+
+const guardarDatoCliente = (id) => {
+    localStorage.setItem('cliente',id)
+}
+const obtenerDatoCliente = () => {
+    return localStorage.getItem('cliente')
+}
+
+const guardarDatoTipoCliente = (tipo) => {
+    localStorage.setItem('tipoCliente',tipo)
+}
+const obtenerDatoTipoCliente = () => {
+    return localStorage.getItem('tipoCliente')
+}
+
+
+export { 
+    guardarClienteDatosIniciales,
+    obtenerClienteDatosIniciales,
+    guardarDatosGenerales,
+    guardarDatoCliente,
+    obtenerDatoCliente,
+    guardarDatoTipoCliente,
+    obtenerDatoTipoCliente
+}
