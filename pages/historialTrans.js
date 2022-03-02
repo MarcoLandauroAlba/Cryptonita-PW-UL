@@ -63,11 +63,11 @@ const historialTrans = () => {
                             if (dataClienteCompleta.cliente.estado == false) {
                                 // USUARIO NO CONFIRMARDO
                                 setTipoDeCliente(3)
-                                guardarDatoTipoCliente(3)
+                                guardarDatosGenerales(cliente,3)
                             } else if (dataClienteCompleta.cliente.estado == true) {
                                 // USUARIO CONFIRMARDO
                                 setTipoDeCliente(2)
-                                guardarDatoTipoCliente(2)
+                                guardarDatosGenerales(cliente,2)
                             } else {
                             }
                         }

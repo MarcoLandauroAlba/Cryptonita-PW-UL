@@ -2,7 +2,7 @@ import Footer from "../components/footer.component"
 import FormularioProcesoRegistro1 from "../components/FormularioProcesoRegistro1.components"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
-import { guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
+import { guardarClienteDatosIniciales, guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
 import { EntregarPaginaAnterior, guardarPaginasAnteriores } from '../dao/paginas_anteriores_local'
 
 const ProcesoRegistro1Page = () => {
@@ -64,11 +64,11 @@ const ProcesoRegistro1Page = () => {
                             if (dataClienteCompleta.cliente.estado == false) {
                                 // USUARIO NO CONFIRMARDO
                                 setTipoDeCliente(3)
-                                guardarDatoTipoCliente(3)
+                                guardarDatosGenerales(cliente,3)
                             } else if (dataClienteCompleta.cliente.estado == true) {
                                 // USUARIO CONFIRMARDO
                                 setTipoDeCliente(2)
-                                guardarDatoTipoCliente(2)
+                                guardarDatosGenerales(cliente,2)
                             } else {
                             }
                         }

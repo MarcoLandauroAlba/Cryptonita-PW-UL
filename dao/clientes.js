@@ -62,6 +62,14 @@ const obtenerClientexCorr = async (correo) => {
         }
     })
 }
+// ESTE USA MARCO PARA EL REGISTRO DE CLIENTES
+const obtenerClientexCorr2 = async (correo) => {
+    return await db.Cliente.findOne({
+        where: {
+            correo: correo,
+        }
+    })
+}
 
 const obtenerClientexCorreoYContrasena = async(correo, contrasena) => {
     return await db.Cliente.findOne({
@@ -105,4 +113,4 @@ const editarOperacion = async (cliente) => {
     })
 }
 
-export {guardarCliente, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI, obtenerClientexCorreoYContrasena}
+export {guardarCliente,obtenerClientexCorr2, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI, obtenerClientexCorreoYContrasena}
