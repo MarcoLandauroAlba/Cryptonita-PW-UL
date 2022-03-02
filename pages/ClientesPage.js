@@ -189,7 +189,7 @@ const ClientesPage = () => {
                         apellido: usuario.apellido, 
                         dni: usuario.dni, 
                         correo: usuario.correo,
-                        telefono : usuario.telefono,
+                        telefono : usuario.telefono,    
                         estado : usuario.estado
                     })
                 }
