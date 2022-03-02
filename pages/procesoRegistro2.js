@@ -104,7 +104,6 @@ const ProcesoRegistro2Page = () => {
     // FIN: EL CODIGO ESCRITO HASTA AQUI, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
 
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
-<<<<<<< HEAD
 
 
 
@@ -118,21 +117,6 @@ const ProcesoRegistro2Page = () => {
     const [faltaContraOri, setFaltaContraOri] = useState(false)
     const [faltaContraRep, setFaltaContraRep] = useState(false)
     const [faltaTelefono, setFaltaTelefono] = useState(false)
-=======
-    
-    //Si el CORREO se repite, se cambia a estado falso
-    const [disponible, setDisponible] = useState(true)
-
-    const GuardarClienteOnHandler = async (correo, contrasena, telefono) => {
-        // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
-        const clienteintancia = JSON.parse(localStorage.getItem("fpr1"))
-        const nombre = clienteintancia.nombre
-        const apellido = clienteintancia.apellido
-        const dni = parseInt(clienteintancia.dni)
-        //TODO:SE MANDA A ESPERA HASTA QUE UN ADMINISTRADOR PERMITA EL LOGEO DEL CLIENTE
-        const estado = false
-        const id=3
->>>>>>> origin
 
     // VALIDA SI EL CORREO INGRESADO CUMPLE CON EL FORMATO REQUERIDO PARA EXISTIR
     const validarEmail = (correo) => {
@@ -147,10 +131,10 @@ const ProcesoRegistro2Page = () => {
     const existeCorreoEnBaseDeDatos = async (correo) => {
         const response = await fetch(`/api/clientes/${correo}`)
         const data = await response.json()
-        console.log('data',data)
-        if(data.cliente==null){
+        console.log('data', data)
+        if (data.cliente == null) {
             return false
-        }else{
+        } else {
             true
         }
     }
@@ -161,9 +145,9 @@ const ProcesoRegistro2Page = () => {
         let EfaltaContraOri = true
         let EfaltaContraRep = true
         let EfaltaTelefono = true
-        let ENodisponible = true
+        let ENodisponible = false
 
-        console.log('validarEmail(correo)',validarEmail(correo))
+        console.log('validarEmail(correo)', validarEmail(correo))
         if (!validarEmail(correo)) {
             setFaltaCorreo(true)
         } else {
@@ -197,13 +181,21 @@ const ProcesoRegistro2Page = () => {
             }
         }
         // // REVISAMOS SI EL CORREO EXISTE EN LA BASE DE DATOS
-        if(!EfaltaCorreo){
-            setDisponible(!await existeCorreoEnBaseDeDatos(correo))
-            ENodisponible = false
+        if (!EfaltaCorreo) {
+            const preguntaExiste = await existeCorreoEnBaseDeDatos(correo)
+            console.log('preguntaExiste',preguntaExiste)
+        //     setDisponible(preguntaExiste)
+        //     if(preguntaExiste){
+        //         ENodisponible = true
+        //     }
+            
+        // }else{
+        //     ENodisponible = true
         }
-        
+
         // SI INGRESA A ESTA CONDICIONAL, SIGNIFICA QUE TODO LO INGRESADO ES VALIDO PARA CREAR UNA CUENTA
-        if(!EfaltaCorreo && !EfaltaContraOri && !EfaltaContraRep && !EfaltaTelefono && !ENodisponible ){
+        if (!EfaltaCorreo && !EfaltaContraOri && !EfaltaContraRep && !EfaltaTelefono && !ENodisponible) {
+            console.log('entrooooooo')
             // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
             const clienteintancia = obtenerClienteDatosIniciales()
             const nombre = clienteintancia.nombre
@@ -211,31 +203,33 @@ const ProcesoRegistro2Page = () => {
             const dni = parseInt(clienteintancia.dni)
             //TODO:SE MANDA A ESPERA HASTA QUE UN ADMINISTRADOR PERMITA EL LOGEO DEL CLIENTE
             const estado = false
-    
+
             const clientePorGuardar = {
-                nombre : nombre,
-                apellido : apellido,
-                dni : dni,
-                correo : correo,
-                telefono : telefono,
-                contrasena : contrasenaOriginal,
-                estado : estado
+                nombre: nombre,
+                apellido: apellido,
+                dni: dni,
+                correo: correo,
+                telefono: telefono,
+                contrasena: contrasenaOriginal,
+                estado: estado
             }
-            console.log('cliente12+',clientePorGuardar)
-    
-            const resp = await fetch("/api/usuarios",{
-                method : "POST",
-                body : JSON.stringify(clientePorGuardar)   
+            console.log('cliente12+', clientePorGuardar)
+
+            const resp = await fetch("/api/usuarios", {
+                method: "POST",
+                body: JSON.stringify(clientePorGuardar)
             })
             const data = await resp.json()
-            
-            
+
             //TODO: SE REALIZA LA ELIMINACION DEL CLIENTE EN PRIMERA INSTANCIA EN EL LOCALSTORAGE
             localStorage.removeItem('fpr1')
-    
-            const tipo = 3
-    
-            // RedirigirAPaginaPrincipalDeEsperaConLoggeo(id)
+
+            // DE LA SIGUIENTE PETICION SE OBTENDRA EL ID DEL CLIENTE CREADO
+            const responseCliente = await fetch(`/api/clientes/${correo}`)
+            const dataCliente = await responseCliente.json()
+            console.log('cliente recien creado: ', dataCliente)
+
+            // RedirigirAPaginaPrincipalDeEsperaConLoggeo(dataCliente.id)
         }
     }
 
