@@ -15,11 +15,14 @@ const guardarCliente = async (estado,telefono,contraseña,correo,nombre,apellido
 }
 
 const obtenerCliente = async (id) => {
-    return await db.Cliente.findOne({
+    
+    const respuesta = await db.Cliente.findOne({
         where : {
             id : id
         }
     })
+    console.log('CLIENTES JS OBTENERCLIENTE+',respuesta)
+    return respuesta 
 }
 
 const obtenerClientexDNI = async (dni) => {
