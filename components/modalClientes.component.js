@@ -5,7 +5,7 @@ const ModalClientes = (props) => {
     
     const[idCliente, setIdCliente] = useState(0)
     const [txtNombre, setTxtNombre] = useState("")
-    const [txtDNI, setTxtDNI] = useState(0)
+    const [txtDNI, setTxtDNI] = useState("")
     const [txtCorreo, setTxtCorreo] = useState("")
     const [txtTelefono, setTxtTelefono] = useState(0)
     const [txtEstado, setTxtEstado] = useState("")
@@ -52,7 +52,7 @@ const ModalClientes = (props) => {
         props.onActualizarCliente(idCliente, txtNombre, txtApellido, txtDNI, txtCorreo, txtTelefono, txtEstado)
         setTxtNombre("")
         setTxtApellido("")
-        setTxtDNI(0)
+        setTxtDNI("")
         setTxtCorreo("")
         setTxtEstado("")
         setTxtTelefono(0)
@@ -62,7 +62,7 @@ const ModalClientes = (props) => {
     const butCloseFormOnClick = () => {
         setTxtNombre("")
         setTxtApellido("")
-        setTxtDNI(0)
+        setTxtDNI("")
         setTxtCorreo("")
         setTxtEstado("")
         setTxtTelefono(0)
