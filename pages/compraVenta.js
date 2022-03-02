@@ -2,6 +2,8 @@ import CompCompraVenta from "../components/CompCompraVenta.component"
 import Footer from "../components/footer.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
+import { guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
+import { EntregarPaginaAnterior, guardarPaginasAnteriores } from '../dao/paginas_anteriores_local'
 const compraVenta = () => {
 
     // ********************************************************************************************************************************************************************************************************

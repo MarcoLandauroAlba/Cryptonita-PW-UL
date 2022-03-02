@@ -16,7 +16,6 @@ const CompCompraVenta = (props) => {
                     <div>
                         <button onClick={()=>{console.log('compra')}} className="m-1 btn btn-primary disabled btn-small col-md-3">Compra</button>
                         <button onClick={()=>{console.log('compra')}} className="m-1 btn btn-primary btn-small col-md-3">Venta</button>
-                        <button onClick={() => { props.redireccionamiento('/historialTrans') }} className="m-1 btn btn-primary btn-small col-md-4">Ver historial</button>
                     </div>
                     <h5 className="card-tittle">Compra</h5> <br />
                     <div className="card">1BTC</div><br />
