@@ -21,7 +21,7 @@ const obtenerCliente = async (id) => {
 }
 
 const obtenerClientexDNI = async (dni) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
             dni : dni
         }
@@ -29,7 +29,7 @@ const obtenerClientexDNI = async (dni) => {
 }
 
 const obtenerClientexNom = async (nombre) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
             nombre : nombre
         }
@@ -37,7 +37,7 @@ const obtenerClientexNom = async (nombre) => {
 }
 
 const obtenerClientexAp = async (apellido) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
             apellido : apellido
         }
@@ -45,7 +45,7 @@ const obtenerClientexAp = async (apellido) => {
 }
 
 const obtenerClientexCorr = async (correo) => {
-    return await db.Cliente.findOne({
+    return await db.Cliente.findAll({
         where : {
             correo : correo
         }

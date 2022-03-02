@@ -141,26 +141,22 @@ const ClientesPage = () => {
         if(boton == 'DNI'){
             const resp = await fetch(`/api/usuarios/DNI/${datos}`)
             const data = await resp.json()
-            nuevaLista.push(data.cliente)
-            setListaUsuarios(nuevaLista)
+            setListaUsuarios(data.cliente)
         }
         else if(boton == 'NOMBRE'){
             const resp = await fetch(`/api/usuarios/nombres/${datos}`)
             const data = await resp.json()
-            nuevaLista.push(data.cliente)
-            setListaUsuarios(nuevaLista)
+            setListaUsuarios(data.cliente)
         }
         else if(boton == 'APELLIDO'){
             const resp = await fetch(`/api/usuarios/apellidos/${datos}`)
             const data = await resp.json()
-            nuevaLista.push(data.cliente)
-            setListaUsuarios(nuevaLista)
+            setListaUsuarios(data.cliente)
         }
         else if(boton == 'CORREO'){
             const resp = await fetch(`/api/usuarios/correos/${datos}`)
             const data = await resp.json()
-            nuevaLista.push(data.cliente)
-            setListaUsuarios(nuevaLista)
+            setListaUsuarios(data.cliente)
         }
         // TODO: FALTA BASE DE DATOS PARA IMPLEMENTAR FUNCIONALIDAD A LOS BOTONES
 
