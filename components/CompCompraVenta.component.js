@@ -1,4 +1,5 @@
 import { Image } from "react-bootstrap"
+
 const CompCompraVenta = (props) => {
     return (
         <div className="row">
