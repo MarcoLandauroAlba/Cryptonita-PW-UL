@@ -131,11 +131,11 @@ const ProcesoRegistro2Page = () => {
     const existeCorreoEnBaseDeDatos = async (correo) => {
         const response = await fetch(`/api/clientes/${correo}`)
         const data = await response.json()
-        console.log('data', data)
+        console.log('existeCorreoEnBaseDeDatos data ', data)
         if (data.cliente == null) {
             return false
         } else {
-            true
+            return true
         }
     }
 
