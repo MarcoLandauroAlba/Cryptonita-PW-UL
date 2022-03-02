@@ -131,11 +131,11 @@ const ProcesoRegistro2Page = () => {
     const existeCorreoEnBaseDeDatos = async (correo) => {
         const response = await fetch(`/api/clientes/${correo}`)
         const data = await response.json()
-        console.log('data', data)
+        console.log('existeCorreoEnBaseDeDatos data ', data)
         if (data.cliente == null) {
             return false
         } else {
-            true
+            return true
         }
     }
 
@@ -183,14 +183,13 @@ const ProcesoRegistro2Page = () => {
         // // REVISAMOS SI EL CORREO EXISTE EN LA BASE DE DATOS
         if (!EfaltaCorreo) {
             const preguntaExiste = await existeCorreoEnBaseDeDatos(correo)
-            console.log('preguntaExiste',preguntaExiste)
-        //     setDisponible(preguntaExiste)
-        //     if(preguntaExiste){
-        //         ENodisponible = true
-        //     }
-            
-        // }else{
-        //     ENodisponible = true
+            console.log('preguntaExiste', preguntaExiste)
+            setDisponible(!preguntaExiste)
+            if (preguntaExiste) {
+                ENodisponible = true
+            } else {
+                ENodisponible = false
+            }
         }
 
         // SI INGRESA A ESTA CONDICIONAL, SIGNIFICA QUE TODO LO INGRESADO ES VALIDO PARA CREAR UNA CUENTA
@@ -229,7 +228,7 @@ const ProcesoRegistro2Page = () => {
             const dataCliente = await responseCliente.json()
             console.log('cliente recien creado: ', dataCliente)
 
-            // RedirigirAPaginaPrincipalDeEsperaConLoggeo(dataCliente.id)
+            RedirigirAPaginaPrincipalDeEsperaConLoggeo(dataCliente.id)
         }
     }
 
