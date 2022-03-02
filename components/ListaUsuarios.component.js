@@ -15,8 +15,7 @@ export default function ListaUsuarios(props) {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
+                            <th>Nombres Completos</th>
                             <th>DNI</th>
                             <th>Correo Electrónico</th>
                             <th>Número Teléfonico</th>
@@ -29,8 +28,7 @@ export default function ListaUsuarios(props) {
                             props.lista.map((usuario) => {
                                 return <tr key={usuario.id}>
                                     <td>{usuario.id}</td>
-                                    <td>{usuario.nombre}</td>
-                                    <td>{usuario.apellido}</td>
+                                    <td>{usuario.nombre + " " + usuario.apellido}</td>
                                     <td>{usuario.dni}</td>
                                     <td>{usuario.correo}</td>
                                     <td>{usuario.telefono}</td>

@@ -1,13 +1,10 @@
-import Footer from "../components/footer.component"
-import FormularioProcesoRegistro1 from "../components/FormularioProcesoRegistro1.components"
-import MenuNavegacion from "../components/menuNavegacion.component"
+import Footer from "../components/footer.component";
+import MenuNavegacion from "../components/menuNavegacion.component";
+import ModTCambio from "../components/ModTCambio.component";
 import { useEffect, useState } from 'react'
-import { guardarClienteDatosIniciales } from "../dao/cliente_local"
 
-
-const ProcesoRegistro1Page = () => {
-
-    // INICIO: EL CODIGO ESCRITO DESDE AQUI HASTA LA SIGUIENTE SEÑAL, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
+const ModificarTCambioAdmin = () => {
+     // INICIO: EL CODIGO ESCRITO DESDE AQUI HASTA LA SIGUIENTE SEÑAL, SERA COPIADO EN TODAS LAS PANTALLAS, LO QUE SE QUIERA AGREGAR, QUE SEA ABAJO =================================
     // const formatoCliente = {datos: ['id-persona','id-cliente','nombre','apellido']}
 
     //Cliente es utilizado para guardar los datos mas importantes del usuario loggeado al momento
@@ -27,9 +24,10 @@ const ProcesoRegistro1Page = () => {
         //se actualizan los valores de las variables de estado con lo guardado en el localStorage
         setCliente(parseInt(localStorage.getItem('cliente')))
         setTipoDeCliente(parseInt(localStorage.getItem('tipoCliente')))
-    }, [cliente, tipoDeCliente])
+    }, [cliente,tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
+    // FUNCION CAMBIADA EXCLUSIVAMENTE PARA ESTA PANTALLA
     const RedirigirAOtraPagina = (direccion) => {
         GuardarPaginaAnterior()
         localStorage.setItem('cliente', cliente)
@@ -52,7 +50,7 @@ const ProcesoRegistro1Page = () => {
         if (localStorage.getItem('paginasAnteriores') != null) {
             let lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
             let pagina = lista.pop()
-            if (pagina == '/procesoRegistro1') {                            // ACTUALIZAR A LA DIRECCION ACTUAL
+            if (pagina == '/OperacionesAdmin') {                                                // ACTUALIZAR A LA DIRECCION ACTUAL
                 let pagina = lista.pop()
             }
             localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
@@ -70,12 +68,12 @@ const ProcesoRegistro1Page = () => {
             lista = JSON.parse(localStorage.getItem('paginasAnteriores'))
             if (lista.length > 5) {
                 lista.shift()
-                lista.push('/procesoRegistro1')                             // ACTUALIZAR A LA DIRECCION ACTUAL
+                lista.push('/OperacionesAdmin')                                                 // ACTUALIZAR A LA DIRECCION ACTUAL
             } else {
-                lista.push('/procesoRegistro1')                             // ACTUALIZAR A LA DIRECCION ACTUAL
+                lista.push('/OperacionesAdmin')                                                 // ACTUALIZAR A LA DIRECCION ACTUAL
             }
         } else {
-            lista.push('/procesoRegistro1')                                 // ACTUALIZAR A LA DIRECCION ACTUAL
+            lista.push('/OperacionesAdmin')                                                     // ACTUALIZAR A LA DIRECCION ACTUAL
         }
         localStorage.setItem('paginasAnteriores', JSON.stringify(lista))
         RevisarListaAnteriores()
@@ -102,68 +100,21 @@ const ProcesoRegistro1Page = () => {
 
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
 
+    return <div>
+        <MenuNavegacion
+            tipoDeCliente={tipoDeCliente}
+            redireccionamiento={RedirigirAOtraPagina}
+            salir={TerminarSesionActiva}
+            ubicacion={'OperacionesAdmin'}
+        />
+        <ModTCambio
+            tipoDeCliente={tipoDeCliente}
+        />
 
-
-
-    const [faltaNombre, setFaltaNombre] = useState(false)
-    const [faltaApellido, setFaltaApellido] = useState(false)
-    const [faltaDni, setFaltaDni] = useState(false)
-
-    //  EN ESTA FUNCION SE GUARDARAN LOS DATOS EN EL LOCALSTORAGE
-    const GuardarClienteOnHandler = (nombre, apellido, dni) => {
-        // PRIMERO CORROBORAMOS SI TODOS LOS CAMPOS HAN SIDO RELLENADOS
-        let EfaltaNombre = true
-        let EfaltaApellido = true
-        let EfaltaDni = true
-        if (nombre == '') {
-            setFaltaNombre(true)
-        } else {
-            setFaltaNombre(false)
-            EfaltaNombre = false
-        }
-        if (apellido == '') {
-            setFaltaApellido(true)
-        } else {
-            setFaltaApellido(false)
-            EfaltaApellido = false
-        }
-        if (dni == undefined) {
-            setFaltaDni(true)
-        } else {
-            if (dni.toString().length == 8) {
-                setFaltaDni(false)
-                EfaltaDni = false
-            } else {
-                setFaltaDni(true)
-            }
-        }
-        // SI TODOS LOS CAMPOS HAN SIDO RELLENADOS CORRECTAMENTE...
-        if (EfaltaNombre == false && EfaltaApellido == false && EfaltaDni == false) {
-            // SE GUARDAN LOS DATOS EN EL LOCALSTORAGE
-            guardarClienteDatosIniciales(nombre, apellido, dni)
-            // SE REDIRIGE A PROCESOREGISTRO2
-            RedirigirAOtraPagina("/procesoRegistro2")
-        }
-    }
-
-    return (
-        <div>
-            <MenuNavegacion
-                tipoDeCliente={tipoDeCliente}
-                redireccionamiento={RedirigirAOtraPagina}
-                salir={TerminarSesionActiva}
-                ubicacion={'procesoRegistro1'}
-            />
-            <FormularioProcesoRegistro1
-                guardar={GuardarClienteOnHandler}
-                volver={VolverAPaginaAnterior}
-                VerFaltaNombre={faltaNombre}
-                VerFaltaApellido={faltaApellido}
-                VerFaltaDni={faltaDni}
-            />
-            <Footer
-                redireccionamiento={RedirigirAOtraPagina}
-            />
-        </div>)
+        <Footer 
+            redireccionamiento={RedirigirAOtraPagina}
+        />
+    </div>
 }
-export default ProcesoRegistro1Page
+
+export default ModificarTCambioAdmin

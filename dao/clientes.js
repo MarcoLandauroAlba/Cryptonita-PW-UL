@@ -10,7 +10,6 @@ const guardarCliente = async (estado,telefono,contraseña,correo,nombre,apellido
         apellido: apellido,
         dni: dni
     })
-    return admin
 }
 
 const obtenerCliente = async (id) => {

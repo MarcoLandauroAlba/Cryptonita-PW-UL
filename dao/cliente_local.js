@@ -7,8 +7,7 @@ const guardarClienteDatosIniciales = (nombre, apellido, dni) => {
     localStorage.setItem("fpr1",JSON.stringify(cliente))
 }
 const obtenerClienteDatosIniciales = () => {
-    const clienteStr = localStorage.getItem("fpr1")
-    return JSON.parse(clienteStr)
+    return JSON.parse(localStorage.getItem("fpr1"))
 }
 
 export { guardarClienteDatosIniciales,obtenerClienteDatosIniciales }
