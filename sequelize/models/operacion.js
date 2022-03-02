@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Operacion.init({
     id_cliente : DataTypes.INTEGER,
-    fecha: DataTypes.TEXT,
     tipo: DataTypes.BOOLEAN,
     comprabtc: DataTypes.INTEGER,
     ventabtc: DataTypes.INTEGER,

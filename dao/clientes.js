@@ -56,7 +56,7 @@ const obtenerClientexCorr = async (correo) => {
 const obtenerClientes = async () => {
     const admins = await db.Cliente.findAll({
         order : [
-            ["id", "DESC"]
+            ["id", "ASC"]
         ]
     })
     return admins

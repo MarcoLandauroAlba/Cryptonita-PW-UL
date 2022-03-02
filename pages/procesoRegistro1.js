@@ -102,19 +102,9 @@ const ProcesoRegistro1Page = () => {
 
     //ESPACIO PARA ESCRIBIR CODIGO EXTRA:
 
-
-
     const GuardarClienteOnHandler = (nombre, apellido, dni) => {
         guardarClienteDatosIniciales(nombre, apellido, dni)
         RedirigirAOtraPagina("/procesoRegistro2")
-    }
-
-    const NombresAGuardar = (nombre, apellido) => {
-        const nombreAGuardar = {
-            nombre : nombre,
-            apellido : apellido
-        }
-        localStorage.setItem("nombreAGuardar", JSON.stringify(nombreAGuardar))
     }
 
     return (
