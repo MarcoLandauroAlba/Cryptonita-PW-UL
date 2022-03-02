@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       estado: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

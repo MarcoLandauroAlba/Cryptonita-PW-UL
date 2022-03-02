@@ -9,7 +9,8 @@ const guardarOperacion = async (idcliente,tipo,comprabtc,ventabtc,montosoles,mon
         monto_soles: montosoles,
         monto_btc: montobtc,
         billetera: billetera,
-        cuentabanco: cuentabcp
+        cuentabanco: cuentabcp,
+        estado:false
     })
 }
 
@@ -22,6 +23,13 @@ const obtenerOperaciones = async () => {
     return operaciones
 }
 
+const obtenerOperacionxIdcliente = async (idcliente) => {
+    return await db.Operacion.findAll({
+        where : {
+            id_cliente : idcliente
+        }
+    })
+}
 
 const obtenerOperacion = async (id) => {
     return await db.Operacion.findOne({
@@ -40,4 +48,4 @@ const editarOperacion = async (operacion) => {
     })
 }
 
-export { guardarOperacion, obtenerOperaciones, obtenerOperacion, editarOperacion }
+export { guardarOperacion, obtenerOperaciones, obtenerOperacion, editarOperacion, obtenerOperacionxIdcliente }

@@ -29,6 +29,10 @@ const administradoresIdHandler = async (req, res) => {
             msg: "",
             administrador:admin
         })
+    }else{
+        res.status(400).json({
+            msg: "Método no definido"
+        })
     }
 }
 

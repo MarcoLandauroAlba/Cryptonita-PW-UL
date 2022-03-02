@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     monto_btc: DataTypes.INTEGER,
     billetera: DataTypes.TEXT,
     cuentabanco: DataTypes.TEXT,
-    estado: DataTypes.INTEGER
+    estado: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Operacion',

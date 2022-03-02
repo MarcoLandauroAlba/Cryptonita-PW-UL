@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Modal, Button} from 'react-bootstrap';
+import { Image } from "react-bootstrap"
 
 const ModalClienteP3V = (props) => {
     const[idCliente, setIdCliente] = useState(0)
