@@ -83,9 +83,6 @@ const ModalClienteP3V = (props) => {
             <form>
                 <div>
                     <label className="form-label">
-                        Cuenta BCP de la empresa: 32454482218612
-                    </label>
-                    <label className="form-label">
                         Número de transacción: {idOperacion}
                     </label>
                     <Image 

@@ -83,9 +83,6 @@ const ModalClienteP3V = (props) => {
             <form>
                 <div>
                     <label className="form-label">
-                        Billetera de la empresa: 65898191
-                    </label>
-                    <label className="form-label">
                         Número de transacción: {idOperacion}
                     </label>
                     <Image 

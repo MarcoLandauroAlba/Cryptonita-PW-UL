@@ -1,24 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Modal, Button} from 'react-bootstrap';
 
-const ModalClienteP2V = (props) => {
-    const[idOperacion, setOperacion] = useState(0)
-
-    useEffect(()=> {
-        if(props.idOperacion != null){
-            setOperacion(props.idOperacion.id)
-        }
-    }, [props.idOperacion]) 
+const ModalClienteP1V = (props) => {
+    
+    const [txtCuenta, setTxtCuenta] = useState("")
+    
+    const CuentaOnChange = (event) => {
+        setTxtCuenta(event.target.value)
+    }
     
     const butGuardarOnClick = () => {
+        props.almacenarCuenta(txtCuenta)
         props.onOcultar()
-        props.habilitarModal3C(true)
+        props.habilitarModal2(Vtrue)
     }
 
     const butCloseFormOnClick = () => {
+        setTxtCuenta("")
+        props.almacenarCuenta("")
         props.onOcultar()
     }
-
     
     return <Modal show={ props.onMostrar } onHide={ butCloseFormOnClick }>
         <Modal.Header closeButton>
@@ -29,11 +30,10 @@ const ModalClienteP2V = (props) => {
             <form>
                 <div>
                     <label className="form-label">
-                        Cuenta BCP de la empresa: 32454482218612
+                        Cuenta BCP:
                     </label>
-                    <label className="form-label">
-                        Número de transacción: {idOperacion}
-                    </label>
+                    <input id="TextInput" className="form-control" type="text" onChange={ CuentaOnChange } defaultValue={ txtCuenta }>
+                    </input>
                 </div>
             </form>
         </Modal.Body>
@@ -45,4 +45,4 @@ const ModalClienteP2V = (props) => {
     </Modal>
 }
 
-export default ModalClienteP2V
+export default ModalClienteP1V
