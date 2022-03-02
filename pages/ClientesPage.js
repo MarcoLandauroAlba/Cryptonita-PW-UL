@@ -150,7 +150,6 @@ const ClientesPage = () => {
 
     const buscarUsuarios = async (datos, boton) => {
         //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
-        let nuevaLista = []
         if (boton == 'DNI') {
             const resp = await fetch(`/api/usuarios/DNI/${datos}`)
             const data = await resp.json()
