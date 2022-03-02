@@ -5,13 +5,13 @@ const ModalClienteP3V = (props) => {
     const[idCliente, setIdCliente] = useState(0)
     const[idOperacion, setOperacion] = useState(0)
     //TODOS: TRUE:VENTA, FALSE:COMPRA
-    const [BTipo, setBTipo] = useState(true)
+    const [BTipo, setBTipo] = useState(false)
     const [Comprabtc, setTxtComprabtc] = useState(0)
     const [Ventabtc, setTxtVentabtc] = useState(0)
     const [MontoSoles, setMontoSoles] = useState(0)
     const [MontoBTC, setMontoBTC] = useState(0)
-    const [txtBilletera, setTxtBilletera] = useState("65898191")
-    const [Cuentabanco, setTxtCuentabanco] = useState("")
+    const [txtBilletera, setTxtBilletera] = useState("")
+    const [Cuentabanco, setTxtCuentabanco] = useState("32454482218612")
     const [txtEstado, setEstado] = useState(false)
 
     useEffect(()=> {
@@ -62,13 +62,13 @@ const ModalClienteP3V = (props) => {
 
     const butCloseFormOnClick = () => {
         setIdCliente(0)
-        setBTipo(true)
+        setBTipo(false)
         setTxtComprabtc(0)
         setTxtVentabtc(0)
         setMontoSoles(0)
         setMontoBTC(0)
-        setTxtBilletera("65898191")
-        setTxtCuentabanco("")
+        setTxtBilletera("")
+        setTxtCuentabanco("32454482218612")
         setEstado("")
         props.onOcultar()
     }
@@ -83,7 +83,7 @@ const ModalClienteP3V = (props) => {
             <form>
                 <div>
                     <label className="form-label">
-                        Billetera de la empresa: 65898191
+                        Cuenta BCP de la empresa: 32454482218612
                     </label>
                     <label className="form-label">
                         Número de transacción: {idOperacion}
