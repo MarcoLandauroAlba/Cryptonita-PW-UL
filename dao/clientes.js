@@ -52,6 +52,15 @@ const obtenerClientexCorr = async (correo) => {
     })
 }
 
+const obtenerClientexCorreoYContrasena = async(correo, contrasena) => {
+    return await db.Cliente.findOne({
+        where: {
+            correo: correo,
+            contraseña: contrasena
+        }
+    })
+}
+
 const obtenerClientes = async () => {
     const admins = await db.Cliente.findAll({
         order : [
@@ -85,4 +94,4 @@ const editarOperacion = async (cliente) => {
     })
 }
 
-export {guardarCliente, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI}
+export {guardarCliente, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI, obtenerClientexCorreoYContrasena}

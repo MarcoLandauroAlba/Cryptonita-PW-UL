@@ -1,12 +1,14 @@
-import { guardarCliente, obtenerCliente, obtenerClientes, editarOperacion } from "../../../dao/clientes"
+import { guardarCliente, obtenerCliente, obtenerClientes, editarOperacion, obtenerClientexCorreoYContrasena } from "../../../dao/clientes"
 
 const clientesIdHandler = async (req, res) => {
-    if (req.method == "GET") {
-        // const data = req.query
-        // const cliente = await obtenerCliente(data.id)
+    if (req.method == "OPTIONS") {
+        const data = JSON.parse(req.body)
+        const cliente = await obtenerClientexCorreoYContrasena(data.correo,data.contraseña) 
         res.json({
-            msg: "hola"
+            msg: 'OPTIONS',
+            cliente: cliente
         })
+
     }else if(req.method == "SHOW"){
         const clientes = await obtenerClientes()
         res.json({
