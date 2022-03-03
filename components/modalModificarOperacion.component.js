@@ -105,8 +105,7 @@ const ModalModificarOperacion = (props) => {
         setEstadoOperacion(false)
         props.onOcultar()
     }
-    return (
-        <Modal show={props.onMostrar} onHide={butCloseFormOnClick}>
+    return <Modal show={props.onMostrar} onHide={butCloseFormOnClick}>
             <Modal.Header closeButton>
                 <Modal.Title>Operaciones</Modal.Title>
             </Modal.Header>
@@ -224,6 +223,5 @@ const ModalModificarOperacion = (props) => {
                 <Button variant="primary" onClick={guardarOnClick}>Guardar</Button>
             </Modal.Footer>
         </Modal>
-    )
 }
 export default ModalModificarOperacion
