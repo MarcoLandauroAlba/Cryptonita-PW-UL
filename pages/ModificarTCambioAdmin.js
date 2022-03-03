@@ -137,14 +137,12 @@ const ModificarTCambioAdmin = () => {
             setValorCripto(data.asks[99][0])
         }
         AsyncUseEffect()
-        console.log('SE EJECUTA',valorCripto)
     }, [seconds])
 
     useEffect(() => {
-        console.log('entro')
         const interval = setInterval(() => {
             setSeconds(seconds => seconds + 1);
-        }, 30000);//Actualizar valor cada minuto
+        }, 30000);//Actualizar valor cada 30 segundos
         return () => clearInterval(interval);
     }, [seconds]);
 

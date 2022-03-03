@@ -36,7 +36,7 @@ export default function FormularioIniciarSesion(props) {
                             <label htmlFor='correo' className="mt-2">Correo:</label>
                             <input type="text" className="form-control mt-2" id="correo" defaultValue={correo} onChange={setCorreoOnChange} />
                             <label htmlFor='contrasena' className="mt-2">Contraseña:</label>
-                            <input type="text" className="form-control mt-2" id="contrasena" defaultValue={contrasena} onChange={setContrasenaOnChange} />
+                            <input type="password" className="form-control mt-2" id="contrasena" defaultValue={contrasena} onChange={setContrasenaOnChange} />
                             <div className="text-center">
                                 <button
                                     className="btn btn-primary mt-4"

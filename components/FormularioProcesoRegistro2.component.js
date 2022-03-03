@@ -58,7 +58,6 @@ export default function FormularioProcesoRegistro2(props) {
                                         {/* AQUI SI DETERMINA SI FALTA INGRESAR DATOS EN CONTRASENA O NO */}
                                         {
                                             (() => {
-                                                console.log('props.VerFaltaCorreo', props.VerFaltaCorreo)
                                                 if (props.VerFaltaCorreo) {
                                                     return (
                                                         <div className="row my-3 border border-danger">
@@ -130,7 +129,6 @@ export default function FormularioProcesoRegistro2(props) {
                                         {/* AQUI SI DETERMINA SI FALTA INGRESAR DATOS EN CONTRASENA O NO */}
                                         {
                                             (() => {
-                                                console.log('props.VerFaltaContraOri', props.VerFaltaContraOri)
                                                 if (props.VerFaltaContraOri) {
                                                     return (
                                                         <div className="row my-3 border border-danger">
@@ -139,7 +137,7 @@ export default function FormularioProcesoRegistro2(props) {
                                                                 <label htmlFor='contrasena'>Contraseña:</label>
                                                             </div>
                                                             <div className="col my-1">
-                                                                <input type="text" className="form-control" id='contrasena' defaultValue={contra} onChange={setContraOnChanged} />
+                                                                <input type="password" className="form-control" id='contrasena' defaultValue={contra} onChange={setContraOnChanged} />
                                                             </div>
                                                         </div>
                                                     )
@@ -150,7 +148,7 @@ export default function FormularioProcesoRegistro2(props) {
                                                                 <label htmlFor='contrasena'>Contraseña:</label>
                                                             </div>
                                                             <div className="col my-1">
-                                                                <input type="text" className="form-control" id='contrasena' defaultValue={contra} onChange={setContraOnChanged} />
+                                                                <input type="password" className="form-control" id='contrasena' defaultValue={contra} onChange={setContraOnChanged} />
                                                             </div>
                                                         </div>
                                                     )
@@ -161,7 +159,6 @@ export default function FormularioProcesoRegistro2(props) {
                                         {/* AQUI SI DETERMINA SI FALTA INGRESAR DATOS EN CONTRASENA REPETICION O NO */}
                                         {
                                             (() => {
-                                                console.log('props.VerFaltaContraRep', props.VerFaltaContraRep)
                                                 if (props.VerFaltaContraRep) {
                                                     return (
                                                         <div className="row my-3 border border-danger">
@@ -170,7 +167,7 @@ export default function FormularioProcesoRegistro2(props) {
                                                                 <label htmlFor='repetir'>Repetir contraseña:</label>
                                                             </div>
                                                             <div className="col my-1">
-                                                                <input type="text" className="form-control" id='repetir' defaultValue={repContra} onChange={setRepContraOnChanged} />
+                                                                <input type="password" className="form-control" id='repetir' defaultValue={repContra} onChange={setRepContraOnChanged} />
                                                             </div>
                                                         </div>
                                                     )
@@ -181,7 +178,7 @@ export default function FormularioProcesoRegistro2(props) {
                                                                 <label htmlFor='repetir'>Repetir contraseña:</label>
                                                             </div>
                                                             <div className="col my-1">
-                                                                <input type="text" className="form-control" id='repetir' defaultValue={repContra} onChange={setRepContraOnChanged} />
+                                                                <input type="password" className="form-control" id='repetir' defaultValue={repContra} onChange={setRepContraOnChanged} />
                                                             </div>
                                                         </div>
                                                     )
@@ -192,7 +189,6 @@ export default function FormularioProcesoRegistro2(props) {
                                         {/* AQUI SI DETERMINA SI FALTA INGRESAR DATOS EN TELEFONO O NO */}
                                         {
                                             (() => {
-                                                console.log('props.VerFaltaTelefono', props.VerFaltaTelefono)
                                                 if (props.VerFaltaTelefono) {
                                                     return (
                                                         <div className="row my-3 border border-danger">

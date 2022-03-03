@@ -127,7 +127,7 @@ const OperacionesAdminPage = () => {
     const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
 
     const obtenerOperadoresHTTP = async () => {
-        let response = await fetch("/api/operacion_extraidas/")
+        let response = await fetch("/api/operacion_extraidas")
         const data = await response.json()
         return data
     }
@@ -155,12 +155,12 @@ const OperacionesAdminPage = () => {
 
     const actualizarProcesoHandler = async (idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {    
         const operacion ={
-            idcliente: idcliente,
+            id_cliente: idcliente,
             tipo: tipo,
             comprabtc: comprabtc,
             ventabtc: ventabtc,
-            montosoles: montosoles,
-            montobtc: montobtc,
+            monto_soles: montosoles,
+            monto_btc: montobtc,
             billetera: billetera,
             cuentabcp: cuentabcp,
             estado: estado
@@ -182,14 +182,13 @@ const OperacionesAdminPage = () => {
     const editarOperacionHandler = async (id) => {
         const resp = await fetch(`/api/operacion_extraidas/${id}`)
         const data = await resp.json()
-        console.log(data)
         setOperacion(data.operacion)
         setSeDebeMostrarModal(true)
     }
 
     const recargarLista = async () => {
         const dataOperadores = await obtenerOperadoresHTTP()
-        setListaOperacionesM(dataOperadores.clientes)
+        setListaOperacionesM(dataOperadores.operaciones)
     }
 
     return (
@@ -203,6 +202,7 @@ const OperacionesAdminPage = () => {
             <OpcionesOperacionesAdmin
                 tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
                 buscarOperaciones={buscarOperaciones}
+                lista={operacionesM}
             />
             <ListaOperaciones
                 tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
@@ -219,7 +219,7 @@ const OperacionesAdminPage = () => {
             <ModalModificarOperacion
                 onOcultar={ocultar}
                 onMostrar={seDebeMostrarModal}
-                onActualizarCliente={actualizarProcesoHandler}
+                onActualizarProceso={actualizarProcesoHandler}
                 operacion={operacion}
             />
         </div>

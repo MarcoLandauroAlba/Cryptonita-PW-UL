@@ -12,7 +12,6 @@ const ModalClientes = (props) => {
     const [txtApellido, setTxtApellido] = useState("")
 
     useEffect(()=> {
-        console.log(props.cliente)
         if(props.cliente != null){
             setIdCliente(props.cliente.id)
             setTxtNombre(props.cliente.nombre)

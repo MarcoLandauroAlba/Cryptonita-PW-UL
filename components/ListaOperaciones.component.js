@@ -29,6 +29,9 @@ export default function ListaOperaciones(props) {
                         {
                             props.lista.map((operacion) => {
                                 return <tr key={operacion.id}>
+                                    {
+                                        console.log(operacion)
+                                    }
                                     <td>{operacion.id}</td>
                                     <td>{operacion.id_cliente}</td>
                                     <td>{operacion.tipo}</td>

@@ -178,8 +178,9 @@ const ClientesPage = () => {
         setSeDebeMostrarModal(false)
     }
 
-    const actualizarClienteHandler = async (nombre, apellido, dni, correo, telefono, estado) => {
+    const actualizarClienteHandler = async (id, nombre, apellido, dni, correo, telefono, estado) => {
         const cliente = {
+            id: id,
             nombre: nombre,
             apellido: apellido,
             dni: dni,
@@ -204,7 +205,6 @@ const ClientesPage = () => {
     const editarClienteHandler = async (id) => {
         const resp = await fetch(`/api/usuarios/${id}`)
         const data = await resp.json()
-        console.log(data)
         setUsuario(data.cliente)
         setSeDebeMostrarModal(true)
     }

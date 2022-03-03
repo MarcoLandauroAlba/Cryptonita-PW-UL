@@ -1,6 +1,6 @@
 import { obtenerOperacionxIdcliente } from "../../../../../dao/operaciones"
 
-const operacionIDClienteHandler = async (req, res) => {
+const OperacionIDClienteHandler = async (req, res) => {
     if(req.method == "GET"){
         const data = req.query
         const operacion = await obtenerOperacionxIdcliente(data.idcliente)
