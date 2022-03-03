@@ -2,8 +2,8 @@ import { Image } from "react-bootstrap"
 import { useState } from 'react'
 
 const CompCompraVenta = (props) => {
-    const[cComp,setCComp]= useState()
-    const[cVent,setCVent]= useState()
+    const[cComp,setCComp]= useState(0)
+    const[cVent,setCVent]= useState(0)
     //const[calcC,setCalcC]= useState()
     
     const setCCompOnChange = (event) => {
