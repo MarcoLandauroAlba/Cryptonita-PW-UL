@@ -139,14 +139,11 @@ const OperacionesAdminPage = () => {
 
     const buscarOperaciones = async (datos, boton) => {
         //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
-        let nuevaLista = []
         if (boton == 'IDCLIENTE') {
             const resp = await fetch(`/api/operacion_extraidas/idcliente/${datos}`)
             const data = await resp.json()
             setListaOperacionesM(data.operacion)
         }
-        // TODO: FALTA BASE DE DATOS PARA IMPLEMENTAR FUNCIONALIDAD A LOS BOTONES
-
     }
 
     const ocultar = () => {
@@ -183,6 +180,8 @@ const OperacionesAdminPage = () => {
         const resp = await fetch(`/api/operacion_extraidas/${id}`)
         const data = await resp.json()
         setOperacion(data.operacion)
+        console.log('holaaaaaaaS')
+        console.log(operacion)
         setSeDebeMostrarModalO(true)
     }
 
@@ -219,7 +218,7 @@ const OperacionesAdminPage = () => {
             <ModalModificarOperacion
                 onOcultar={ocultar}
                 onMostrar={seDebeMostrarModalO}
-                onActualizarProceso={actualizarProcesoHandler}
+                onActualizarOperacion={actualizarProcesoHandler}
                 operacion={operacion}
             />
         </div>
