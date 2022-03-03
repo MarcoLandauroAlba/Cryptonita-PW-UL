@@ -135,15 +135,7 @@ const ModalModificarOperacion = (props) => {
                             Tipo de transacción:
                         </label>
                         <fieldset disabled>
-                          { /* {
-                                (() => {
-                                    if (tipo == true) {
-                                        return (<input id="disabledTextInput" className="form-control" type="text">Venta</input>)
-                                    } else {
-                                        return (<input id="disabledTextInput" className="form-control" type="text">Compra</input>)
-                                    }
-                                })()
-                            }*/}
+                          <input id="disabledTextInput" className="form-control" type="text" onChange={ TipoOnChange } defaultValue={ tipo }></input>
                         </fieldset>
                     </div>
                     <div>
