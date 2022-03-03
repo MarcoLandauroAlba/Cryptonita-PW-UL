@@ -82,10 +82,10 @@ const ModalModificarOperacion = (props) => {
     
     const guardarOnClick = () => {
         const tipoconvert = false
-        if(tipo == "compra"){
+        if(tipo == "Compra"){
             tipoconvert = false
         }
-        else if(tipo == "venta"){
+        else if(tipo == "Venta"){
             tipoconvert = true
         }
         props.onActualizarOperacion(idOperacion,idCliente,tipoconvert,compraBtc,ventaBtc,montoSoles,montoBtc,billetera,cuentaBanco,estadoOperacion)
