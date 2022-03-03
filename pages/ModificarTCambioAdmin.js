@@ -144,7 +144,7 @@ const ModificarTCambioAdmin = () => {
         console.log('entro')
         const interval = setInterval(() => {
             setSeconds(seconds => seconds + 1);
-        }, 60000);//Actualizar valor cada minuto
+        }, 30000);//Actualizar valor cada minuto
         return () => clearInterval(interval);
     }, [seconds]);
 

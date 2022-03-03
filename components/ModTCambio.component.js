@@ -13,14 +13,19 @@ export default function ModTCambio(props) {
     if (props.tipoDeCliente == 1) {
         return <div className="row">
             <div>
-                Precio BTC Compra(El valor se actualiza cada minuto): 
+                Precio BTC Compra: 
                 {
                     (() => {
-                        return formatter.format(props.valor)
+                        return "$"+parseFloat(props.valor)
                     })()
                 }<br/>
-                Precio BTC Venta : $44,000.00
-
+                Precio BTC Venta:
+                {
+                    (() => {
+                        return "$"+ (parseFloat(props.valor)*(1+0.005))
+                    })()
+                }<br/>
+                Ambos valores se actualizan cada 30s
             </div>
         </div>
     } else {
