@@ -19,7 +19,7 @@ export default function Nosotros() {
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
     // DIRECCION DE LA PAGINA ACTUAL
-    const direccionActual = '/Nosotros'
+    const direccionActual = '/nosotros'
     //  SOLO SIRVE PARA EL PROPS ubicacion
     const ubicacionActual = 'nosotros'
 
