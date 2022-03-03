@@ -1,48 +1,60 @@
-import { useEffect, useState } from 'react';
-import { Modal, Button} from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
-const ModalClienteP2V = (props) => {
-    const[idOperacion, setOperacion] = useState(0)
-
-    useEffect(()=> {
-        if(props.idOperacion != null){
-            setOperacion(props.idOperacion.id)
+const ModalClienteP2C = (props) => {
+    if (props.onMostrar) {
+        const butGuardarOnClick = () => {
+            props.almacenarOperacion(
+                false,
+                props.bitcoins,
+                0,
+                props.soles,
+                0,
+                props.billetera,
+                '32454482218612',
+                false
+            )
+            props.onOcultar()
+            props.habilitarModal3C()
         }
-    }, [props.idOperacion]) 
-    
-    const butGuardarOnClick = () => {
-        props.onOcultar()
-        props.habilitarModal3C(true)
-    }
 
-    const butCloseFormOnClick = () => {
-        props.onOcultar()
-    }
+        const butCloseFormOnClick = () => {
+            props.onOcultar()
+        }
 
-    
-    return <Modal show={ props.onMostrar } onHide={ butCloseFormOnClick }>
-        <Modal.Header closeButton>
-            <Modal.Title>Paso 2 de 3</Modal.Title>
-        </Modal.Header>
 
-        <Modal.Body>
-            <form>
+        return <Modal show={props.onMostrar} onHide={butCloseFormOnClick}>
+            <Modal.Header closeButton>
+                <Modal.Title>Paso 2 de 3</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
                 <div>
-                    <label className="form-label">
+                    <div className="h3 my-3">
                         Cuenta BCP de la empresa: 32454482218612
-                    </label>
-                    <label className="form-label">
-                        Número de transacción: {idOperacion}
-                    </label>
+                    </div>
+                    <div className="h4 mt-3">
+                        Número de transacción: {props.idOperacion}
+                    </div>
+                    <div className="h6 mt-3">
+                        Cantidad de Bincoins comprados: ฿/.{props.bitcoins}
+                    </div>
+                    <div className="h6 mt-3">
+                        Costo de la transaccion: S/.{props.soles}
+                    </div>
                 </div>
-            </form>
-        </Modal.Body>
+            </Modal.Body>
 
-        <Modal.Footer>
-            <Button variant="primary"
-            onClick={ butGuardarOnClick }>Confirmar</Button>
-        </Modal.Footer>
-    </Modal>
+            <Modal.Footer>
+                <Button variant="primary"
+                    onClick={butGuardarOnClick}>Confirmar transaccion</Button>
+            </Modal.Footer>
+        </Modal>
+    } else {
+        console.log('ModalClienteP2C fuera')
+        return <></>
+    }
+
+
 }
 
-export default ModalClienteP2V
+export default ModalClienteP2C

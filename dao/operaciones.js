@@ -1,7 +1,17 @@
 const db = require("../sequelize/models")
 
-const guardarOperacion = async (idcliente,tipo,comprabtc,ventabtc,montosoles,montobtc,billetera,cuentabcp) => {
+const guardarOperacion = async (idOperacion, idcliente,tipo,comprabtc,ventabtc,montosoles,montobtc,billetera,cuentabcp) => {
+    console.log('idOperacion',idOperacion)
+    console.log('idcliente',idcliente)
+    console.log('tipo',tipo)
+    console.log('comprabtc',comprabtc)
+    console.log('ventabtc',ventabtc)
+    console.log('montosoles',montosoles)
+    console.log('montobtc',montobtc)
+    console.log('billetera',billetera)
+    console.log('cuentabcp',cuentabcp)
     await db.Operacion.create({
+        id: idOperacion,
         id_cliente : idcliente,
         tipo: tipo,
         comprabtc: comprabtc,

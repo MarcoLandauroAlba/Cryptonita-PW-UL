@@ -12,16 +12,16 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       comprabtc: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DOUBLE
       },
       ventabtc: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DOUBLE
       },
       monto_soles: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DOUBLE
       },
       monto_btc: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DOUBLE
       },
       billetera: {
         type: Sequelize.TEXT
