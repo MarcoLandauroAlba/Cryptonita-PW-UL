@@ -36,7 +36,7 @@ const BloqueNosotros = (props) => {
                 </Card.Body>
             </Card>
             <Card style={{ width: '18rem' }} className="m-2  col-lg-3 col-sm-6">
-                <Card.Img variant="top" src="https://i.pinimg.com/236x/32/28/d3/3228d36a72d1dd13a7580e34949d8185.jpg" />
+                <Card.Img variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlZZjrTfJH9VfA2zA6tpz3gAIV8tE3NOyhQ&usqp=CAU" />
                 <Card.Body>
                     <Card.Title>Jean Pierre Soto Tipacti</Card.Title>
                     <Card.Text>

@@ -77,7 +77,7 @@ const ModalModificarOperacion = (props) => {
     }
     
     const guardarOnClick = () => {
-        props.onActualizarOperacion(idCliente,tipo,compraBtc,ventaBtc,montoSoles,montoBtc,billetera,cuentaBanco,estadoOperacion)
+        props.onActualizarProceso(idOperacion,idCliente,tipo,compraBtc,ventaBtc,montoSoles,montoBtc,billetera,cuentaBanco,estadoOperacion)
         setIdOperacion(0)
         setIdCliente(0)
         setTipo(true)
@@ -135,7 +135,7 @@ const ModalModificarOperacion = (props) => {
                             Tipo de transacción:
                         </label>
                         <fieldset disabled>
-                            {
+                          { /* {
                                 (() => {
                                     if (tipo == true) {
                                         return (<input id="disabledTextInput" className="form-control" type="text">Venta</input>)
@@ -143,7 +143,7 @@ const ModalModificarOperacion = (props) => {
                                         return (<input id="disabledTextInput" className="form-control" type="text">Compra</input>)
                                     }
                                 })()
-                            }
+                            }*/}
                         </fieldset>
                     </div>
                     <div>
