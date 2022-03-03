@@ -1,5 +1,7 @@
-export default function bloqueHistorialTrans (props) {
-    return <div>
+const BloqueHistorialTrans = (props) => {
+
+    if (props.tipoDeCliente == 2) {
+        return <div>
             <h3 className="mt-3">Listado de Operaciones</h3>
             <div className="table-responsive">
                 <table className="table mt-4">
@@ -18,7 +20,7 @@ export default function bloqueHistorialTrans (props) {
                             <th className="text-center">Estado</th>
                         </tr>
                     </thead>
-                    <tbody> 
+                    <tbody>
                         {
                             props.lista.map((operacion) => {
                                 return <tr className='align-middle' key={operacion.id}>
@@ -35,7 +37,7 @@ export default function bloqueHistorialTrans (props) {
                                     <td className="text-center">{operacion.billetera}</td>
                                     <td className="text-center">{operacion.cuentabanco}</td>
                                     <td className="text-center">{operacion.createdAt}</td>
-                                    <td className="text-center">{operacion.estado}</td> 
+                                    <td className="text-center">{operacion.estado}</td>
                                 </tr>
                             })
                         }
@@ -43,4 +45,9 @@ export default function bloqueHistorialTrans (props) {
                 </table>
             </div>
         </div>
+    } else {
+        return <></>
+    }
+
 }
+export default BloqueHistorialTrans

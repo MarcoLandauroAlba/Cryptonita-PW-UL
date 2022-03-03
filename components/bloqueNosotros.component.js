@@ -1,4 +1,4 @@
-import { Button, Card, Image } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 /*
 props Utilizados:
 - volver: Sirve para regresar a la page anterior mas proxima (funciona como un stack)

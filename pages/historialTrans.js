@@ -1,5 +1,5 @@
 import Footer from "../components/footer.component"
-import bloqueHistorialTrans from "../components/bloqueHistorialTrans.component"
+import BloqueHistorialTrans from "../components/bloqueHistorialTrans.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
 import { guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
@@ -131,7 +131,7 @@ const HistorialTrans = () => {
                 salir={TerminarSesionActiva}
                 ubicacion={ubicacionActual}
             />
-            <bloqueHistorialTrans
+            <BloqueHistorialTrans
                 tipoDeCliente={tipoDeCliente}
                 lista={operacionesM}
             />
