@@ -8,6 +8,15 @@ const OpcionesOperacionesAdmin = (props) => {
 
     const [datosIdCliente, setDatosIdCliente] = useState()
 
+    // DEVUELVE LA CANTIDAD DE BITCOINS UTILIZADA EN LAS LISTAS MOSTRADAS
+    const sumaMontos = () => {
+        const suma = 0
+        for (let ope of props.lista){
+            suma += ope.monto_btc
+        }
+        return suma
+    }
+
     const setDatosOnChangeIdCliente = (event) => {
         setDatosIdCliente(event.target.value)
     }
@@ -39,19 +48,14 @@ const OpcionesOperacionesAdmin = (props) => {
                         </form>
                     </div>
                     <div className="col-md-6">
-                        <form>
-                            <label className="mx-2 h5" >Monto total operado en BitCoins:</label>
-                            {/* <div className="d-flex justify-content-end">
-                                <input
-                                    className="mx-2"
-                                    type="text"
-                                    placeholder="Nombre"
-                                    name="segundo"
-                                    onChange={setDatosOnChangeNOMBRE}
-                                    defaultValue={datosNOMBRE}
-                                />
-                            </div> */}
-                        </form>
+                        <div>
+                            <h5 className="mx-2" >
+                                Monto total operado en BitCoins: 
+                                {(()=>{
+                                    return sumaMontos()
+                                })()}
+                            </h5>
+                        </div>
                     </div>
                 </div>
                 <div className="col-md-1"></div>

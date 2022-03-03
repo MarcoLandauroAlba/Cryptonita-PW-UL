@@ -203,6 +203,7 @@ const OperacionesAdminPage = () => {
             <OpcionesOperacionesAdmin
                 tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
                 buscarOperaciones={buscarOperaciones}
+                lista={operacionesM}
             />
             <ListaOperaciones
                 tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
