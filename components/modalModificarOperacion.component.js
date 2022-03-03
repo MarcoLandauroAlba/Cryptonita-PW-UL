@@ -77,7 +77,18 @@ export default function ModalModificarOperacion(props) {
     }
     
     const guardarOnClick = () => {
-        props.guardar(props.operacion.id,estadoOperacion)
+        props.onActualizarOperacion(idCliente,tipo,compraBtc,ventaBtc,montoSoles,montoBtc,billetera,cuentaBanco,estadoOperacion)
+        setIdOperacion(0)
+        setIdCliente(0)
+        setTipo(true)
+        setCompraBtc(0)
+        setVentaBtc(0)
+        setMontoSoles(0)
+        setMontoBtc(0)
+        setBilletera(0)
+        setCuentabanco(0)
+        setCreatedAt('')
+        setEstadoOperacion(false)
     }
 
     const butCloseFormOnClick = () => {

@@ -159,8 +159,8 @@ const OperacionesAdminPage = () => {
             tipo: tipo,
             comprabtc: comprabtc,
             ventabtc: ventabtc,
-            montosoles: montosoles,
-            montobtc: montobtc,
+            monto_soles: montosoles,
+            monto_btc: montobtc,
             billetera: billetera,
             cuentabcp: cuentabcp,
             estado: estado
@@ -188,7 +188,7 @@ const OperacionesAdminPage = () => {
 
     const recargarLista = async () => {
         const dataOperadores = await obtenerOperadoresHTTP()
-        setListaOperacionesM(dataOperadores.clientes)
+        setListaOperacionesM(dataOperadores.operaciones)
     }
 
     return (
@@ -219,7 +219,7 @@ const OperacionesAdminPage = () => {
             <ModalModificarOperacion
                 onOcultar={ocultar}
                 onMostrar={seDebeMostrarModal}
-                onActualizarCliente={actualizarProcesoHandler}
+                onActualizarProceso={actualizarProcesoHandler}
                 operacion={operacion}
             />
         </div>
