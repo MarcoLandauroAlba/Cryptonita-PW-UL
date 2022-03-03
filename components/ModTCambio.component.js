@@ -16,13 +16,13 @@ export default function ModTCambio(props) {
                 Precio BTC Compra: 
                 {
                     (() => {
-                        return "$"+parseFloat(props.valor)
+                        return "S/."+ ((parseFloat(props.valor))*3.75).toFixed(4)
                     })()
                 }<br/>
                 Precio BTC Venta:
                 {
                     (() => {
-                        return "$"+ (parseFloat(props.valor)*(1+0.005))
+                        return "S/."+ (parseFloat(props.valor)*(1+0.005)*3.75).toFixed(4)
                     })()
                 }<br/>
                 Ambos valores se actualizan cada 30s

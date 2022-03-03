@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Button, Modal } from "react-bootstrap"
 
-export default function ModalModificarOperacion(props) {
+const ModalModificarOperacion = (props) => {
 
     const [estadoOperacion, setEstadoOperacion] = useState(false)
     const[idOperacion, setIdOperacion] = useState(0)
@@ -105,129 +105,123 @@ export default function ModalModificarOperacion(props) {
         setEstadoOperacion(false)
         props.onOcultar()
     }
+    return <Modal show={props.onMostrar} onHide={butCloseFormOnClick}>
+            <Modal.Header closeButton>
+                <Modal.Title>Operaciones</Modal.Title>
+            </Modal.Header>
 
-    if(props.mostrar){
-        return (
-            <Modal show={props.onMostrar} onHide={props.butCloseFormOnClick}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Operaciones</Modal.Title>
-                </Modal.Header>
-    
-                <Modal.Body>
-                    <form>
-                        <div>
-                            <label className="form-label">
-                                Operación:
-                            </label>
-                            <fieldset disabled>
-                                <input id="disabledTextInput" className="form-control" type="text" onChange={IdOperacionOnChange} defaultValue={idOperacion}>
-                                </input>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label">
-                                ID del cliente:
-                            </label>
-                            <fieldset disabled>
-                                <input id="disabledTextInput" className="form-control" type="text" onChange={IdClienteOnChange} defaultValue={idCliente}>
-                                </input>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label">
-                                Tipo de transacción:
-                            </label>
-                            <fieldset disabled>
+            <Modal.Body>
+                <form>
+                    <div>
+                        <label className="form-label">
+                            Operación:
+                        </label>
+                        <fieldset disabled>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={IdOperacionOnChange} defaultValue={idOperacion}>
+                            </input>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label">
+                            ID del cliente:
+                        </label>
+                        <fieldset disabled>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={IdClienteOnChange} defaultValue={idCliente}>
+                            </input>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label">
+                            Tipo de transacción:
+                        </label>
+                        <fieldset disabled>
                             {
                                 (() => {
-                                    if(tipo==true){
-                                        return(<input id="disabledTextInput" className="form-control" type="text">Venta</input>)
-                                    }else{
-                                        return(<input id="disabledTextInput" className="form-control" type="text">Compra</input>)
+                                    if (tipo == true) {
+                                        return (<input id="disabledTextInput" className="form-control" type="text">Venta</input>)
+                                    } else {
+                                        return (<input id="disabledTextInput" className="form-control" type="text">Compra</input>)
                                     }
                                 })()
                             }
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label">
-                                Precio de compra de BTC:
-                            </label>
-                            <fieldset disabled>
-                                <input id="disabledTextInput" className="form-control" type="text" onChange={CompraBtcOnChange} defaultValue={compraBtc}>
-                                </input>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label">
-                                Precio de venta de BTC:
-                            </label>
-                            <fieldset disabled>
-                                <input id="disabledTextInput" className="form-control" type="text" onChange={VentaBtcOnChange} defaultValue={ventaBtc}>
-                                </input>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label">
-                                Monto en soles:
-                            </label>
-                            <fieldset disabled>
-                                <input id="disabledTextInput" className="form-control" type="text" onChange={MontoSolesOnChange} defaultValue={montoSoles}>
-                                </input>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label">
-                                Monto en BTC:
-                            </label>
-                            <fieldset disabled>
-                                <input id="disabledTextInput" className="form-control" type="text" onChange={MontoBtcOnChange} defaultValue={montoBtc}>
-                                </input>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label">
-                                Billetera:
-                            </label>
-                            <fieldset disabled>
-                                <input id="disabledTextInput" className="form-control" type="text" onChange={BilleteraOnChange} defaultValue={billetera}>
-                                </input>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label">
-                                Cuenta BCP:
-                            </label>
-                            <fieldset disabled>
-                                <input id="disabledTextInput" className="form-control" type="text" onChange={CuentabancoOnChange} defaultValue={cuentaBanco}>
-                                </input>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label">
-                                Fecha:
-                            </label>
-                            <fieldset disabled>
-                                <input id="disabledTextInput" className="form-control" type="text" onChange={CreatedAtOnChange} defaultValue={createdAt}>
-                                </input>
-                            </fieldset>
-                        </div>
-                        <div>
-                            <label className="form-label my-1">Operacion</label>
-                            <select className="form-select" defaultValue={estadoOperacion} onChange={setEstadoOperacionOnClick}>
-                                <option value={false}>Pendiente</option>
-                                <option value={true}>Aceptada</option>
-                            </select>
-                        </div>
-                    </form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={ butCloseFormOnClick }>Cerrar</Button>
-                    <Button variant="primary" onClick={guardarOnClick}>Guardar</Button>
-                </Modal.Footer>
-            </Modal>
-        )
-    }else{
-        return <></>
-    }
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label">
+                            Precio de compra de BTC:
+                        </label>
+                        <fieldset disabled>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={CompraBtcOnChange} defaultValue={compraBtc}>
+                            </input>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label">
+                            Precio de venta de BTC:
+                        </label>
+                        <fieldset disabled>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={VentaBtcOnChange} defaultValue={ventaBtc}>
+                            </input>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label">
+                            Monto en soles:
+                        </label>
+                        <fieldset disabled>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={MontoSolesOnChange} defaultValue={montoSoles}>
+                            </input>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label">
+                            Monto en BTC:
+                        </label>
+                        <fieldset disabled>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={MontoBtcOnChange} defaultValue={montoBtc}>
+                            </input>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label">
+                            Billetera:
+                        </label>
+                        <fieldset disabled>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={BilleteraOnChange} defaultValue={billetera}>
+                            </input>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label">
+                            Cuenta BCP:
+                        </label>
+                        <fieldset disabled>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={CuentabancoOnChange} defaultValue={cuentaBanco}>
+                            </input>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label">
+                            Fecha:
+                        </label>
+                        <fieldset disabled>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={CreatedAtOnChange} defaultValue={createdAt}>
+                            </input>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <label className="form-label my-1">Operacion</label>
+                        <select className="form-select" defaultValue={estadoOperacion} onChange={setEstadoOperacionOnClick}>
+                            <option value={false}>Pendiente</option>
+                            <option value={true}>Aceptada</option>
+                        </select>
+                    </div>
+                </form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={butCloseFormOnClick}>Cerrar</Button>
+                <Button variant="primary" onClick={guardarOnClick}>Guardar</Button>
+            </Modal.Footer>
+        </Modal>
 }
+export default ModalModificarOperacion

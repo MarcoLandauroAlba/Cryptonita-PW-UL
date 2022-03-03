@@ -124,7 +124,7 @@ const OperacionesAdminPage = () => {
     const [operacionesM, setListaOperacionesM] = useState([])
     const [operacion, setOperacion] = useState(null)
 
-    const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
+    const [seDebeMostrarModalO, setSeDebeMostrarModalO] = useState(false)
 
     const obtenerOperadoresHTTP = async () => {
         let response = await fetch("/api/operacion_extraidas")
@@ -150,7 +150,7 @@ const OperacionesAdminPage = () => {
     }
 
     const ocultar = () => {
-        setSeDebeMostrarModal(false)
+        setSeDebeMostrarModalO(false)
     }
 
     const actualizarProcesoHandler = async (idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {    
@@ -173,7 +173,7 @@ const OperacionesAdminPage = () => {
         const data = await resp.json()
 
         if (data.msg == "") {
-            setSeDebeMostrarModal(false)
+            setSeDebeMostrarModalO(false)
             const dataOperadores = await obtenerOperadoresHTTP()
             setListaOperacionesM(dataOperadores.operaciones)
         }
@@ -183,7 +183,7 @@ const OperacionesAdminPage = () => {
         const resp = await fetch(`/api/operacion_extraidas/${id}`)
         const data = await resp.json()
         setOperacion(data.operacion)
-        setSeDebeMostrarModal(true)
+        setSeDebeMostrarModalO(true)
     }
 
     const recargarLista = async () => {
@@ -218,7 +218,7 @@ const OperacionesAdminPage = () => {
             />
             <ModalModificarOperacion
                 onOcultar={ocultar}
-                onMostrar={seDebeMostrarModal}
+                onMostrar={seDebeMostrarModalO}
                 onActualizarProceso={actualizarProcesoHandler}
                 operacion={operacion}
             />
