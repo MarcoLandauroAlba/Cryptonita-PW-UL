@@ -16,14 +16,10 @@ const CuerpoEsperaRegistro = (props) => {
                 </div>
                 <div className="col-md-3"></div>
             </div>
-            <div className="mt-4 row">
-                <div className="col-md-5"></div>
-                <div className="col-md-3">
+            <div className="mt-4" allign='center'>
                     <button type="button" className="btn btn-success btn-lg" onClick={() => {
                         props.redireccionamiento("/EsperaRegistro")
                     }}>Recargar Pagina</button>
-                </div>
-                <div className="col-md-4"></div>
             </div>
         </div>
     } else {
@@ -42,14 +38,10 @@ const CuerpoEsperaRegistro = (props) => {
             </div>
             <div className="col-md-3"></div>
         </div>
-        <div className="mt-4 row">
-        <div className="col-md-5"></div>
-            <div className="col-md-3">
+        <div className="mt-4 row" allign='center'>
             <button type="button" className="btn btn-success btn-lg" onClick={()=>{
                 props.redireccionamiento("/")
             }}>Comenzar a Navegar!</button>
-            </div>
-            <div className="col-md-4"></div>
         </div>
     </div>
     }
