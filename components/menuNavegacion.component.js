@@ -17,7 +17,7 @@ const MenuNavegacion = (props) => {
                         <Image
                             alt="..."
                             className="me-2"
-                            src="https://img2.freepng.es/20180324/luq/kisspng-bitcoin-paypal-cryptocurrency-ethereum-litecoin-bitcoin-5ab6e3fcaf1991.4843415715219353567172.jpg"
+                            src="images\WhatsApp Image 2022-03-03 at 2.25.04 PM.jpeg"
                             fluid={true}
                             width={25}
                         />
@@ -101,7 +101,7 @@ const MenuNavegacion = (props) => {
                         <Image
                             alt="..."
                             className="me-2"
-                            src="https://img2.freepng.es/20180324/luq/kisspng-bitcoin-paypal-cryptocurrency-ethereum-litecoin-bitcoin-5ab6e3fcaf1991.4843415715219353567172.jpg"
+                            src="images\WhatsApp Image 2022-03-03 at 2.25.04 PM.jpeg"
                             fluid={true}
                             width={25}
                         />
@@ -168,7 +168,7 @@ const MenuNavegacion = (props) => {
                         <Image
                             alt="..."
                             className="me-2"
-                            src="https://img2.freepng.es/20180324/luq/kisspng-bitcoin-paypal-cryptocurrency-ethereum-litecoin-bitcoin-5ab6e3fcaf1991.4843415715219353567172.jpg"
+                            src="images\WhatsApp Image 2022-03-03 at 2.25.04 PM.jpeg"
                             fluid={true}
                             width={25}
                         />
@@ -193,7 +193,7 @@ const MenuNavegacion = (props) => {
                         <Image
                             alt="..."
                             className="me-2"
-                            src="https://img2.freepng.es/20180324/luq/kisspng-bitcoin-paypal-cryptocurrency-ethereum-litecoin-bitcoin-5ab6e3fcaf1991.4843415715219353567172.jpg"
+                            src="images\WhatsApp Image 2022-03-03 at 2.25.04 PM.jpeg"
                             fluid={true}
                             width={25}
                         />
