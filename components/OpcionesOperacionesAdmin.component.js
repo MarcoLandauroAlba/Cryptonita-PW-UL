@@ -8,6 +8,7 @@ const OpcionesOperacionesAdmin = (props) => {
 
     const [datosIdCliente, setDatosIdCliente] = useState()
 
+    // DEVUELVE LA CANTIDAD DE BITCOINS UTILIZADA EN LAS LISTAS MOSTRADAS
     const sumaMontos = () => {
         const suma = 0
         for (let ope of props.lista){
