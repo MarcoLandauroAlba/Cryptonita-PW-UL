@@ -41,4 +41,4 @@ const OperacionIDClienteHandler = async (req, res) => {
     }
 }
 
-export default operacionIDClienteHandler
+export default OperacionIDClienteHandler
