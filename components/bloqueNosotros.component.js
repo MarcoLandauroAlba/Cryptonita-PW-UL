@@ -7,7 +7,7 @@ const BloqueNosotros = (props) => {
     return (
         <div>
             <h2>Nosotros</h2>
-            <div className="row">
+            <div className="row d-flex justify-content-center">
             <Card style={{ width: '18rem' }} className="m-2 col-lg-3 col-sm-6">
                 <Card.Img variant="top" src="https://i.pinimg.com/236x/32/28/d3/3228d36a72d1dd13a7580e34949d8185.jpg" />
                 <Card.Body>
@@ -35,8 +35,8 @@ const BloqueNosotros = (props) => {
                     </Card.Text>
                 </Card.Body>
             </Card>
-            <Card style={{ width: '18rem' }} className="m-2  col-lg-3 col-sm-6">
-                <Card.Img variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLlZZjrTfJH9VfA2zA6tpz3gAIV8tE3NOyhQ&usqp=CAU" />
+            <Card style={{ width: '18rem' }} className="m-2 col-lg-3 col-sm-6">
+                <Card.Img variant="top" src="https://i.pinimg.com/236x/32/28/d3/3228d36a72d1dd13a7580e34949d8185.jpg" />
                 <Card.Body>
                     <Card.Title>Jean Pierre Soto Tipacti</Card.Title>
                     <Card.Text>
@@ -45,7 +45,7 @@ const BloqueNosotros = (props) => {
                 </Card.Body>
             </Card>
             </div>
-            <div className="d-grid gap-2 col-6 mx-auto">
+            <div className="btn-lg d-flex justify-content-center">
                 <button
                     className="btn btn-primary"
                     onClick={() => { props.volver() }}
