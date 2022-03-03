@@ -17,7 +17,7 @@ const CompCompraVenta = (props) => {
                     <div className="card">
                     {
                     (() => {
-                        return "$"+props.valor + " = 1 BTC" 
+                        return "S/."+ ((parseFloat(props.valor))*3.75).toFixed(4) + " = 1 BTC" 
                     })()
                     }  
                     </div><br />
@@ -25,7 +25,7 @@ const CompCompraVenta = (props) => {
                     <div className="card">
                     {
                     (() => {
-                        return "1 BTC ="+ "$"+ (parseFloat(props.valor)*(1+0.005)) 
+                        return "1 BTC ="+ "S/."+ (parseFloat(props.valor)*(1+0.005)*3.75).toFixed(4)
                     })()
                     }  
                     </div> <br/>
