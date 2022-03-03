@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Modal, Button} from 'react-bootstrap';
 import { Image } from "react-bootstrap"
 
-const ModalClienteP3V = (props) => {
+const ModalClienteP3C = (props) => {
     const[idCliente, setIdCliente] = useState(0)
     const[idOperacion, setOperacion] = useState(0)
     //TODOS: TRUE:VENTA, FALSE:COMPRA
@@ -103,4 +103,4 @@ const ModalClienteP3V = (props) => {
     </Modal>
 }
 
-export default ModalClienteP3V
+export default ModalClienteP3C

@@ -11,7 +11,9 @@ const ModalClienteP1C = (props) => {
     
     const butGuardarOnClick = () => {
         props.almacenarBilletera(txtBilletera)
+        console.log('props.onOcultar()')
         props.onOcultar()
+        console.log('props.habilitarModal2C(true)')
         props.habilitarModal2C(true)
     }
 
@@ -23,7 +25,7 @@ const ModalClienteP1C = (props) => {
     
     return <Modal show={ props.onMostrar } onHide={ butCloseFormOnClick }>
         <Modal.Header closeButton>
-            <Modal.Title>Paso 2 de 3</Modal.Title>
+            <Modal.Title>Paso 1 de 3</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

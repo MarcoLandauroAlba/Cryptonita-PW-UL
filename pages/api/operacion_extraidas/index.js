@@ -1,4 +1,3 @@
-import operacion from "../../../sequelize/models/operacion"
 const { guardarOperacion, obtenerOperaciones, obtenerOperacion, editarOperacion, obtenerOperacionxIdcliente } = require("../../../dao/operaciones")
 
 const operacionesHandler = async (req, res) => {

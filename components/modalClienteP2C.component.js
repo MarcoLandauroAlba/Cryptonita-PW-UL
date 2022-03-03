@@ -1,14 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal, Button} from 'react-bootstrap';
 
-const ModalClienteP2V = (props) => {
-    const[idOperacion, setOperacion] = useState(0)
-
-    useEffect(()=> {
-        if(props.idOperacion != null){
-            setOperacion(props.idOperacion.id)
-        }
-    }, [props.idOperacion]) 
+const ModalClienteP2C = (props) => {
     
     const butGuardarOnClick = () => {
         props.onOcultar()
@@ -32,7 +25,7 @@ const ModalClienteP2V = (props) => {
                         Cuenta BCP de la empresa: 32454482218612
                     </label>
                     <label className="form-label">
-                        Número de transacción: {idOperacion}
+                        Número de transacción: {props.idOperacion}
                     </label>
                 </div>
             </form>
@@ -45,4 +38,4 @@ const ModalClienteP2V = (props) => {
     </Modal>
 }
 
-export default ModalClienteP2V
+export default ModalClienteP2C

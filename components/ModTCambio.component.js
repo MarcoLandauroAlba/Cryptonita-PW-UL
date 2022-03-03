@@ -41,13 +41,12 @@ export default function ModTCambio(props) {
                             <div className="my-3">
                                 {
                                     (() => {
-                                        return "S/." + (parseFloat(props.valor) * (1 + 0.005) * 3.75).toFixed(4)
+                                        return "S/." + (parseFloat(props.valor) * 3.75).toFixed(4)
                                     })()
                                 }
                             </div>
                         </Card.Title>
                         <Card.Text>
-
                         </Card.Text>
                     </Card.Body>
                 </Card>
