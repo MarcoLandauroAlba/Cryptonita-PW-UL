@@ -6,7 +6,7 @@ const ModalModificarOperacion = (props) => {
     const [estadoOperacion, setEstadoOperacion] = useState(false)
     const[idOperacion, setIdOperacion] = useState(0)
     const[idCliente, setIdCliente] = useState(0)
-    const [tipo, setTipo] = useState(true)
+    const [tipo, setTipo] = useState('')
     const [compraBtc, setCompraBtc] = useState(0)
     const [ventaBtc, setVentaBtc] = useState(0)
     const [montoSoles, setMontoSoles] = useState(0)
@@ -20,7 +20,11 @@ const ModalModificarOperacion = (props) => {
         if(props.operacion != null){
             setIdOperacion(props.operacion.id)
             setIdCliente(props.operacion.id_cliente)
-            setTipo(props.operacion.tipo)
+            if(props.operacion.tipo==true){
+                setTipo('Venta')
+            }else{
+                setTipo('Compra')
+            }
             setCompraBtc(props.operacion.comprabtc)
             setVentaBtc(props.operacion.ventabtc)
             setMontoSoles(props.operacion.monto_soles)
@@ -80,7 +84,7 @@ const ModalModificarOperacion = (props) => {
         props.onActualizarProceso(idOperacion,idCliente,tipo,compraBtc,ventaBtc,montoSoles,montoBtc,billetera,cuentaBanco,estadoOperacion)
         setIdOperacion(0)
         setIdCliente(0)
-        setTipo(true)
+        setTipo('')
         setCompraBtc(0)
         setVentaBtc(0)
         setMontoSoles(0)
@@ -94,7 +98,7 @@ const ModalModificarOperacion = (props) => {
     const butCloseFormOnClick = () => {
         setIdOperacion(0)
         setIdCliente(0)
-        setTipo(true)
+        setTipo('')
         setCompraBtc(0)
         setVentaBtc(0)
         setMontoSoles(0)
@@ -135,7 +139,8 @@ const ModalModificarOperacion = (props) => {
                             Tipo de transacción:
                         </label>
                         <fieldset disabled>
-                          <input id="disabledTextInput" className="form-control" type="text" onChange={ TipoOnChange } defaultValue={ tipo }></input>
+                            <input id="disabledTextInput" className="form-control" type="text" onChange={TipoOnChange} defaultValue={tipo}>
+                            </input>
                         </fieldset>
                     </div>
                     <div>
@@ -204,8 +209,8 @@ const ModalModificarOperacion = (props) => {
                     <div>
                         <label className="form-label my-1">Operacion</label>
                         <select className="form-select" defaultValue={estadoOperacion} onChange={setEstadoOperacionOnClick}>
-                            <option value={false}>Pendiente</option>
-                            <option value={true}>Aceptada</option>
+                            <option value={false}>Por Validar</option>
+                            <option value={true}>Validado</option>
                         </select>
                     </div>
                 </form>

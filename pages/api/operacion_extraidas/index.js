@@ -16,10 +16,10 @@ const operacionesHandler = async (req, res) => {
             }
             let tipo = ""
             if(op.tipo == true){
-                tipo = "Vender"
+                tipo = "Venta"
             }
             else{
-                tipo = "Comprar"
+                tipo = "Compra"
             }
             operacionesconEstado.push({
                 id: op.id,
