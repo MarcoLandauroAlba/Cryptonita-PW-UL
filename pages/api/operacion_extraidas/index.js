@@ -1,3 +1,5 @@
+import operacion from "../../../sequelize/models/operacion"
+
 const { guardarOperacion, obtenerOperaciones, obtenerOperacion, editarOperacion, obtenerOperacionxIdcliente } = require("../../../dao/operaciones")
 
 const operacionesHandler = async (req, res) => {
@@ -20,6 +22,7 @@ const operacionesHandler = async (req, res) => {
                 tipo = "Comprar"
             }
             operacionesconEstado.push({
+                id: operacion.id,
                 id_cliente: op.id_cliente,
                 tipo: tipo,
                 comprabtc: op.comprabtc,
@@ -35,7 +38,7 @@ const operacionesHandler = async (req, res) => {
         }
         res.json({
             msg: "",
-            clientes : operacionesconEstado
+            operaciones : operacionesconEstado
         })
     }else if(req.method == "POST"){
         console.log("Se debería guardar en la base de datos")

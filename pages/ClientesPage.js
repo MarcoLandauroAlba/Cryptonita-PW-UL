@@ -179,9 +179,8 @@ const ClientesPage = () => {
         setSeDebeMostrarModal(false)
     }
 
-    const actualizarClienteHandler = async (id, nombre, apellido, dni, correo, telefono, estado) => {
+    const actualizarClienteHandler = async (nombre, apellido, dni, correo, telefono, estado) => {
         const cliente = {
-            id: id,
             nombre: nombre,
             apellido: apellido,
             dni: dni,

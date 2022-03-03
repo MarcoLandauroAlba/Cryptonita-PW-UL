@@ -132,7 +132,7 @@ const ModalClientes = (props) => {
         </Modal.Body>
 
         <Modal.Footer>
-            <Button variant="secondary">Cerrar</Button>
+            <Button variant="secondary" onClick={ butCloseFormOnClick }>Cerrar</Button>
             <Button variant="primary"
             onClick={ butGuardarOnClick }>Guardar</Button>
         </Modal.Footer>

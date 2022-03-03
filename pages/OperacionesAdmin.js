@@ -1,5 +1,7 @@
 import MenuNavegacion from "../components/menuNavegacion.component";
+import OpcionesOperacionesAdmin from "../components/OpcionesOperacionesAdmin.component"
 import Footer from "../components/footer.component";
+import ValidadoCambioOperacion from "../components/ValidadoCambioOperaciones.component"
 import ListaOperaciones from "../components/ListaOperaciones.component"
 import ModalModificarOperacion from "../components/modalModificarOperacion.component";
 import { useEffect, useState } from 'react'
@@ -83,7 +85,6 @@ const OperacionesAdminPage = () => {
             }
         }
         AsyncUseEffect()
-        buscarListaDeOperacionesEnBD()
     }, [cliente, tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
@@ -118,44 +119,77 @@ const OperacionesAdminPage = () => {
     // ESPACIO PARA ESCRIBIR CODIGO EXTRA 
 
 
-
-
-    const [listadoDeOperaciones, setListadoDeOperaciones] = useState([])
-
-    const buscarListaDeOperacionesEnBD = () => {
-
-        // TODO: HACER PETICION A BACKEND PARA OBTENER TODAS LAS OPERACIONES REALIZADAS EN EL TRABAJO
-
-        setListadoDeOperaciones([
-            { numero: 1, id: "arnodorian020", fecha: "10/01/2022 16:54", cliente: "Jose Lavarte", tipoOperacion: "Compra", tipoCambio: 167124.42, estado: 0, monto: 3 },
-            { numero: 2, id: "ardTreat", fecha: "20/01/2022 08:40", cliente: "Juan Quintero", tipoOperacion: "Venta", tipoCambio: 167124.42, estado: 1, monto: 4 },
-            { numero: 3, id: "reseAlm", fecha: "16/02/2021 09:34", cliente: "Pedro Malaver", tipoOperacion: "Compra", tipoCambio: 167124.42, estado: 0, monto: 8 }
-        ])
-    }
-
     // FALTA REALIZAR LA FUNCION PARA CAMBIAR LOS DATOS DE LAS OPERACIONES Y PASARLO COMO PROPS A ModalModificarOperacion
 
-    const [mostrar, setMostrar] = useState(false)
-    const [operacion, setOperacion] = useState({})
+    const [operacionesM, setListaOperacionesM] = useState([])
+    const [operacion, setOperacion] = useState(null)
 
-    const Actualizar = (operacion) => {
-        // CODIGO PARA ACTUALIZAR UNA OPERACION
-        console.log(operacion)
-        setOperacion(operacion)
-        setMostrar(true)
+    const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
+
+    const obtenerOperadoresHTTP = async () => {
+        let response = await fetch("/api/operacion_extraidas/")
+        const data = await response.json()
+        return data
+    }
+
+    useEffect(async () => {
+        const dataOperadores = await obtenerOperadoresHTTP()
+        setListaOperacionesM(dataOperadores.operaciones)
+    }, [])
+
+    const buscarOperaciones = async (datos, boton) => {
+        //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
+        let nuevaLista = []
+        if (boton == 'IDCLIENTE') {
+            const resp = await fetch(`/api/operacion_extraidas/idcliente/${datos}`)
+            const data = await resp.json()
+            setListaOperacionesM(data.operacion)
+        }
+        // TODO: FALTA BASE DE DATOS PARA IMPLEMENTAR FUNCIONALIDAD A LOS BOTONES
 
     }
+
     const ocultar = () => {
-        setMostrar(false)
+        setSeDebeMostrarModal(false)
     }
 
-    const guardar = (idOperacion, estado) => {
-        // CODIGO PARA ACTUALIZAR UNA OPERACION
-        console.log(idOperacion)
-        console.log(estado)
-        // TODO: ENVIAR DATOS ACTUALIZADOS A BASE DE DATOS
+    const actualizarProcesoHandler = async (idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {    
+        const operacion ={
+            idcliente: idcliente,
+            tipo: tipo,
+            comprabtc: comprabtc,
+            ventabtc: ventabtc,
+            montosoles: montosoles,
+            montobtc: montobtc,
+            billetera: billetera,
+            cuentabcp: cuentabcp,
+            estado: estado
+        }
 
-        // TODO: ACTUALIZAR VALOR DE LA LISTA DE OPERACIONES PARA QUE RENDERIZE UNA NUEVA LISTA
+        const resp = await fetch("/api/operacion_extraidas", {
+            method: "PUT",
+            body: JSON.stringify(operacion)
+        })
+        const data = await resp.json()
+
+        if (data.msg == "") {
+            setSeDebeMostrarModal(false)
+            const dataOperadores = await obtenerOperadoresHTTP()
+            setListaOperacionesM(dataOperadores.operaciones)
+        }
+    }
+
+    const editarOperacionHandler = async (id) => {
+        const resp = await fetch(`/api/operacion_extraidas/${id}`)
+        const data = await resp.json()
+        console.log(data)
+        setOperacion(data.operacion)
+        setSeDebeMostrarModal(true)
+    }
+
+    const recargarLista = async () => {
+        const dataOperadores = await obtenerOperadoresHTTP()
+        setListaOperacionesM(dataOperadores.clientes)
     }
 
     return (
@@ -166,20 +200,27 @@ const OperacionesAdminPage = () => {
                 salir={TerminarSesionActiva}
                 ubicacion={ubicacionActual}
             />
+            <OpcionesOperacionesAdmin
+                tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
+                buscarOperaciones={buscarOperaciones}
+            />
             <ListaOperaciones
                 tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
-                lista={listadoDeOperaciones}
-                actualizar={Actualizar}
+                lista={operacionesM}
+                onEditar={editarOperacionHandler}
+                onRecargar={recargarLista}
             />
-            <ModalModificarOperacion
-                mostrar={mostrar}
-                operacion={operacion}
-                ocultar={ocultar}
-                guardar={guardar}
+            <ValidadoCambioOperacion
+                tipoDeCliente={tipoDeCliente}               /*SEGURIDAD*/
             />
-
             <Footer
                 redireccionamiento={RedirigirAOtraPagina}
+            />
+            <ModalModificarOperacion
+                onOcultar={ocultar}
+                onMostrar={seDebeMostrarModal}
+                onActualizarCliente={actualizarProcesoHandler}
+                operacion={operacion}
             />
         </div>
     )

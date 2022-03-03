@@ -9,7 +9,7 @@ const administradoresIdHandler = async (req, res) => {
             admin: admin
         })
     }else if (req.method == "GET") {
-        const data = req.body
+        const data = req.query
         const admin = await obtenerAdmin(data.id)
         res.json({
             msg: "",

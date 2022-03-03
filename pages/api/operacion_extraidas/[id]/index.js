@@ -2,7 +2,7 @@ import { obtenerOperacion } from "../../../../dao/operaciones";
 
 const operacionIdHandler = async (req, res) => {
     if(req.method == "GET"){
-        const data = req.body
+        const data = req.query
         const operacion = await obtenerOperacion(data.id)
         const operacionesconEstado = []
         let estado = ""
