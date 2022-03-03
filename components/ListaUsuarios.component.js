@@ -4,8 +4,6 @@ props Utilizados:
 - lista: Lleva la lista de usuarios que cumplen con los requerimientos enviados
 */
 export default function ListaUsuarios(props) {
-
-
     if (props.tipoDeCliente == 1) {
         return <div>
             <h3>Listado de Usuarios</h3>

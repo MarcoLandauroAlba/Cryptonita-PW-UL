@@ -4,7 +4,6 @@ import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
 import { guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
 import { EntregarPaginaAnterior, guardarPaginasAnteriores } from '../dao/paginas_anteriores_local'
-
 const compraVenta = () => {
 
     // ********************************************************************************************************************************************************************************************************
@@ -115,7 +114,30 @@ const compraVenta = () => {
     // ========================================================================================================================================================================================================
     // ********************************************************************************************************************************************************************************************************
     // ESPACIO PARA ESCRIBIR CODIGO EXTRA 
+    const [valorCripto, setValorCripto] = useState(0)
+    const [seconds, setSeconds] = useState(0);
 
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+
+    useEffect(() => {
+        // PRUEBAS CON PRECIO DE CRIPTOMONEDA
+
+        // https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/historical?CMC_PRO_API_KEY=${apikey.key}
+
+        const AsyncUseEffect = async () => {
+
+            const base_url = 'https://api.binance.com'
+            const query = '/api/v1/depth?symbol=BTCUSDT'
+            const response = await fetch(base_url + query)
+            const data = await response.json()
+            setValorCripto(formatter.format(data.asks[99][0]))
+        }
+        AsyncUseEffect()
+        console.log('SE EJECUTA')
+    }, [seconds])
     return (
         <div>
             <MenuNavegacion
@@ -124,7 +146,9 @@ const compraVenta = () => {
                 salir={TerminarSesionActiva}
                 ubicacion={ubicacionActual}
             />
-            <CompCompraVenta />
+            <CompCompraVenta 
+             valor={valorCripto}
+            />
             <Footer
                 redireccionamiento={RedirigirAOtraPagina}
             />

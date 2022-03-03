@@ -1,61 +1,49 @@
+/*
+props Utilizados:
+- tipoDeCliente: Solo renderiza en pantalla si es un cliente de tipo administrador (SEGURIDAD)
+- lista: Lleva la lista de usuarios que cumplen con los requerimientos enviados
+*/
 export default function ListaOperaciones(props) {
-
-    const MontoOperado = () => {
-        let total = 0
-        for (let oper of props.lista){
-            total += oper.monto
-        }
-        return total
-    }
-
-    const ModificarOperacion = () => {
-
-    }
-
-    if(props.tipoDeCliente==1){
+    if (props.tipoDeCliente == 1) {
         return <div>
-            <div className="mx-2">
-                <h3 className="text-start">Listado de Operaciones</h3>
-                <h6 className="text-end mt-1">Monto total de BitCoins operados:
-                    {
-                        (()=>{
-                            return MontoOperado()
-                        })()
-                    }
-                </h6>
-            </div>
-
+            <h3>Listado de Operaciones</h3>
+            <button type="button" className="btn btn-success" onClick={ props.onRecargar }>Recargar Lista Original</button>
             <div className="table-responsive">
-                <table className="table mx-2">
+                <table className="table mt-4">
                     <thead>
                         <tr>
-                            <th>Número</th>
                             <th>ID</th>
-                            <th>Fecha y Hora</th>
-                            <th>Cliente</th>
-                            <th>Tipo de Operación</th>
-                            <th>Tipo de Cambio</th>
+                            <th>ID Cliente</th>
+                            <th>Tipo</th>
+                            <th>Compra de BTC</th>
+                            <th>Venta de BTC</th>
+                            <th>Monto soles</th>
+                            <th>Monto BTC</th>
+                            <th>Billetera</th>
+                            <th>Cuenta BCP</th>
+                            <th>Fecha</th>
                             <th>Estado</th>
-                            <th>Monto en Bitcoins</th>
-                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             props.lista.map((operacion) => {
                                 return <tr key={operacion.id}>
-                                    <td>{operacion.numero}</td>
                                     <td>{operacion.id}</td>
-                                    <td>{operacion.fecha}</td>
-                                    <td>{operacion.cliente}</td>
-                                    <td>{operacion.tipoOperacion}</td>
-                                    <td>{operacion.tipoCambio}</td>
-                                    <td>{operacion.estado}</td>
-                                    <td>{operacion.monto}</td>
-                                    <td><button type="button" className="btn btn-link" onClick={()=>{
-                                        props.actualizar(operacion)
-                                    }}>Modificar</button>
-                                    <button type="button" className="btn btn-link">Eliminar</button></td>
+                                    <td>{operacion.id_cliente}</td>
+                                    <td>{operacion.tipo}</td>
+                                    <td>{operacion.comprabtc}</td>
+                                    <td>{operacion.ventabtc}</td>
+                                    <td>{operacion.monto_soles}</td>
+                                    <td>{operacion.monto_btc}</td>
+                                    <td>{operacion.billetera}</td>
+                                    <td>{operacion.cuentabanco}</td>
+                                    <td>{operacion.createdAt}</td>
+                                    <td>{operacion.estado}</td> 
+                                    <td><button type="button" className="btn btn-link" onClick={ ()=>{
+                                        props.onEditar(operacion.id)
+                                    } }>Modificar</button>
+                                    </td>
                                 </tr>
                             })
                         }

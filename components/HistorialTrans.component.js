@@ -5,45 +5,41 @@ const HistorialTrans = (props) =>{
                 <button onClick={() => { props.redireccionamiento('/compraVenta') }} className="btn btn-primary btn-small col-md-3">Volver a Compra/Venta</button>
                 <button onClick={()=>{console.log('redirigir aqui')}}  className="btn btn-primary disabled btn-small col-md-4">Ver historial</button>
             </div>
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Fecha y hora</th>
-                    <th>Tipo Operacion</th>
-                    <th>Tipo Cambio</th>
-                    <th>Monto Bitcoin</th>
-                </tr>
-                <tr>
-                    <td>789987</td>
-                    <td>10/12/2021 21:39</td>
-                    <td>Compra</td>
-                    <td>1BTC = s/190,987</td>
-                    <td>0.02 BTC</td>
-                </tr>
-                <tr>
-                    <td>777798</td>
-                    <td>10/1/2022 11:20</td>
-                    <td>Venta</td>
-                    <td>1BTC = s/163,789</td>
-                    <td>1.35 BTC</td>
-                </tr>
-                <tr>
-                    <td>776891</td>
-                    <td>12/1/2022 16:32</td>
-                    <td>Venta</td>
-                    <td>1BTC = s/164,889</td>
-                    <td>0.378 BTC</td>
-                </tr>
-                <tr>
-                    <td>781237</td>
-                    <td>10/2/2022 21:55</td>
-                    <td>Compra</td>
-                    <td>1BTC = s/165,123</td>
-                    <td>0.213 BTC</td>
-                </tr>
-            </table>
+            <div className="table-responsive">
+                <table className="table mx-2">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>ID</th>
+                            <th>Fecha y Hora</th>
+                            <th>Cliente</th>
+                            <th>Tipo de Operación</th>
+                            <th>Tipo de Cambio</th>
+                            <th>Estado</th>
+                            <th>Monto en Bitcoins</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            props.lista.map((operacion) => {
+                                return <tr key={operacion.id}>
+                                    <td>{operacion.numero}</td>
+                                    <td>{operacion.id}</td>
+                                    <td>{operacion.fecha}</td>
+                                    <td>{operacion.cliente}</td>
+                                    <td>{operacion.tipoOperacion}</td>
+                                    <td>{operacion.tipoCambio}</td>
+                                    <td>{operacion.estado}</td>
+                                    <td>{operacion.monto}</td>
+                                </tr>
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+        </div>
 
     )
 }
