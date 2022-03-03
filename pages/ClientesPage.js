@@ -67,11 +67,11 @@ const ClientesPage = () => {
                             if (dataClienteCompleta.cliente.estado == false) {
                                 // USUARIO NO CONFIRMARDO
                                 setTipoDeCliente(3)
-                                guardarDatosGenerales(cliente,3)
+                                guardarDatosGenerales(cliente, 3)
                             } else if (dataClienteCompleta.cliente.estado == true) {
                                 // USUARIO CONFIRMARDO
                                 setTipoDeCliente(2)
-                                guardarDatosGenerales(cliente,2)
+                                guardarDatosGenerales(cliente, 2)
                             } else {
                             }
                         }
@@ -83,6 +83,8 @@ const ClientesPage = () => {
                     // LUEGO DE BUSCAR EN BASE DE DATOS, ALMACENAR EN EL LS EL TIPO DE DE USUARIO QUE ES
                 }
             }
+            const dataClientes = await obtenerClientesHTTP()
+            setListaUsuarios(dataClientes.clientes)
         }
         AsyncUseEffect()
 
@@ -142,11 +144,6 @@ const ClientesPage = () => {
         const data = await response.json()
         return data
     }
-
-    useEffect(async () => {
-        const dataClientes = await obtenerClientesHTTP()
-        setListaUsuarios(dataClientes.clientes)
-    }, [])
 
     const buscarUsuarios = async (datos, boton) => {
         //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:

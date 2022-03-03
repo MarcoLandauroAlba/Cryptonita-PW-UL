@@ -67,11 +67,11 @@ const OperacionesAdminPage = () => {
                             if (dataClienteCompleta.cliente.estado == false) {
                                 // USUARIO NO CONFIRMARDO
                                 setTipoDeCliente(3)
-                                guardarDatosGenerales(cliente,3)
+                                guardarDatosGenerales(cliente, 3)
                             } else if (dataClienteCompleta.cliente.estado == true) {
                                 // USUARIO CONFIRMARDO
                                 setTipoDeCliente(2)
-                                guardarDatosGenerales(cliente,2)
+                                guardarDatosGenerales(cliente, 2)
                             } else {
                             }
                         }
@@ -83,6 +83,8 @@ const OperacionesAdminPage = () => {
                     // LUEGO DE BUSCAR EN BASE DE DATOS, ALMACENAR EN EL LS EL TIPO DE DE USUARIO QUE ES
                 }
             }
+            const dataOperadores = await obtenerOperadoresHTTP()
+            setListaOperacionesM(dataOperadores.operaciones)
         }
         AsyncUseEffect()
     }, [cliente, tipoDeCliente])
@@ -132,11 +134,6 @@ const OperacionesAdminPage = () => {
         return data
     }
 
-    useEffect(async () => {
-        const dataOperadores = await obtenerOperadoresHTTP()
-        setListaOperacionesM(dataOperadores.operaciones)
-    }, [])
-
     const buscarOperaciones = async (datos, boton) => {
         //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
         if (boton == 'IDCLIENTE') {
@@ -150,8 +147,8 @@ const OperacionesAdminPage = () => {
         setSeDebeMostrarModalO(false)
     }
 
-    const actualizarProcesoHandler = async (id, idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {    
-        const operacion ={
+    const actualizarProcesoHandler = async (id, idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {
+        const operacion = {
             id: id,
             id_cliente: idcliente,
             tipo: tipo,
@@ -170,7 +167,7 @@ const OperacionesAdminPage = () => {
         })
         const data = await resp.json()
 
-        
+
         if (data.msg == "") {
             setSeDebeMostrarModalO(false)
             const dataOperadores = await obtenerOperadoresHTTP()

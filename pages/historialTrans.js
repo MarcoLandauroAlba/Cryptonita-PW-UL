@@ -1,11 +1,11 @@
 import Footer from "../components/footer.component"
-import HistorialTrans from "../components/HistorialTrans.component"
+import bloqueHistorialTrans from "../components/bloqueHistorialTrans.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
 import { guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
 import { EntregarPaginaAnterior, guardarPaginasAnteriores } from '../dao/paginas_anteriores_local'
 
-const historialTrans = () => {
+const HistorialTrans = () => {
     // ********************************************************************************************************************************************************************************************************
     // ========================================================================================================================================================================================================
     // ********************************************************************************************************************************************************************************************************
@@ -18,9 +18,9 @@ const historialTrans = () => {
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
     // DIRECCION DE LA PAGINA ACTUAL
-    const direccionActual = '/historialTrans'
+    const direccionActual = '/HistorialTrans'
     //  SOLO SIRVE PARA EL PROPS ubicacion
-    const ubicacionActual = 'historialTrans'
+    const ubicacionActual = 'HistorialTrans'
 
     useEffect(() => {
         const AsyncUseEffect = async () => {
@@ -131,7 +131,7 @@ const historialTrans = () => {
                 salir={TerminarSesionActiva}
                 ubicacion={ubicacionActual}
             />
-            <HistorialTrans
+            <bloqueHistorialTrans
                 tipoDeCliente={tipoDeCliente}
                 lista={operacionesM}
             />
@@ -142,4 +142,4 @@ const historialTrans = () => {
     )
 }
 
-export default historialTrans
+export default HistorialTrans

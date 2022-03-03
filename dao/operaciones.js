@@ -27,7 +27,7 @@ const guardarOperacion = async (idOperacion, idcliente,tipo,comprabtc,ventabtc,m
 const obtenerOperaciones = async () => {
     const operaciones = await db.Operacion.findAll({
         order : [
-            ["id", "DESC"]
+            ["createdAt", "DESC"]
         ]
     })
     return operaciones
@@ -37,7 +37,9 @@ const obtenerOperacionxIdcliente = async (idcliente) => {
     return await db.Operacion.findAll({
         where : {
             id_cliente : idcliente
-        }
+        },order:[
+            ["createdAt", "DESC"]
+        ]
     })
 }
 

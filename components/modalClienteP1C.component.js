@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 const ModalClienteP1C = (props) => {
+    const [txtBilletera, setTxtBilletera] = useState("")
     if (props.onMostrar) {
         console.log('ModalClienteP1C dentro')
-        const [txtBilletera, setTxtBilletera] = useState("")
+        
 
         const BilleteraOnChange = (event) => {
             setTxtBilletera(event.target.value)

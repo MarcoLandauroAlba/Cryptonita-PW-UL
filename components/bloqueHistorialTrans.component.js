@@ -1,4 +1,4 @@
-export default function HistorialTrans (props) {
+export default function bloqueHistorialTrans (props) {
     return <div>
             <h3 className="mt-3">Listado de Operaciones</h3>
             <div className="table-responsive">

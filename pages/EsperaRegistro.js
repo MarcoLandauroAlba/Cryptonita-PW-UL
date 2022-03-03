@@ -116,10 +116,9 @@ const EsperaRegistroPage = () => {
     // ********************************************************************************************************************************************************************************************************
     // ESPACIO PARA ESCRIBIR CODIGO EXTRA 
 
-    const ConfirmarRegistro = (direccion) => {
-        RedirigirAOtraPagina(direccion)
-        localStorage.setItem("tipoCliente", 2)
-    }
+
+
+    
 
     return (
         <div>
@@ -130,7 +129,10 @@ const EsperaRegistroPage = () => {
                 ubicacion={ubicacionActual}
             />
             <CuerpoEsperaRegistro
-                redireccionamiento={ConfirmarRegistro} />
+                redireccionamiento={RedirigirAOtraPagina} 
+                tipoDeCliente={tipoDeCliente}
+            />
+            
             <Footer
                 redireccionamiento={RedirigirAOtraPagina}
             />

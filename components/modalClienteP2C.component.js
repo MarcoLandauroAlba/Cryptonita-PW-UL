@@ -5,10 +5,10 @@ const ModalClienteP2C = (props) => {
         const butGuardarOnClick = () => {
             props.almacenarOperacion(
                 false,
-                props.bitcoins,
+                true,
                 0,
                 props.soles,
-                0,
+                props.bitcoins,
                 props.billetera,
                 '32454482218612',
                 false

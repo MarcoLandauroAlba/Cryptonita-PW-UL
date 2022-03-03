@@ -134,13 +134,13 @@ const MenuNavegacion = (props) => {
                                 {
                                     (
                                         () => {
-                                            if (props.ubicacion == 'historialTrans') {
+                                            if (props.ubicacion == 'HistorialTrans') {
                                                 return (
-                                                    <button className="nav-link btn active" onClick={() => { props.redireccionamiento('/historialTrans') }}>Historial de Operaciones</button>
+                                                    <button className="nav-link btn active" onClick={() => { props.redireccionamiento('/HistorialTrans') }}>Historial de Operaciones</button>
                                                 )
                                             } else {
                                                 return (
-                                                    <button className="nav-link btn" onClick={() => { props.redireccionamiento('/historialTrans') }}>Historial de Operaciones</button>
+                                                    <button className="nav-link btn" onClick={() => { props.redireccionamiento('/HistorialTrans') }}>Historial de Operaciones</button>
                                                 )
                                             }
                                         })()

@@ -5,13 +5,13 @@ const ModalClienteP2V = (props) => {
     if (props.onMostrar) {
         const butGuardarOnClick = () => {
             props.almacenarOperacion(
-                false,
+                true,
                 0,
-                props.bitcoins,
-                0,
+                true,
                 props.soles,
-                props.billetera,
-                '32454482218612',
+                props.bitcoins,
+                '65898191',
+                props.cuenta,
                 false
             )
             props.onOcultar()

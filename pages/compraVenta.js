@@ -216,10 +216,10 @@ const CompraVenta = () => {
 
     const CrearCuenta = async (valor) => {
         if (valor == '') {
-            setOperacion('')
+            setCuenta('')
             setIdOperacion('')
         } else {
-            setOperacion(valor.toString())
+            setCuenta(valor.toString())
             const listaDeOperaciones = await obtenerOperacionesRealizadas()
             const tamano = listaDeOperaciones.operaciones.length
             setIdOperacion(valor + tamano.toString())
@@ -228,17 +228,34 @@ const CompraVenta = () => {
     }
 
     const CrearOperacion = async (BTipo, Comprabtc, Ventabtc, MontoSoles, MontoBTC, txtBilletera, Cuentabanco, txtEstado) => {
-        const operacionesconId = {
-            id: idOperacion,
-            id_cliente: cliente,
-            tipo: BTipo,
-            comprabtc: Comprabtc,
-            ventabtc: Ventabtc,
-            monto_soles: MontoSoles,
-            monto_btc: MontoBTC,
-            billetera: txtBilletera,
-            cuentabcp: Cuentabanco,
-            estado: txtEstado,
+        console.log('Comprabtc',Comprabtc)
+        let operacionesconId
+        if(Comprabtc==true){
+            operacionesconId = {
+                id: idOperacion,
+                id_cliente: cliente,
+                tipo: BTipo,
+                comprabtc: valorCripto * 3.75,
+                ventabtc: 0,
+                monto_soles: MontoSoles,
+                monto_btc: MontoBTC,
+                billetera: txtBilletera,
+                cuentabcp: Cuentabanco,
+                estado: txtEstado,
+            }
+        }else if(Ventabtc==true){
+            operacionesconId = {
+                id: idOperacion,
+                id_cliente: cliente,
+                tipo: BTipo,
+                comprabtc: 0,
+                ventabtc: valorCripto * 3.75,
+                monto_soles: MontoSoles,
+                monto_btc: MontoBTC,
+                billetera: txtBilletera,
+                cuentabcp: Cuentabanco,
+                estado: txtEstado,
+            }
         }
         setOperacion(operacionesconId)
         console.log('operacionesconId aqui', operacionesconId)
@@ -304,6 +321,7 @@ const CompraVenta = () => {
                 idOperacion={idOperacion}
                 habilitarModal3C={HabilitarModalP3C}
                 almacenarOperacion={CrearOperacion}
+                montoBitCoin={valorCripto}
                 soles={cComp}
                 bitcoins={multComp}
                 billetera={billetera}
@@ -326,6 +344,7 @@ const CompraVenta = () => {
                 idOperacion={idOperacion}
                 habilitarModal3V={HabilitarModalP3V}
                 almacenarOperacion={CrearOperacion}
+                montoBitCoin={valorCripto}
                 soles={cVent}
                 bitcoins={multVent}
                 cuenta={cuenta}
