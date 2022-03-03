@@ -6,32 +6,40 @@ const HistorialTrans = (props) =>{
                 <button onClick={()=>{console.log('redirigir aqui')}}  className="btn btn-primary disabled btn-small col-md-4">Ver historial</button>
             </div>
             <div className="table-responsive">
-                <table className="table mx-2">
+                <table className="table mt-4">
                     <thead>
-                        <tr>
-                            <th>Número</th>
-                            <th>ID</th>
-                            <th>Fecha y Hora</th>
-                            <th>Cliente</th>
-                            <th>Tipo de Operación</th>
-                            <th>Tipo de Cambio</th>
-                            <th>Estado</th>
-                            <th>Monto en Bitcoins</th>
-                            <th>Opciones</th>
+                        <tr className='align-middle'>
+                            <th className="text-center">ID</th>
+                            <th className="text-center">ID Cliente</th>
+                            <th className="text-center">Tipo</th>
+                            <th className="text-center">Compra de BTC</th>
+                            <th className="text-center">Venta de BTC</th>
+                            <th className="text-center">Monto soles</th>
+                            <th className="text-center">Monto BTC</th>
+                            <th className="text-center">Billetera</th>
+                            <th className="text-center">Cuenta BCP</th>
+                            <th className="text-center">Fecha</th>
+                            <th className="text-center">Estado</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                         {
                             props.lista.map((operacion) => {
-                                return <tr key={operacion.id}>
-                                    <td>{operacion.numero}</td>
-                                    <td>{operacion.id}</td>
-                                    <td>{operacion.fecha}</td>
-                                    <td>{operacion.cliente}</td>
-                                    <td>{operacion.tipoOperacion}</td>
-                                    <td>{operacion.tipoCambio}</td>
-                                    <td>{operacion.estado}</td>
-                                    <td>{operacion.monto}</td>
+                                return <tr className='align-middle' key={operacion.id}>
+                                    {
+                                        console.log(operacion)
+                                    }
+                                    <td className="text-center">{operacion.id}</td>
+                                    <td className="text-center">{operacion.id_cliente}</td>
+                                    <td className="text-center">{operacion.tipo}</td>
+                                    <td className="text-center">{operacion.comprabtc}</td>
+                                    <td className="text-center">{operacion.ventabtc}</td>
+                                    <td className="text-center">{operacion.monto_soles}</td>
+                                    <td className="text-center">{operacion.monto_btc}</td>
+                                    <td className="text-center">{operacion.billetera}</td>
+                                    <td className="text-center">{operacion.cuentabanco}</td>
+                                    <td className="text-center">{operacion.createdAt}</td>
+                                    <td className="text-center">{operacion.estado}</td> 
                                 </tr>
                             })
                         }

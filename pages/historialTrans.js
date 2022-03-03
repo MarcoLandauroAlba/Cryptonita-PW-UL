@@ -116,6 +116,15 @@ const historialTrans = () => {
     // ESPACIO PARA ESCRIBIR CODIGO EXTRA 
     const [listadoDeOperaciones, setListadoDeOperaciones] = useState([])
 
+    useEffect( async ()=>{
+        const datos = localStorage.getItem("cliente")
+        const resp = await fetch(`/api/operacion_extraidas/idcliente/${datos}`)
+        const data = await resp.json()
+        setListadoDeOperaciones(data.operacion)
+        console.log(data.operacion)
+    },[])
+    
+    
     const buscarListaDeOperacionesEnBD = () => {
 
         // TODO: HACER PETICION A BACKEND PARA OBTENER TODAS LAS OPERACIONES REALIZADAS EN EL TRABAJO

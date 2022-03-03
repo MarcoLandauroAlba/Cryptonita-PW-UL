@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Button, Modal } from "react-bootstrap"
 
+
 const ModalModificarOperacion = (props) => {
 
     const [estadoOperacion, setEstadoOperacion] = useState(false)
