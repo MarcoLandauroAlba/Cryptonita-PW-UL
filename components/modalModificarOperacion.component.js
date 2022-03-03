@@ -81,7 +81,7 @@ const ModalModificarOperacion = (props) => {
     }
     
     const guardarOnClick = () => {
-        props.onActualizarOperacion(idCliente,tipo,compraBtc,ventaBtc,montoSoles,montoBtc,billetera,cuentaBanco,estadoOperacion)
+        props.onActualizarProceso(idOperacion,idCliente,tipo,compraBtc,ventaBtc,montoSoles,montoBtc,billetera,cuentaBanco,estadoOperacion)
         setIdOperacion(0)
         setIdCliente(0)
         setTipo('')

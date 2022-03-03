@@ -32,20 +32,29 @@ const obtenerOperacionxIdcliente = async (idcliente) => {
 }
 
 const obtenerOperacion = async (id) => {
-    return await db.Operacion.findOne({
+    const respuesta =  await db.Operacion.findOne({
         where : {
             id : id
         }
     })
+    return respuesta
 }
 
 const editarOperacion = async (operacion) => {
-    await db.Operacion.update({
-        estado : operacion.estado},{
-        where : {
-            id : operacion.id
-        }
-    })
+    const operacionAModificar = await obtenerOperacion(operacion.id)
+    
+    operacionAModificar.id = operacion.id
+    operacionAModificar.id_cliente = operacion.id_cliente
+    operacionAModificar.tipo = operacion.tipo
+    operacionAModificar.comprabtc = operacion.comprabtc
+    operacionAModificar.ventabtc = operacion.ventabtc
+    operacionAModificar.monto_soles = operacion.monto_soles
+    operacionAModificar.monto_btc = operacion.monto_btc
+    operacionAModificar.billetera = operacion.billetera
+    operacionAModificar.cuentabanco = operacion.cuentabanco
+    operacionAModificar.estado = operacion.estado
+
+    await operacionAModificar.save()
 }
 
 export { guardarOperacion, obtenerOperaciones, obtenerOperacion, editarOperacion, obtenerOperacionxIdcliente }

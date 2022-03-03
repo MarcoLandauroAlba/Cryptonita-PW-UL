@@ -150,8 +150,9 @@ const OperacionesAdminPage = () => {
         setSeDebeMostrarModalO(false)
     }
 
-    const actualizarProcesoHandler = async (idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {    
+    const actualizarProcesoHandler = async (id, idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {    
         const operacion ={
+            id: id,
             id_cliente: idcliente,
             tipo: tipo,
             comprabtc: comprabtc,
@@ -169,6 +170,7 @@ const OperacionesAdminPage = () => {
         })
         const data = await resp.json()
 
+        
         if (data.msg == "") {
             setSeDebeMostrarModalO(false)
             const dataOperadores = await obtenerOperadoresHTTP()
