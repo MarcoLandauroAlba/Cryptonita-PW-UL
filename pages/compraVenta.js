@@ -287,6 +287,9 @@ const CompraVenta = () => {
         setMultVent(cantidad)
     }
 
+
+
+
     return (
         <div>
             <MenuNavegacion
@@ -307,8 +310,6 @@ const CompraVenta = () => {
             <Footer
                 redireccionamiento={RedirigirAOtraPagina}
             />
-
-
             <ModalClienteP1C
                 almacenarBilletera={CrearBilletera}
                 onOcultar={onOcultarModalP1C}

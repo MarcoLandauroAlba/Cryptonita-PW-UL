@@ -41,6 +41,7 @@ const CompCompraVenta = (props) => {
                         <input type="number" className="form-control mt-2" id="pCompra" defaultValue={cComp} onChange={setCCompOnChange} />
                         {(() => {
                             return <input type="text" className="form-control mt-2" id="calcCompra" defaultValue={"S/." + parseFloat((()=>{
+                                console.log('cComp',cComp)
                                 if(cComp==null || cComp==undefined){
                                     return 0
                                 }else{
@@ -69,6 +70,7 @@ const CompCompraVenta = (props) => {
                         <input type="number" className="form-control mt-2" id="pCompra" defaultValue={cVent} onChange={setCVentOnChange} />
                         {(() => {
                             return <input type="text" className="form-control mt-2" id="calcCompra" defaultValue={"S/." + parseFloat((()=>{
+                                console.log('cVent',cVent)
                                 if(cVent==null || cVent==undefined){
                                     return 0
                                 }else{
