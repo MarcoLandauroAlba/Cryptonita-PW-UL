@@ -4,7 +4,6 @@ const operacionesHandler = async (req, res) => {
     if(req.method == "GET"){
         const operaciones = await obtenerOperaciones()
         const operacionesconEstado = []
-        console.log(operaciones)
         for(let op of operaciones){
             let estado = ""
             if(op.estado == true){
@@ -42,7 +41,6 @@ const operacionesHandler = async (req, res) => {
     }else if(req.method == "POST"){
         const data = JSON.parse(req.body)
         await guardarOperacion(data.id,data.id_cliente,data.tipo,data.comprabtc,data.ventabtc,data.monto_soles,data.monto_btc,data.billetera,data.cuentabcp)
-        console.log(data)
         res.json({
             msg: "",
             data:data

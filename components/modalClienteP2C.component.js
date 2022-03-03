@@ -50,7 +50,6 @@ const ModalClienteP2C = (props) => {
             </Modal.Footer>
         </Modal>
     } else {
-        console.log('ModalClienteP2C fuera')
         return <></>
     }
 

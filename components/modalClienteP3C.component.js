@@ -34,7 +34,6 @@ const ModalClienteP3C = (props) => {
             </Modal.Footer>
         </Modal>
     } else {
-        console.log('ModalClienteP3C fuera')
         return <></>
     }
 

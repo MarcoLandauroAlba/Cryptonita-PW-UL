@@ -179,8 +179,6 @@ const OperacionesAdminPage = () => {
         const resp = await fetch(`/api/operacion_extraidas/${id}`)
         const data = await resp.json()
         setOperacion(data.operacion)
-        console.log('holaaaaaaaS')
-        console.log(operacion)
         setSeDebeMostrarModalO(true)
     }
 

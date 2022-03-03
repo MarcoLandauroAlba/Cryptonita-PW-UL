@@ -24,9 +24,6 @@ const BloqueHistorialTrans = (props) => {
                         {
                             props.lista.map((operacion) => {
                                 return <tr className='align-middle' key={operacion.id}>
-                                    {
-                                        console.log(operacion)
-                                    }
                                     <td className="text-center">{operacion.id}</td>
                                     <td className="text-center">{operacion.id_cliente}</td>
                                     <td className="text-center">{operacion.tipo}</td>
@@ -46,7 +43,9 @@ const BloqueHistorialTrans = (props) => {
             </div>
         </div>
     } else {
-        return <></>
+        return <div className="h1 text-center text-danger">
+            Usted no tiene permiso de estar en esta pagina
+        </div>
     }
 
 }

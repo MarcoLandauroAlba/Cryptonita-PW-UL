@@ -29,9 +29,6 @@ export default function ListaOperaciones(props) {
                         {
                             props.lista.map((operacion) => {
                                 return <tr className='align-middle' key={operacion.id}>
-                                    {
-                                        console.log(operacion)
-                                    }
                                     <td className="text-center">{operacion.id}</td>
                                     <td className="text-center">{operacion.id_cliente}</td>
                                     <td className="text-center">{operacion.tipo}</td>

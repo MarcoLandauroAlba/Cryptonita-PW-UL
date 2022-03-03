@@ -223,12 +223,10 @@ const CompraVenta = () => {
             const listaDeOperaciones = await obtenerOperacionesRealizadas()
             const tamano = listaDeOperaciones.operaciones.length
             setIdOperacion(valor + tamano.toString())
-            console.log('valor+tamano.toString()'.valor + tamano.toString())
         }
     }
 
     const CrearOperacion = async (BTipo, Comprabtc, Ventabtc, MontoSoles, MontoBTC, txtBilletera, Cuentabanco, txtEstado) => {
-        console.log('Comprabtc',Comprabtc)
         let operacionesconId
         if(Comprabtc==true){
             operacionesconId = {
@@ -258,14 +256,12 @@ const CompraVenta = () => {
             }
         }
         setOperacion(operacionesconId)
-        console.log('operacionesconId aqui', operacionesconId)
 
         let response = await fetch("/api/operacion_extraidas", {
             method: "POST",
             body: JSON.stringify(operacionesconId)
         })
         const data = await response.json()
-        console.log(data)
     }
 
 
@@ -299,6 +295,7 @@ const CompraVenta = () => {
                 ubicacion={ubicacionActual}
             />
             <CompCompraVenta
+                tipoDeCliente={tipoDeCliente}
                 valor={valorCripto}
                 habilitarModal1C={HabilitarModalP1C}
                 habilitarModal1V={HabilitarModalP1V}
