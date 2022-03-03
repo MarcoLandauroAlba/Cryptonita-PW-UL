@@ -3,7 +3,7 @@ const  Op  = Sequelize.Op
 const db = require("../sequelize/models")
 
 const guardarCliente = async (estado,telefono,contraseña,correo,nombre,apellido,dni) => {
-    const admin = await db.Cliente.create({
+    await db.Cliente.create({
         estado: estado,
         telefono: telefono,
         contraseña: contraseña,

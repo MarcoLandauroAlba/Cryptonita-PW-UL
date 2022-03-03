@@ -1,10 +1,6 @@
-const HistorialTrans = (props) =>{
-    return(<div >
-        <div className="card text-center"> <br/>
-            <div> 
-                <button onClick={() => { props.redireccionamiento('/compraVenta') }} className="btn btn-primary btn-small col-md-3">Volver a Compra/Venta</button>
-                <button onClick={()=>{console.log('redirigir aqui')}}  className="btn btn-primary disabled btn-small col-md-4">Ver historial</button>
-            </div>
+export default function HistorialTrans (props) {
+    return <div>
+            <h3 className="mt-3">Listado de Operaciones</h3>
             <div className="table-responsive">
                 <table className="table mt-4">
                     <thead>
@@ -47,8 +43,4 @@ const HistorialTrans = (props) =>{
                 </table>
             </div>
         </div>
-        </div>
-
-    )
 }
-export default HistorialTrans

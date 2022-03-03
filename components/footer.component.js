@@ -23,7 +23,7 @@ const Footer = (props) => {
                         <div className="text-center mb-1">
                             <Button
                                 variant="outline-dark"
-                                onClick={() => { props.redireccionamiento('/Nosotros') }}
+                                onClick={() => { props.redireccionamiento('/nosotros') }}
                             >
                                 Nosotros
                             </Button>
