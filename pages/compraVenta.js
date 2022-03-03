@@ -24,9 +24,9 @@ const CompraVenta = () => {
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
     // DIRECCION DE LA PAGINA ACTUAL
-    const direccionActual = '/CompraVenta'
+    const direccionActual = '/compraVenta'
     //  SOLO SIRVE PARA EL PROPS ubicacion
-    const ubicacionActual = 'CompraVenta'
+    const ubicacionActual = 'compraVenta'
 
     useEffect(() => {
         const AsyncUseEffect = async () => {
