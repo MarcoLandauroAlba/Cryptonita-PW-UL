@@ -1,4 +1,3 @@
-import { Image } from "react-bootstrap"
 import { useState } from 'react'
 
 const CompCompraVenta = (props) => {
@@ -11,6 +10,7 @@ const CompCompraVenta = (props) => {
             if(event.target.value==undefined || event.target.value==null || Number.isNaN(event.target.value) || event.target.value==""){
                 return 0
             }else{
+                props.establecerMultComp(parseFloat(event.target.value))
                 return parseFloat(event.target.value)
             }
         })())
@@ -20,6 +20,7 @@ const CompCompraVenta = (props) => {
             if(event.target.value==undefined || event.target.value==null || Number.isNaN(event.target.value) || event.target.value==""){
                 return 0
             }else{
+                props.establecerMultVent(parseFloat(event.target.value))
                 return parseFloat(event.target.value)
             }
         })())
@@ -43,6 +44,7 @@ const CompCompraVenta = (props) => {
                                 if(cComp==null || cComp==undefined){
                                     return 0
                                 }else{
+                                    props.establecerCComp(parseFloat(cComp)* ((parseFloat(props.valor)) * 3.75).toFixed(4))
                                     return cComp
                                 }
                             })()) * ((parseFloat(props.valor)) * 3.75).toFixed(4)} disabled />
@@ -70,9 +72,10 @@ const CompCompraVenta = (props) => {
                                 if(cVent==null || cVent==undefined){
                                     return 0
                                 }else{
+                                    props.establecerCVent(parseFloat(cVent)* ((parseFloat(props.valor)) * 3.75).toFixed(4))
                                     return cVent
                                 }
-                            })()) * (parseFloat(props.valor) * (1 + 0.005) * 3.75).toFixed(4)} disabled />
+                            })()) * (parseFloat(props.valor) * 3.75).toFixed(4)} disabled />
                         })()}
                     </form>
                 </div>

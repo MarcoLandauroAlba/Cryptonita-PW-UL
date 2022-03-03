@@ -12,7 +12,7 @@ const ModalClienteP1V = (props) => {
     const butGuardarOnClick = () => {
         props.almacenarCuenta(txtCuenta)
         props.onOcultar()
-        props.habilitarModal2(Vtrue)
+        props.habilitarModal2V()
     }
 
     const butCloseFormOnClick = () => {
@@ -23,7 +23,7 @@ const ModalClienteP1V = (props) => {
     
     return <Modal show={ props.onMostrar } onHide={ butCloseFormOnClick }>
         <Modal.Header closeButton>
-            <Modal.Title>Paso 2 de 3</Modal.Title>
+            <Modal.Title>Paso 1 de 3</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

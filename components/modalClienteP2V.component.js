@@ -1,76 +1,59 @@
-import { useEffect, useState } from 'react';
-import { Modal, Button} from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 const ModalClienteP2V = (props) => {
-    const[idOperacion, setOperacion] = useState(0)
 
-    useEffect(()=> {
-        if(props.idOperacion != null){
-            setOperacion(props.idOperacion.id)
+    if (props.onMostrar) {
+        const butGuardarOnClick = () => {
+            props.almacenarOperacion(
+                false,
+                0,
+                props.bitcoins,
+                0,
+                props.soles,
+                props.billetera,
+                '32454482218612',
+                false
+            )
+            props.onOcultar()
+            props.habilitarModal3V()
         }
-    }, [props.idOperacion]) 
-    
-    // const IdClienteOnChange = (event) => {
-    //     setIdCliente(event.target.value)
-    // }
 
-    // const BTipoOnChange = (event) => {
-    //     setBTipo(event.target.value)
-    // }
+        const butCloseFormOnClick = () => {
+            props.onOcultar()
+        }
 
-    // const ComprabtcOnChange = (event) => {
-    //     setTxtComprabtc(event.target.value)
-    // }
+        return <Modal show={props.onMostrar} onHide={butCloseFormOnClick}>
+            <Modal.Header closeButton>
+                <Modal.Title>Paso 2 de 3</Modal.Title>
+            </Modal.Header>
 
-    // const VentabtcOnChange = (event) => {
-    //     setTxtVentabtc(event.target.value)
-    // }
-
-    // const BilleteraOnChange = (event) => {
-    //     setTxtBilletera(event.target.value)
-    // }
-
-    // const CuentabancoOnChange = (event) => {
-    //     setTxtCuentabanco(event.target.value)
-    // }
-    
-    // const EstadoOnChange = (event) => {
-    //     setEstado(event.target.value)
-    // }
-    
-    const butGuardarOnClick = () => {
-        props.onOcultar()
-        props.habilitarModal3V(true)
-    }
-
-    const butCloseFormOnClick = () => {
-        props.onOcultar()
-    }
-
-    
-    return <Modal show={ props.onMostrar } onHide={ butCloseFormOnClick }>
-        <Modal.Header closeButton>
-            <Modal.Title>Paso 2 de 3</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-            <form>
+            <Modal.Body>
                 <div>
-                    <label className="form-label">
-                        Billetera de la empresa: 65898191
-                    </label>
-                    <label className="form-label">
-                        Número de transacción: {idOperacion}
-                    </label>
+                    <div>
+                        <div className="h3 my-3">
+                            Billetera de la empresa: 65898191
+                        </div>
+                        <div className="h4 mt-3">
+                            Número de transacción: {props.idOperacion}
+                        </div>
+                        <div className="h6 mt-3">
+                            Cantidad de Bincoins comprados: ฿/.{props.bitcoins}
+                        </div>
+                        <div className="h6 mt-3">
+                            Costo de la transaccion: S/.{props.soles}
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </Modal.Body>
+            </Modal.Body>
 
-        <Modal.Footer>
-            <Button variant="primary"
-            onClick={ butGuardarOnClick }>Confirmar</Button>
-        </Modal.Footer>
-    </Modal>
+            <Modal.Footer>
+                <Button variant="primary"
+                    onClick={butGuardarOnClick}>Confirmar</Button>
+            </Modal.Footer>
+        </Modal>
+    }else{
+        return <></>
+    }
 }
 
 export default ModalClienteP2V

@@ -10,7 +10,7 @@ import ModalClienteP3C from "../components/modalClienteP3C.component"
 import ModalClienteP1V from "../components/modalClienteP1V.component"
 import ModalClienteP2V from "../components/modalClienteP2V.component"
 import ModalClienteP3V from "../components/modalClienteP3V.component"
-const compraVenta = () => {
+const CompraVenta = () => {
 
     // ********************************************************************************************************************************************************************************************************
     // ========================================================================================================================================================================================================
@@ -24,9 +24,9 @@ const compraVenta = () => {
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
     // DIRECCION DE LA PAGINA ACTUAL
-    const direccionActual = '/compraVenta'
+    const direccionActual = '/CompraVenta'
     //  SOLO SIRVE PARA EL PROPS ubicacion
-    const ubicacionActual = 'compraVenta'
+    const ubicacionActual = 'CompraVenta'
 
     useEffect(() => {
         const AsyncUseEffect = async () => {
@@ -192,7 +192,9 @@ const compraVenta = () => {
     }
 
     const [billetera, setBilletera] = useState()
+    const [cuenta, setCuenta] = useState()
     const [idOperacion, setIdOperacion] = useState()
+    const [operacion, setOperacion] = useState()
 
     const obtenerOperacionesRealizadas = async () => {
         let response = await fetch("/api/operacion_extraidas")
@@ -201,21 +203,72 @@ const compraVenta = () => {
     }
 
     const CrearBilletera = async (valor) => {
-        if(valor==''){
+        if (valor == '') {
             setBilletera('')
             setIdOperacion('')
-        }else{
-            setBilletera(valor)
+        } else {
+            setBilletera(valor.toString())
             const listaDeOperaciones = await obtenerOperacionesRealizadas()
             const tamano = listaDeOperaciones.operaciones.length
-            setIdOperacion(valor+tamano.toString())
+            setIdOperacion(valor + tamano.toString())
         }
     }
 
+    const CrearCuenta = async (valor) => {
+        if (valor == '') {
+            setOperacion('')
+            setIdOperacion('')
+        } else {
+            setOperacion(valor.toString())
+            const listaDeOperaciones = await obtenerOperacionesRealizadas()
+            const tamano = listaDeOperaciones.operaciones.length
+            setIdOperacion(valor + tamano.toString())
+            console.log('valor+tamano.toString()'.valor + tamano.toString())
+        }
+    }
+
+    const CrearOperacion = async (BTipo, Comprabtc, Ventabtc, MontoSoles, MontoBTC, txtBilletera, Cuentabanco, txtEstado) => {
+        const operacionesconId = {
+            id: idOperacion,
+            id_cliente: cliente,
+            tipo: BTipo,
+            comprabtc: Comprabtc,
+            ventabtc: Ventabtc,
+            monto_soles: MontoSoles,
+            monto_btc: MontoBTC,
+            billetera: txtBilletera,
+            cuentabcp: Cuentabanco,
+            estado: txtEstado,
+        }
+        setOperacion(operacionesconId)
+        console.log('operacionesconId aqui', operacionesconId)
+
+        let response = await fetch("/api/operacion_extraidas", {
+            method: "POST",
+            body: JSON.stringify(operacionesconId)
+        })
+        const data = await response.json()
+        console.log(data)
+    }
 
 
-    
+    const [cComp, setCComp] = useState(0)
+    const [cVent, setCVent] = useState(0)
+    const [multComp, setMultComp] = useState(0)
+    const [multVent, setMultVent] = useState(0)
 
+    const establecerCComp = (cantidad) => {
+        setCComp(cantidad)
+    }
+    const establecerCVent = (cantidad) => {
+        setCVent(cantidad)
+    }
+    const establecerMultComp = (cantidad) => {
+        setMultComp(cantidad)
+    }
+    const establecerMultVent = (cantidad) => {
+        setMultVent(cantidad)
+    }
 
     return (
         <div>
@@ -229,45 +282,64 @@ const compraVenta = () => {
                 valor={valorCripto}
                 habilitarModal1C={HabilitarModalP1C}
                 habilitarModal1V={HabilitarModalP1V}
+                establecerCComp={establecerCComp}
+                establecerCVent={establecerCVent}
+                establecerMultComp={establecerMultComp}
+                establecerMultVent={establecerMultVent}
             />
             <Footer
                 redireccionamiento={RedirigirAOtraPagina}
             />
 
 
-            <ModalClienteP1C 
+            <ModalClienteP1C
                 almacenarBilletera={CrearBilletera}
                 onOcultar={onOcultarModalP1C}
-                onMostrar= {mostrarModalP1C}
-                habilitarModal2C= {HabilitarModalP2C}
+                onMostrar={mostrarModalP1C}
+                habilitarModal2C={HabilitarModalP2C}
             />
-            <ModalClienteP2C 
+            <ModalClienteP2C
                 onOcultar={onOcultarModalP2C}
-                onMostrar= {mostrarModalP2C}
+                onMostrar={mostrarModalP2C}
                 idOperacion={idOperacion}
-
+                habilitarModal3C={HabilitarModalP3C}
+                almacenarOperacion={CrearOperacion}
+                soles={cComp}
+                bitcoins={multComp}
+                billetera={billetera}
             />
-            {/* <ModalClienteP3C 
+            <ModalClienteP3C
                 onOcultar={onOcultarModalP3C}
-                onMostrar= {mostrarModalP3C}
+                onMostrar={mostrarModalP3C}
+                idOperacion={idOperacion}
             />
 
-            <ModalClienteP1V 
+            <ModalClienteP1V
+                almacenarCuenta={CrearCuenta}
                 onOcultar={onOcultarModalP1V}
-                onMostrar= {mostrarModalP1V}
+                onMostrar={mostrarModalP1V}
+                habilitarModal2V={HabilitarModalP2V}
             />
-            <ModalClienteP2V 
+            <ModalClienteP2V
                 onOcultar={onOcultarModalP2V}
-                onMostrar= {mostrarModalP2V}
+                onMostrar={mostrarModalP2V}
+                idOperacion={idOperacion}
+                habilitarModal3V={HabilitarModalP3V}
+                almacenarOperacion={CrearOperacion}
+                soles={cVent}
+                bitcoins={multVent}
+                cuenta={cuenta}
+
             />
-            <ModalClienteP3V 
+            <ModalClienteP3V
                 onOcultar={onOcultarModalP3V}
-                onMostrar= {mostrarModalP3V}
-            /> */}
-            
+                onMostrar={mostrarModalP3V}
+                idOperacion={idOperacion}
+            />
+
 
         </div>
     )
 }
 
-export default compraVenta
+export default CompraVenta
