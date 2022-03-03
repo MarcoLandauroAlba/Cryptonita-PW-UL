@@ -104,4 +104,4 @@ const modificarCliente = async (cliente) => {
     await clienteAModificar.save()
 }
 
-export {guardarCliente,obtenerClientexCorr2, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI, obtenerClientexCorreoYContrasena}
+export {guardarCliente,obtenerClientexCorr2, obtenerCliente, obtenerClientes, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI, obtenerClientexCorreoYContrasena}
