@@ -139,22 +139,20 @@ const OperacionesAdminPage = () => {
 
     const buscarOperaciones = async (datos, boton) => {
         //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
-        let nuevaLista = []
         if (boton == 'IDCLIENTE') {
             const resp = await fetch(`/api/operacion_extraidas/idcliente/${datos}`)
             const data = await resp.json()
             setListaOperacionesM(data.operacion)
         }
-        // TODO: FALTA BASE DE DATOS PARA IMPLEMENTAR FUNCIONALIDAD A LOS BOTONES
-
     }
 
     const ocultar = () => {
         setSeDebeMostrarModalO(false)
     }
 
-    const actualizarProcesoHandler = async (idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {    
+    const actualizarProcesoHandler = async (id, idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {    
         const operacion ={
+            id: id,
             id_cliente: idcliente,
             tipo: tipo,
             comprabtc: comprabtc,
@@ -172,6 +170,7 @@ const OperacionesAdminPage = () => {
         })
         const data = await resp.json()
 
+        
         if (data.msg == "") {
             setSeDebeMostrarModalO(false)
             const dataOperadores = await obtenerOperadoresHTTP()
@@ -183,6 +182,8 @@ const OperacionesAdminPage = () => {
         const resp = await fetch(`/api/operacion_extraidas/${id}`)
         const data = await resp.json()
         setOperacion(data.operacion)
+        console.log('holaaaaaaaS')
+        console.log(operacion)
         setSeDebeMostrarModalO(true)
     }
 
@@ -219,7 +220,7 @@ const OperacionesAdminPage = () => {
             <ModalModificarOperacion
                 onOcultar={ocultar}
                 onMostrar={seDebeMostrarModalO}
-                onActualizarProceso={actualizarProcesoHandler}
+                onActualizarOperacion={actualizarProcesoHandler}
                 operacion={operacion}
             />
         </div>
