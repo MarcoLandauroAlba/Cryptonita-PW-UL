@@ -51,7 +51,7 @@ const OpcionesOperacionesAdmin = (props) => {
                             <h5 className="mx-2" >
                                 Monto total operado en BitCoins: 
                                 {(()=>{
-
+                                    return sumaMontos()
                                 })()}
                             </h5>
                         </div>
