@@ -27,6 +27,16 @@ const OpcionesOperacionesAdmin = (props) => {
                 <div className="col-md-1"></div>
                 <div className="col-md-10 row">
                     <div className="col-md-6">
+                        <div className="d-flex">
+                            <h5 className="mx-2" >
+                                Monto total operado en BitCoins:  ฿.
+                                {(()=>{
+                                    return sumaMontos()
+                                })()}
+                            </h5>
+                        </div>
+                    </div>
+                    <div className="col-md-6">
                         <form>
                             <label className="mx-2 h5" >Filtrar por id de cliente:</label>
                             <div className="d-flex justify-content-end">
@@ -46,16 +56,6 @@ const OpcionesOperacionesAdmin = (props) => {
                                 </button>
                             </div>
                         </form>
-                    </div>
-                    <div className="col-md-6">
-                        <div>
-                            <h5 className="mx-2" >
-                                Monto total operado en BitCoins: 
-                                {(()=>{
-                                    return sumaMontos()
-                                })()}
-                            </h5>
-                        </div>
                     </div>
                 </div>
                 <div className="col-md-1"></div>
