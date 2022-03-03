@@ -12,39 +12,39 @@ export default function ModTCambio(props) {
     });
 
     if (props.tipoDeCliente == 1) {
-        return <div className="row">
-            <div className="col-md-6">
+        return <div className="row mt-3">
+            <div className="col-md-6 my-2">
                 <Card style={{ width: '100%' }}>
                     <Card.Img variant="top" src="https://www.criptonoticias.com/wp-content/uploads/2019/07/Bitcoin-punto-venta-Espa%C3%B1a-Latinoam%C3%A9rica-1050x570.jpg" />
-                    <Card.Body>
+                    <Card.Body className="text-white bg-success text-center">
                         <Card.Title>
-                            <div className="my-1">COMPRA DE BITCOINS</div>
-                            <div className="my-3">
+                            <h3 className="my-1">COMPRA DE BITCOINS</h3>
+                            <h4 className="my-3">
                                 {
                                     (() => {
-                                        return "S/." + ((parseFloat(props.valor)) * 3.75).toFixed(4)
+                                        return "S/. " + ((parseFloat(props.valor)) * 3.75).toFixed(4)
                                     })()
                                 }
-                            </div>
+                            </h4>
                         </Card.Title>
                         <Card.Text>
                         </Card.Text>
                     </Card.Body>
                 </Card>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 my-2">
                 <Card style={{ width: '100%' }}>
-                    <Card.Img variant="top" src="https://www.criptonoticias.com/wp-content/uploads/2018/01/Plataformas-P2P-Zelle-Criptomonedas-e1515968242132.jpg" />
-                    <Card.Body>
+                    <Card.Img variant="top" src="https://www.criptonoticias.com/wp-content/uploads/2019/08/bitcoin-riesgo-liquidez-criptomonedas-1050x570.jpg" />
+                    <Card.Body className="text-white bg-primary text-center">
                         <Card.Title>
-                            <div className="my-1">VENTA DE BITCOINS</div>
-                            <div className="my-3">
+                            <h3 className="my-1">VENTA DE BITCOINS</h3>
+                            <h4 className="my-3">
                                 {
                                     (() => {
-                                        return "S/." + (parseFloat(props.valor) * 3.75).toFixed(4)
+                                        return "S/. " + (parseFloat(props.valor) * 3.75).toFixed(4)
                                     })()
                                 }
-                            </div>
+                            </h4>
                         </Card.Title>
                         <Card.Text>
                         </Card.Text>

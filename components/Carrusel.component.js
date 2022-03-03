@@ -8,7 +8,7 @@ const Carrusel = () => {
                         <Image
                             alt="..."
                             className="banner"
-                            src="https://estaticos-cdn.elperiodico.com/clip/5d0a3ba8-43db-4b2f-abc9-882d8344e5d5_alta-libre-aspect-ratio_default_0.jpg"
+                            src="https://resizer.iproimg.com/unsafe/880x/filters:format(webp)/https://assets.iproup.com/assets/jpg/2021/02/16511.jpg?7.1.4"
                             thumbnail={true}
                         />
                         <div>
@@ -29,13 +29,13 @@ const Carrusel = () => {
                         <Image
                             alt="..."
                             className="banner"
-                            src="https://estudiotarazona.com/wp-content/uploads/2020/11/81cd82ce-2d69-417f-9c7a-324660761590-1000x500.jpg"
+                            src="https://www.criptonoticias.com/wp-content/uploads/2021/09/bitcoin-habla-hispana-adopcion-bitcoin-peru-salvador.jpg"
                             thumbnail={true}
                         />
                         <div>
-                            <div className='m-5' align="justify">
+                            <div className='m-5 text-center' align="justify">
                                 <font face='Britannic Bold'>
-                                    <h2 className='m-4'>CAMBIA TUS SOLES A BITCOINS EN NUESTRA CASA DE CAMBIO</h2>
+                                    <h2 className='m-4'>Cambia tus soles a bitcoins en nuestra casas de cambio</h2>
                                 </font>
                             </div>
                         </div>

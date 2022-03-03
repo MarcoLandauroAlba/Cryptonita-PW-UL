@@ -7,47 +7,12 @@ const BloqueTermYCond = (props) => {
     return (
         <div className="row">
             <h2 className="mt-4">Términos y Condiciones</h2>
+            <h5 className="text-muted">Revisado por última vez: 2 de Marzo del 2022</h5>
             <div className="col-lg-8 mt-4">
-                <ul>
-                    <li><h5>Información del sitio</h5></li>
-                    <p className="text-justify">
-                        Sitio de cambio de criptomonedas en la región peruana
-                        que busca agilizar la labor de los cambistas para establecer
-                        el cambio de manera online. Página que es realizada para un
-                        proyecto universitario y no está avalada como tal por un banco
-                        o entidad financiera.
-                    </p>
-                    <li><h5>Usuarios</h5></li>
-                    <p>
-                        La página se compromete en la protección de los datos personales
-                        y la no divulgación de algún dato sensible que pueda afectar directa
-                        o indirectamente a alguno de nuestros usuarios
-                    </p>
-                    <li><h5>Regulaciones</h5></li>
-                    <ul>
-                        <li>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        </li>
-                        <li>
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        </li>
-                        <li>
-                            when an unknown printer took a galley of type and scrambled it to make a type
-                        </li>
-                        <li>
-                            specimen book. It has survived not only five centuries, but also the leap into
-                        </li>
-                        <li>
-                            electronic typesetting, remaining essentially unchanged. It was popularised in
-                        </li>
-                        <li>
-                            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                        </li>
-                        <li>
-                            and more recently with desktop publishing software like Aldus PageMaker including
-                        </li>
-                    </ul>
-                </ul>
+                <h5>Información del sitio</h5>
+                <p align="justify">
+                    Estos Términos de uso de Cryptonita se celebran entre usted (en lo sucesivo, "usted" o "tu") y los operadores de Cryptonita (como se define a continuación). Al acceder, descargar, usar o hacer clic en "Acepto" para aceptar cualquier Servicio de Cryptonita (como se define a continuación) proporcionado por Cryptonita (como se define a continuación), usted acepta que ha leído, entendido y aceptado todos los términos y condiciones estipulados en estos Términos de uso (en adelante, “estos Términos”). Además, al usar algunas funciones de los Servicios, puede estar sujeto a términos y condiciones adicionales específicos aplicables a esas funciones. Lea los términos detenidamente, ya que rigen su uso de los Servicios de Cryptonita. ESTOS TÉRMINOS CONTIENEN DISPOSICIONES IMPORTANTES, INCLUYENDO UNA DISPOSICIÓN DE ARBITRAJE QUE REQUIERE QUE TODAS LAS RECLAMACIONES SE RESUELVAN MEDIANTE ARBITRAJE LEGALMENTE VINCULANTE. Los términos de la disposición de arbitraje se establecen en el Artículo 10, “Resolución de disputas: foro, arbitraje, renuncia a acciones colectivas”, a continuación. Al igual que con cualquier activo, los valores de las Monedas digitales (como se define a continuación) pueden fluctuar significativamente y existe un riesgo sustancial de pérdidas económicas al comprar, vender, mantener o invertir en Monedas digitales y sus derivados. AL UTILIZAR LOS SERVICIOS DE CRYPTONITA, USTED RECONOCE Y ACEPTA QUE: (1) USTED ES CONSCIENTE DE LOS RIESGOS ASOCIADOS CON LAS TRANSACCIONES DE MONEDAS DIGITALES Y SUS DERIVADOS; (2) USTED ASUMIRÁ TODOS LOS RIESGOS RELACIONADOS CON EL USO DE LOS SERVICIOS DE CRYPTONITA Y LAS TRANSACCIONES DE MONEDAS DIGITALES Y SUS DERIVADOS; Y (3) CRYPTONITA NO SERÁ RESPONSABLE DE DICHOS RIESGOS O RESULTADOS ADVERSOS. Al acceder, usar o intentar usar los Servicios de Cryptonita en cualquier capacidad, usted reconoce que acepta y acepta estar sujeto a estos Términos. Si no está de acuerdo, no acceda a Cryptonita ni utilice los servicios de Cryptonita.
+                </p>
             </div>
             <div className="col-lg-4 mt-4">
                 <Image

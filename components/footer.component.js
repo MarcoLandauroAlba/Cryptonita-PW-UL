@@ -16,7 +16,7 @@ const renderTooltip2 = (props) => (
 
 const Footer = (props) => {
     return (
-        <footer className="card mt-4">
+        <footer className="card mt-4 mb-2">
             <div className="card-body">
                 <div className="row">
                     <div className="col-md">
