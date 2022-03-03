@@ -8,12 +8,14 @@ export default function ModTCambio(props) {
     if (props.tipoDeCliente == 1) {
         return <div className="row">
             <div>
-                Precio Criptomoneda:
+                Precio BTC Compra(El valor se actualiza cada minuto): 
                 {
                     (() => {
-                        return props.valor
+                        return JSON.stringify(props.valor)
                     })()
-                }
+                }<br/>
+                Precio BTC Venta : $44,000.00
+
             </div>
         </div>
     } else {
