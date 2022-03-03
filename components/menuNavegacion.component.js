@@ -51,7 +51,7 @@ const MenuNavegacion = (props) => {
                                 {
                                     (
                                         () => {
-                                            if (props.ubicacion == 'index') {
+                                            if (props.ubicacion == 'ModificarTCambioAdmin') {
                                                 return (
                                                     <button className="nav-link btn active" onClick={() => { props.redireccionamiento('/ModificarTCambioAdmin') }}>Tipo de Cambio</button>
                                                 )

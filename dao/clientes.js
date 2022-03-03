@@ -21,7 +21,6 @@ const obtenerCliente = async (id) => {
             id : id
         }
     })
-    console.log('CLIENTES JS OBTENERCLIENTE+',respuesta)
     return respuesta 
 }
 
@@ -105,14 +104,4 @@ const modificarCliente = async (cliente) => {
     await clienteAModificar.save()
 }
 
-const editarOperacion = async (cliente) => {
-    await db.Cliente.update({
-        estado : cliente.estado},{
-        where : {
-            id : cliente.id
-        },
-        estado: cliente.estado
-    })
-}
-
-export {guardarCliente,obtenerClientexCorr2, obtenerCliente, obtenerClientes, editarOperacion, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI, obtenerClientexCorreoYContrasena}
+export {guardarCliente,obtenerClientexCorr2, obtenerCliente, obtenerClientes, modificarCliente, obtenerClientexAp, obtenerClientexCorr, obtenerClientexNom, obtenerClientexDNI, obtenerClientexCorreoYContrasena}

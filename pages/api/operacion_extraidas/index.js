@@ -41,9 +41,8 @@ const operacionesHandler = async (req, res) => {
             operaciones : operacionesconEstado
         })
     }else if(req.method == "POST"){
-        console.log("Se debería guardar en la base de datos")
         const data = JSON.parse(req.body)
-        await guardarOperacion(data.idcliente,data.tipo,data.comprabtc,data.ventabtc,data.montosoles,data.montobtc,data.billetera,data.cuentabcp)
+        await guardarOperacion(data.id_cliente,data.tipo,data.comprabtc,data.ventabtc,data.monto_soles,data.monto_btc,data.billetera,data.cuentabcp)
         res.json({
             msg: ""
         })

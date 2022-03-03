@@ -142,7 +142,6 @@ const ProcesoRegistro2Page = () => {
     const existeCorreoEnBaseDeDatos = async (correo) => {
         const response = await fetch(`/api/usuarios/correos/${correo}`,{method: 'OPTIONS'})
         const data = await response.json()
-        console.log('existeCorreoEnBaseDeDatos data ', data)
         if (data.cliente == null) {
             return false
         } else {
@@ -158,7 +157,6 @@ const ProcesoRegistro2Page = () => {
         let EfaltaTelefono = true
         let ENodisponible = false
 
-        console.log('validarEmail(correo)', validarEmail(correo))
         if (!validarEmail(correo)) {
             setFaltaCorreo(true)
         } else {
@@ -194,7 +192,6 @@ const ProcesoRegistro2Page = () => {
         // // REVISAMOS SI EL CORREO EXISTE EN LA BASE DE DATOS
         if (!EfaltaCorreo) {
             const preguntaExiste = await existeCorreoEnBaseDeDatos(correo)
-            console.log('preguntaExiste',preguntaExiste)
             setDisponible(!preguntaExiste)
             if (preguntaExiste) {
                 ENodisponible = true
@@ -205,7 +202,6 @@ const ProcesoRegistro2Page = () => {
 
         // SI INGRESA A ESTA CONDICIONAL, SIGNIFICA QUE TODO LO INGRESADO ES VALIDO PARA CREAR UNA CUENTA
         if (!EfaltaCorreo && !EfaltaContraOri && !EfaltaContraRep && !EfaltaTelefono && !ENodisponible) {
-            console.log('entrooooooo')
             // TODO: FALTA COMUNICARSE CON EL BACKEND PARA REALIZAR LA CREACION DE DATOS
             const clienteintancia = obtenerClienteDatosIniciales()
             const nombre = clienteintancia.nombre
@@ -223,7 +219,6 @@ const ProcesoRegistro2Page = () => {
                 contrasena: contrasenaOriginal,
                 estado: estado
             }
-            console.log('cliente12+', clientePorGuardar)
 
             const resp = await fetch("/api/usuarios", {
                 method: "POST",
@@ -237,7 +232,6 @@ const ProcesoRegistro2Page = () => {
             // DE LA SIGUIENTE PETICION SE OBTENDRA EL ID DEL CLIENTE CREADO
             const responseCliente = await fetch(`/api/usuarios/correos/${correo}`,{method: 'OPTIONS'})
             const dataCliente = await responseCliente.json()
-            console.log('cliente recien creado: ', dataCliente)
 
             RedirigirAPaginaPrincipalDeEsperaConLoggeo(dataCliente.cliente.id)
         }
