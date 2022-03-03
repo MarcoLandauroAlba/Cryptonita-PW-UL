@@ -11,27 +11,27 @@ export default function ListaUsuarios(props) {
             <div className="table-responsive">
                 <table className="table mt-4">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombres Completos</th>
-                            <th>DNI</th>
-                            <th>Correo Electrónico</th>
-                            <th>Número Teléfonico</th>
-                            <th>Estado</th>
-                            <th>Opciones</th>
+                        <tr className='align-middle'>
+                            <th className="text-center">ID</th>
+                            <th className="text-center">Nombres Completos</th>
+                            <th className="text-center">DNI</th>
+                            <th className="text-center">Correo Electrónico</th>
+                            <th className="text-center">Número Teléfonico</th>
+                            <th className="text-center">Estado</th>
+                            <th className="text-center">Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             props.lista.map((usuario) => {
-                                return <tr key={usuario.id}>
-                                    <td>{usuario.id}</td>
-                                    <td>{usuario.nombre + " " + usuario.apellido}</td>
-                                    <td>{usuario.dni}</td>
-                                    <td>{usuario.correo}</td>
-                                    <td>{usuario.telefono}</td>
-                                    <td>{usuario.estado}</td> 
-                                    <td><button type="button" className="btn btn-link" onClick={ ()=>{
+                                return <tr className='align-middle' key={usuario.id}>
+                                    <td className="text-center">{usuario.id}</td>
+                                    <td className="text-center">{usuario.nombre + " " + usuario.apellido}</td>
+                                    <td className="text-center">{usuario.dni}</td>
+                                    <td className="text-center">{usuario.correo}</td>
+                                    <td className="text-center">{usuario.telefono}</td>
+                                    <td className="text-center">{usuario.estado}</td> 
+                                    <td className='text-center'><button type="button" className="btn btn-link" onClick={ ()=>{
                                         props.onEditar(usuario.id)
                                     } }>Modificar</button>
                                     </td>

@@ -11,39 +11,39 @@ export default function ListaOperaciones(props) {
             <div className="table-responsive">
                 <table className="table mt-4">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>ID Cliente</th>
-                            <th>Tipo</th>
-                            <th>Compra de BTC</th>
-                            <th>Venta de BTC</th>
-                            <th>Monto soles</th>
-                            <th>Monto BTC</th>
-                            <th>Billetera</th>
-                            <th>Cuenta BCP</th>
-                            <th>Fecha</th>
-                            <th>Estado</th>
+                        <tr className='align-middle'>
+                            <th className="text-center">ID</th>
+                            <th className="text-center">ID Cliente</th>
+                            <th className="text-center">Tipo</th>
+                            <th className="text-center">Compra de BTC</th>
+                            <th className="text-center">Venta de BTC</th>
+                            <th className="text-center">Monto soles</th>
+                            <th className="text-center">Monto BTC</th>
+                            <th className="text-center">Billetera</th>
+                            <th className="text-center">Cuenta BCP</th>
+                            <th className="text-center">Fecha</th>
+                            <th className="text-center">Estado</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                         {
                             props.lista.map((operacion) => {
-                                return <tr key={operacion.id}>
+                                return <tr className='align-middle' key={operacion.id}>
                                     {
                                         console.log(operacion)
                                     }
-                                    <td>{operacion.id}</td>
-                                    <td>{operacion.id_cliente}</td>
-                                    <td>{operacion.tipo}</td>
-                                    <td>{operacion.comprabtc}</td>
-                                    <td>{operacion.ventabtc}</td>
-                                    <td>{operacion.monto_soles}</td>
-                                    <td>{operacion.monto_btc}</td>
-                                    <td>{operacion.billetera}</td>
-                                    <td>{operacion.cuentabanco}</td>
-                                    <td>{operacion.createdAt}</td>
-                                    <td>{operacion.estado}</td> 
-                                    <td><button type="button" className="btn btn-link" onClick={ ()=>{
+                                    <td className="text-center">{operacion.id}</td>
+                                    <td className="text-center">{operacion.id_cliente}</td>
+                                    <td className="text-center">{operacion.tipo}</td>
+                                    <td className="text-center">{operacion.comprabtc}</td>
+                                    <td className="text-center">{operacion.ventabtc}</td>
+                                    <td className="text-center">{operacion.monto_soles}</td>
+                                    <td className="text-center">{operacion.monto_btc}</td>
+                                    <td className="text-center">{operacion.billetera}</td>
+                                    <td className="text-center">{operacion.cuentabanco}</td>
+                                    <td className="text-center">{operacion.createdAt}</td>
+                                    <td className="text-center">{operacion.estado}</td> 
+                                    <td className='text-center'><button type="button" className="btn btn-link" onClick={ ()=>{
                                         props.onEditar(operacion.id)
                                     } }>Modificar</button>
                                     </td>

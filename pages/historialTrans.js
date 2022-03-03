@@ -79,9 +79,9 @@ const historialTrans = () => {
                     // LUEGO DE BUSCAR EN BASE DE DATOS, ALMACENAR EN EL LS EL TIPO DE DE USUARIO QUE ES
                 }
             }
+            await buscarOperaciones(cliente)
         }
         AsyncUseEffect()
-
     }, [cliente, tipoDeCliente])
 
     // Props: redireccionamiento    => Mantiene el tipo de usuario actual
@@ -114,21 +114,14 @@ const historialTrans = () => {
     // ========================================================================================================================================================================================================
     // ********************************************************************************************************************************************************************************************************
     // ESPACIO PARA ESCRIBIR CODIGO EXTRA 
-    const [listadoDeOperaciones, setListadoDeOperaciones] = useState([])
+    const [operacionesM, setListaOperacionesM] = useState([])
 
-    const buscarListaDeOperacionesEnBD = () => {
-
-        // TODO: HACER PETICION A BACKEND PARA OBTENER TODAS LAS OPERACIONES REALIZADAS EN EL TRABAJO
-
-        setListadoDeOperaciones([
-            { numero: 1, id: "arnodorian020", fecha: "10/01/2022 16:54", cliente: "Jose Lavarte", tipoOperacion: "Compra", tipoCambio: 167124.42, estado: 0, monto: 3 },
-            { numero: 2, id: "ardTreat", fecha: "20/01/2022 08:40", cliente: "Juan Quintero", tipoOperacion: "Venta", tipoCambio: 167124.42, estado: 1, monto: 4 },
-            { numero: 3, id: "reseAlm", fecha: "16/02/2021 09:34", cliente: "Pedro Malaver", tipoOperacion: "Compra", tipoCambio: 167124.42, estado: 0, monto: 8 }
-        ])
+    const buscarOperaciones = async (clienteid) => {
+        //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
+        const resp = await fetch(`/api/operacion_extraidas/idcliente/${clienteid}`)
+        const data = await resp.json()
+        setListaOperacionesM(data.operacion)
     }
-
-
-
 
     return (
         <div>
@@ -139,8 +132,8 @@ const historialTrans = () => {
                 ubicacion={ubicacionActual}
             />
             <HistorialTrans
-                redireccionamiento={RedirigirAOtraPagina}
-                lista={listadoDeOperaciones} 
+                tipoDeCliente={tipoDeCliente}
+                lista={operacionesM}
             />
             <Footer
                 redireccionamiento={RedirigirAOtraPagina}
