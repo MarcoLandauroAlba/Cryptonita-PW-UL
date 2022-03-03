@@ -21,7 +21,7 @@ const OperacionIDClienteHandler = async (req, res) => {
                 tipo = "Compra"
             }
             operacionesconEstado.push({
-                id: op.id,
+                id:op.id,
                 id_cliente: op.id_cliente,
                 tipo: tipo,
                 comprabtc: op.comprabtc,

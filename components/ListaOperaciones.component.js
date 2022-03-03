@@ -25,24 +25,24 @@ export default function ListaOperaciones(props) {
                             <th>Estado</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                         {
                             props.lista.map((operacion) => {
                                 return <tr key={operacion.id}>
                                     {
                                         console.log(operacion)
                                     }
-                                    <td>{operacion.id}</td>
-                                    <td>{operacion.id_cliente}</td>
-                                    <td>{operacion.tipo}</td>
-                                    <td>{operacion.comprabtc}</td>
-                                    <td>{operacion.ventabtc}</td>
-                                    <td>{operacion.monto_soles}</td>
-                                    <td>{operacion.monto_btc}</td>
-                                    <td>{operacion.billetera}</td>
-                                    <td>{operacion.cuentabanco}</td>
-                                    <td>{operacion.createdAt}</td>
-                                    <td>{operacion.estado}</td> 
+                                    <td className='justify-content-center'>{operacion.id}</td>
+                                    <td className='justify-content-center'>{operacion.id_cliente}</td>
+                                    <td className='justify-content-center'>{operacion.tipo}</td>
+                                    <td className='justify-content-center'>{operacion.comprabtc}</td>
+                                    <td className='justify-content-center'>{operacion.ventabtc}</td>
+                                    <td className='justify-content-center'>{operacion.monto_soles}</td>
+                                    <td className='justify-content-center'>{operacion.monto_btc}</td>
+                                    <td className='justify-content-center'>{operacion.billetera}</td>
+                                    <td className='justify-content-center'>{operacion.cuentabanco}</td>
+                                    <td className='justify-content-center'>{operacion.createdAt}</td>
+                                    <td className='justify-content-center'>{operacion.estado}</td> 
                                     <td><button type="button" className="btn btn-link" onClick={ ()=>{
                                         props.onEditar(operacion.id)
                                     } }>Modificar</button>
