@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { obtenerClienteDatosIniciales } from "../dao/cliente_local"
 /*
 props Utilizados:
 - guardar           : Almacena los valores de nombres, apellidos y dni en el localStorage
@@ -11,6 +12,16 @@ export default function FormularioProcesoRegistro1(props) {
     const [nombres, setNombres] = useState('')
     const [apellidos, setApellidos] = useState('')
     const [dni, setDni] = useState()
+
+    useEffect(()=>{
+        const datosClienteAnterior = obtenerClienteDatosIniciales()
+        if(datosClienteAnterior!=null){
+            setNombres(datosClienteAnterior.nombre)
+            setApellidos(datosClienteAnterior.apellido)
+            setDni(datosClienteAnterior.dni)
+        }
+    },[])
+
     const setNombresOnChanged = (event) => {
         setNombres(event.target.value)
     }

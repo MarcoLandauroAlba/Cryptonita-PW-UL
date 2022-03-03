@@ -24,9 +24,9 @@ const CompraVenta = () => {
     //Tipo de cliente es para saber el tipo (de 4 opciones) de cliente loggeado al momento
     const [tipoDeCliente, setTipoDeCliente] = useState(4)
     // DIRECCION DE LA PAGINA ACTUAL
-    const direccionActual = '/compraVenta'
+    const direccionActual = '/CompraVenta'
     //  SOLO SIRVE PARA EL PROPS ubicacion
-    const ubicacionActual = 'compraVenta'
+    const ubicacionActual = 'CompraVenta'
 
     useEffect(() => {
         const AsyncUseEffect = async () => {
@@ -303,6 +303,7 @@ const CompraVenta = () => {
                 establecerCVent={establecerCVent}
                 establecerMultComp={establecerMultComp}
                 establecerMultVent={establecerMultVent}
+                cComp={cComp}
             />
             <Footer
                 redireccionamiento={RedirigirAOtraPagina}
