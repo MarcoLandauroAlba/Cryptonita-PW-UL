@@ -1,4 +1,5 @@
 import { Image } from "react-bootstrap"
+
 const CompCompraVenta = (props) => {
     return (
         <div className="row">
@@ -15,13 +16,17 @@ const CompCompraVenta = (props) => {
                     <div>
                         <button onClick={()=>{console.log('compra')}} className="m-1 btn btn-primary disabled btn-small col-md-3">Compra</button>
                         <button onClick={()=>{console.log('compra')}} className="m-1 btn btn-primary btn-small col-md-3">Venta</button>
-                        <button onClick={() => { props.redireccionamiento('/historialTrans') }} className="m-1 btn btn-primary btn-small col-md-4">Ver historial</button>
                     </div>
-                    <h5 className="card-tittle">Compra</h5> <br />
-                    <div className="card">1BTC</div><br />
-                    <h5 className="card-tittle">Venta</h5><br />
-                    <div className="card">s/167,433 </div> <br />
-                    <button className="btn btn-primary"> Confirmar transaccion</button> <br />
+                    <h5 className="card-tittle">Precio Compra BTC*</h5> <br />
+                    <div className="card">
+                    {
+                    (() => {
+                        return props.valor + " = 1 BTC" 
+                    })()
+                    }  
+                    </div><br />
+                    *Los precios se actualizan cada minuto  
+                    <button className="btn btn-primary"> Iniciar transaccion</button> <br />
                 </div>
             </div>
         </div>)

@@ -63,11 +63,11 @@ const historialTrans = () => {
                             if (dataClienteCompleta.cliente.estado == false) {
                                 // USUARIO NO CONFIRMARDO
                                 setTipoDeCliente(3)
-                                guardarDatoTipoCliente(3)
+                                guardarDatosGenerales(cliente,3)
                             } else if (dataClienteCompleta.cliente.estado == true) {
                                 // USUARIO CONFIRMARDO
                                 setTipoDeCliente(2)
-                                guardarDatoTipoCliente(2)
+                                guardarDatosGenerales(cliente,2)
                             } else {
                             }
                         }
@@ -114,7 +114,18 @@ const historialTrans = () => {
     // ========================================================================================================================================================================================================
     // ********************************************************************************************************************************************************************************************************
     // ESPACIO PARA ESCRIBIR CODIGO EXTRA 
+    const [listadoDeOperaciones, setListadoDeOperaciones] = useState([])
 
+    const buscarListaDeOperacionesEnBD = () => {
+
+        // TODO: HACER PETICION A BACKEND PARA OBTENER TODAS LAS OPERACIONES REALIZADAS EN EL TRABAJO
+
+        setListadoDeOperaciones([
+            { numero: 1, id: "arnodorian020", fecha: "10/01/2022 16:54", cliente: "Jose Lavarte", tipoOperacion: "Compra", tipoCambio: 167124.42, estado: 0, monto: 3 },
+            { numero: 2, id: "ardTreat", fecha: "20/01/2022 08:40", cliente: "Juan Quintero", tipoOperacion: "Venta", tipoCambio: 167124.42, estado: 1, monto: 4 },
+            { numero: 3, id: "reseAlm", fecha: "16/02/2021 09:34", cliente: "Pedro Malaver", tipoOperacion: "Compra", tipoCambio: 167124.42, estado: 0, monto: 8 }
+        ])
+    }
 
 
 
@@ -128,7 +139,9 @@ const historialTrans = () => {
                 ubicacion={ubicacionActual}
             />
             <HistorialTrans
-                redireccionamiento={RedirigirAOtraPagina} />
+                redireccionamiento={RedirigirAOtraPagina}
+                lista={listadoDeOperaciones} 
+            />
             <Footer
                 redireccionamiento={RedirigirAOtraPagina}
             />

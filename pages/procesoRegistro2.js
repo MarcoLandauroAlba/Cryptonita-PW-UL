@@ -2,7 +2,7 @@ import Footer from "../components/footer.component"
 import FormularioProcesoRegistro2 from "../components/FormularioProcesoRegistro2.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
-import { guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
+import { guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerClienteDatosIniciales, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
 import { EntregarPaginaAnterior, guardarPaginasAnteriores } from '../dao/paginas_anteriores_local'
 
 const ProcesoRegistro2Page = () => {
@@ -64,11 +64,11 @@ const ProcesoRegistro2Page = () => {
                             if (dataClienteCompleta.cliente.estado == false) {
                                 // USUARIO NO CONFIRMARDO
                                 setTipoDeCliente(3)
-                                guardarDatoTipoCliente(3)
+                                guardarDatosGenerales(cliente,3)
                             } else if (dataClienteCompleta.cliente.estado == true) {
                                 // USUARIO CONFIRMARDO
                                 setTipoDeCliente(2)
-                                guardarDatoTipoCliente(2)
+                                guardarDatosGenerales(cliente,2)
                             } else {
                             }
                         }
@@ -140,7 +140,7 @@ const ProcesoRegistro2Page = () => {
 
     // VALIDA SI EL CORREO EXISTE EN BASE DE DATOS O NO
     const existeCorreoEnBaseDeDatos = async (correo) => {
-        const response = await fetch(`/api/usuarios/correos/${correo}`)
+        const response = await fetch(`/api/usuarios/correos/${correo}`,{method: 'OPTIONS'})
         const data = await response.json()
         console.log('existeCorreoEnBaseDeDatos data ', data)
         if (data.cliente == null) {
@@ -235,7 +235,7 @@ const ProcesoRegistro2Page = () => {
             localStorage.removeItem('fpr1')
 
             // DE LA SIGUIENTE PETICION SE OBTENDRA EL ID DEL CLIENTE CREADO
-            const responseCliente = await fetch(`/api/usuarios/correos/${correo}`)
+            const responseCliente = await fetch(`/api/usuarios/correos/${correo}`,{method: 'OPTIONS'})
             const dataCliente = await responseCliente.json()
             console.log('cliente recien creado: ', dataCliente)
 
@@ -254,7 +254,7 @@ const ProcesoRegistro2Page = () => {
     }
 
     const RedirigirAPaginaPrincipalDeEsperaConLoggeo = (VALORcliente) => {
-        GuardarPaginaAnterior()
+        guardarPaginasAnteriores(direccionActual)
         localStorage.setItem('cliente', VALORcliente)
         localStorage.setItem('tipoCliente', 3)
         location.href = '/EsperaRegistro'

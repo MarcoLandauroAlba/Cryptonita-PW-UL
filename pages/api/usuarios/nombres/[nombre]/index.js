@@ -2,7 +2,7 @@ import { obtenerClientexNom } from "../../../../../dao/clientes"
 
 const ClientesNombreHandler = async (req, res) => {
     if(req.method == "GET"){
-        const data = req.body
+        const data = req.query
         const cliente = await obtenerClientexNom(data.nombre)
         const clientesconEstado = []
         for(let cl of cliente){

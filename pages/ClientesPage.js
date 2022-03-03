@@ -67,11 +67,11 @@ const ClientesPage = () => {
                             if (dataClienteCompleta.cliente.estado == false) {
                                 // USUARIO NO CONFIRMARDO
                                 setTipoDeCliente(3)
-                                guardarDatoTipoCliente(3)
+                                guardarDatosGenerales(cliente,3)
                             } else if (dataClienteCompleta.cliente.estado == true) {
                                 // USUARIO CONFIRMARDO
                                 setTipoDeCliente(2)
-                                guardarDatoTipoCliente(2)
+                                guardarDatosGenerales(cliente,2)
                             } else {
                             }
                         }
@@ -150,7 +150,6 @@ const ClientesPage = () => {
 
     const buscarUsuarios = async (datos, boton) => {
         //IMPLEMENTAR LA BUSQUEDA EN BASE DE DATOS:
-        let nuevaLista = []
         if (boton == 'DNI') {
             const resp = await fetch(`/api/usuarios/DNI/${datos}`)
             const data = await resp.json()

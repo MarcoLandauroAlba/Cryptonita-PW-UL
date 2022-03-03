@@ -3,7 +3,7 @@ import { guardarAdmin, obtenerAdmin, obtenerAdmins, obtenerAdminxCorreoYContrase
 const administradoresIdHandler = async (req, res) => {
     if (req.method == "OPTIONS") {
         const data = JSON.parse(req.body)
-        const admin = await obtenerAdminxCorreoYContrasena(data.correo,data.contraseña)
+        const admin = await obtenerAdminxCorreoYContrasena(data.correo,data.contrasena)
         res.json({
             msg: 'OPTIONS',
             admin: admin

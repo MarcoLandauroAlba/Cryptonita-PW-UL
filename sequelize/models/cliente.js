@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     correo: DataTypes.TEXT,
     nombre: DataTypes.TEXT,
     apellido: DataTypes.TEXT,
-    dni: DataTypes.INTEGER
+    dni: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Cliente',
