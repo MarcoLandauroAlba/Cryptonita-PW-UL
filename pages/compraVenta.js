@@ -117,10 +117,7 @@ const compraVenta = () => {
     const [valorCripto, setValorCripto] = useState(0)
     const [seconds, setSeconds] = useState(0);
 
-    var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    });
+    
 
     useEffect(() => {
         // PRUEBAS CON PRECIO DE CRIPTOMONEDA
@@ -133,10 +130,9 @@ const compraVenta = () => {
             const query = '/api/v1/depth?symbol=BTCUSDT'
             const response = await fetch(base_url + query)
             const data = await response.json()
-            setValorCripto(formatter.format(data.asks[99][0]))
+            setValorCripto(data.asks[99][0])
         }
         AsyncUseEffect()
-        console.log('SE EJECUTA')
     }, [seconds])
     return (
         <div>

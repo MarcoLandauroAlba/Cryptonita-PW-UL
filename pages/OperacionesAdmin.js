@@ -182,7 +182,6 @@ const OperacionesAdminPage = () => {
     const editarOperacionHandler = async (id) => {
         const resp = await fetch(`/api/operacion_extraidas/${id}`)
         const data = await resp.json()
-        console.log(data)
         setOperacion(data.operacion)
         setSeDebeMostrarModal(true)
     }

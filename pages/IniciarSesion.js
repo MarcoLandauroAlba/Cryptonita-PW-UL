@@ -129,16 +129,12 @@ export default function IniciarSesionPage() {
     const validarUsuario = async (correo,contrasena) => {
 
         const usuarioIncompleto = {correo: correo, contrasena: contrasena}
-        console.log('antes responseClientes')
         const responseClientes = await fetch('api/usuarios/correoYcontra',{
             method: 'OPTIONS',
             body: JSON.stringify(usuarioIncompleto)
         })
-        console.log('despues responseClientes')
         const dataCliente = await responseClientes.json()
-        console.log('estoy aqui amigo')
         if(dataCliente.cliente!=null){
-            console.log('validarUsuario EXISTE')
             if(dataCliente.cliente.estado==true){
                 RedirigirAPaginaPrincipalConLogeoRealizado(dataCliente.cliente.id,2)
                 redi
@@ -146,7 +142,6 @@ export default function IniciarSesionPage() {
                 RedirigirAPaginaPrincipalConLogeoRealizado(dataCliente.cliente.id,3)
             }
         }else{
-            console.log('validarUsuario NULO')
             const responseAdmin = await fetch('api/administradores',{
                 method: 'OPTIONS',
                 body: JSON.stringify(usuarioIncompleto)

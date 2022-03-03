@@ -64,7 +64,6 @@ const OpcionesOperacionesAdmin = (props) => {
 
 
     } else {
-        console.log('USTED NO ES ADMINISTRADOR')
         return <></>
     }
 }
