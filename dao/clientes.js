@@ -21,7 +21,6 @@ const obtenerCliente = async (id) => {
             id : id
         }
     })
-    console.log('CLIENTES JS OBTENERCLIENTE+',respuesta)
     return respuesta 
 }
 

@@ -17,7 +17,6 @@ export default function ModalModificarOperacion(props) {
 
 
     useEffect(()=> {
-        console.log(props.operacion)
         if(props.operacion != null){
             setIdOperacion(props.operacion.id)
             setIdCliente(props.operacion.id_cliente)

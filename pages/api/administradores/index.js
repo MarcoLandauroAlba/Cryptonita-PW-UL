@@ -24,7 +24,6 @@ const administradoresIdHandler = async (req, res) => {
     }else if(req.method == "POST"){
         const data = req.query
         const admin = await guardarAdmin(data)
-        console.log("Se guardara el proyecto con id " + data.id)
         res.json({
             msg: "",
             administrador:admin

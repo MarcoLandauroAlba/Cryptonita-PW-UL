@@ -127,7 +127,7 @@ const OperacionesAdminPage = () => {
     const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
 
     const obtenerOperadoresHTTP = async () => {
-        let response = await fetch("/api/operacion_extraidas/")
+        let response = await fetch("/api/operacion_extraidas")
         const data = await response.json()
         return data
     }
@@ -155,7 +155,7 @@ const OperacionesAdminPage = () => {
 
     const actualizarProcesoHandler = async (idcliente, tipo, comprabtc, ventabtc, montosoles, montobtc, billetera, cuentabcp, estado) => {    
         const operacion ={
-            idcliente: idcliente,
+            id_cliente: idcliente,
             tipo: tipo,
             comprabtc: comprabtc,
             ventabtc: ventabtc,
@@ -182,7 +182,6 @@ const OperacionesAdminPage = () => {
     const editarOperacionHandler = async (id) => {
         const resp = await fetch(`/api/operacion_extraidas/${id}`)
         const data = await resp.json()
-        console.log(data)
         setOperacion(data.operacion)
         setSeDebeMostrarModal(true)
     }

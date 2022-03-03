@@ -13,7 +13,6 @@ const guardarAdmin = async (telefono,contraseña,correo,nombre,apellido,dni) => 
 }
 
 const obtenerAdmin = async (id) => {
-    console.log('obtenerAdmin',id)
     return await db.Administrador.findOne({
         where : {
             id : id

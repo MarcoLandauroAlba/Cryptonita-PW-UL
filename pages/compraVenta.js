@@ -136,7 +136,6 @@ const compraVenta = () => {
             setValorCripto(formatter.format(data.asks[99][0]))
         }
         AsyncUseEffect()
-        console.log('SE EJECUTA')
     }, [seconds])
     return (
         <div>

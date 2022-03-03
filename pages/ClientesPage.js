@@ -205,7 +205,6 @@ const ClientesPage = () => {
     const editarClienteHandler = async (id) => {
         const resp = await fetch(`/api/usuarios/${id}`)
         const data = await resp.json()
-        console.log(data)
         setUsuario(data.cliente)
         setSeDebeMostrarModal(true)
     }
