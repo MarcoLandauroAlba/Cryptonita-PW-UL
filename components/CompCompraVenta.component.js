@@ -13,20 +13,26 @@ const CompCompraVenta = (props) => {
             </div>
             <div className="col-md-4 mt-4">
                 <div className="card text-center"> <br />
-                    <div>
-                        <button onClick={()=>{console.log('compra')}} className="m-1 btn btn-primary disabled btn-small col-md-3">Compra</button>
-                        <button onClick={()=>{console.log('compra')}} className="m-1 btn btn-primary btn-small col-md-3">Venta</button>
-                    </div>
-                    <h5 className="card-tittle">Precio Compra BTC*</h5> <br />
+                    <h5 className="card-tittle">Precio Compra BTC</h5> <br />
                     <div className="card">
                     {
                     (() => {
-                        return props.valor + " = 1 BTC" 
+                        return "$"+props.valor + " = 1 BTC" 
                     })()
                     }  
                     </div><br />
-                    *Los precios se actualizan cada minuto  
-                    <button className="btn btn-primary"> Iniciar transaccion</button> <br />
+                    <h5 className="card-tittle">Precio Venta BTC</h5> <br />
+                    <div className="card">
+                    {
+                    (() => {
+                        return "1 BTC ="+ "$"+ (parseFloat(props.valor)*(1+0.005)) 
+                    })()
+                    }  
+                    </div> <br/>
+                    *Los precios se actualizan cada 30s  
+                    <button className="btn btn-primary md-2"> Realizar Compra</button><br/>
+                    <button className="btn btn-primary md-2"> Realizar Venta</button>
+                    <br/>
                 </div>
             </div>
         </div>)
