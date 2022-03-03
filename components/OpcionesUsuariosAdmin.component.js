@@ -113,8 +113,6 @@ const OpcionesUsuariosAdmin = (props) => {
                 <div className="col-md-1"></div>
             </div>
         )
-
-
     } else {
         return <></>
     }
