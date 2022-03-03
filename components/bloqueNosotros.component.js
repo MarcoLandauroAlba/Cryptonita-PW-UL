@@ -9,7 +9,7 @@ const BloqueNosotros = (props) => {
             <h2>Nosotros</h2>
             <div className="row d-flex justify-content-center">
             <Card style={{ width: '18rem' }} className="m-2 col-lg-3 col-sm-6">
-                <Card.Img variant="top" src="https://i.pinimg.com/236x/32/28/d3/3228d36a72d1dd13a7580e34949d8185.jpg" />
+                <Card.Img variant="top" src="images\IMG_20220227_120826_380.jpg" />
                 <Card.Body>
                     <Card.Title>Mauricio Alejandro Aguirre Izaguirre</Card.Title>
                     <Card.Text>
