@@ -11,6 +11,10 @@ const obtenerClienteDatosIniciales = () => {
     return JSON.parse(localStorage.getItem("fpr1"))
 }
 
+const eliminarDatosIniciales = () =>{
+    localStorage.removeItem('fpr1')
+}
+
 
 const guardarDatosGenerales = (id,tipo) => {
     localStorage.setItem('cliente',id)
@@ -40,5 +44,6 @@ export {
     guardarDatoCliente,
     obtenerDatoCliente,
     guardarDatoTipoCliente,
-    obtenerDatoTipoCliente
+    obtenerDatoTipoCliente,
+    eliminarDatosIniciales
 }

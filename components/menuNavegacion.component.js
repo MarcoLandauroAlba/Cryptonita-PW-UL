@@ -118,13 +118,13 @@ const MenuNavegacion = (props) => {
                                 {
                                     (
                                         () => {
-                                            if (props.ubicacion == 'compraVenta') {
+                                            if (props.ubicacion == 'CompraVenta') {
                                                 return (
-                                                    <button className="nav-link btn active" onClick={() => { props.redireccionamiento('/compraVenta') }}>Compra/Venta</button>
+                                                    <button className="nav-link btn active" onClick={() => { props.redireccionamiento('/CompraVenta') }}>Compra/Venta</button>
                                                 )
                                             } else {
                                                 return (
-                                                    <button className="nav-link btn" onClick={() => { props.redireccionamiento('/compraVenta') }}>Compra/Venta</button>
+                                                    <button className="nav-link btn" onClick={() => { props.redireccionamiento('/CompraVenta') }}>Compra/Venta</button>
                                                 )
                                             }
                                         })()

@@ -2,7 +2,7 @@ import Footer from "../components/footer.component"
 import FormularioProcesoRegistro2 from "../components/FormularioProcesoRegistro2.component"
 import MenuNavegacion from "../components/menuNavegacion.component"
 import { useEffect, useState } from 'react'
-import { guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerClienteDatosIniciales, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
+import { eliminarDatosIniciales, guardarDatoCliente, guardarDatosGenerales, guardarDatoTipoCliente, obtenerClienteDatosIniciales, obtenerDatoCliente, obtenerDatoTipoCliente } from '../dao/cliente_local'
 import { EntregarPaginaAnterior, guardarPaginasAnteriores } from '../dao/paginas_anteriores_local'
 
 const ProcesoRegistro2Page = () => {
@@ -227,7 +227,7 @@ const ProcesoRegistro2Page = () => {
             const data = await resp.json()
 
             //TODO: SE REALIZA LA ELIMINACION DEL CLIENTE EN PRIMERA INSTANCIA EN EL LOCALSTORAGE
-            localStorage.removeItem('fpr1')
+            eliminarDatosIniciales()
 
             // DE LA SIGUIENTE PETICION SE OBTENDRA EL ID DEL CLIENTE CREADO
             const responseCliente = await fetch(`/api/usuarios/correos/${correo}`,{method: 'OPTIONS'})
