@@ -16,7 +16,7 @@ const CuerpoEsperaRegistro = (props) => {
                 </div>
                 <div className="col-md-3"></div>
             </div>
-            <div className="mt-4" allign='center'>
+            <div className="mt-4 row" allign='center'>
                     <button type="button" className="btn btn-success btn-lg" onClick={() => {
                         props.redireccionamiento("/EsperaRegistro")
                     }}>Recargar Pagina</button>
