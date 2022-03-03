@@ -127,7 +127,7 @@ const OperacionesAdminPage = () => {
     const [seDebeMostrarModal, setSeDebeMostrarModal] = useState(false)
 
     const obtenerOperadoresHTTP = async () => {
-        let response = await fetch("/api/operacion_extraidas/")
+        let response = await fetch("/api/operacion_extraidas")
         const data = await response.json()
         return data
     }

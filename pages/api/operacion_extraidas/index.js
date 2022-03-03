@@ -1,11 +1,11 @@
 import operacion from "../../../sequelize/models/operacion"
-
 const { guardarOperacion, obtenerOperaciones, obtenerOperacion, editarOperacion, obtenerOperacionxIdcliente } = require("../../../dao/operaciones")
 
 const operacionesHandler = async (req, res) => {
     if(req.method == "GET"){
         const operaciones = await obtenerOperaciones()
         const operacionesconEstado = []
+        console.log(operaciones)
         for(let op of operaciones){
             let estado = ""
             if(op.estado == true){
@@ -22,7 +22,7 @@ const operacionesHandler = async (req, res) => {
                 tipo = "Comprar"
             }
             operacionesconEstado.push({
-                id: operacion.id,
+                id: op.id,
                 id_cliente: op.id_cliente,
                 tipo: tipo,
                 comprabtc: op.comprabtc,
